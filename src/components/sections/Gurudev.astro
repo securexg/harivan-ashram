@@ -4,84 +4,43 @@ import { gurudev, links } from "~/data/site";
 
 <section id="gurudev" class="relative bg-cream-100">
   <div class="container-x py-[var(--section-y)]">
-    <div class="grid gap-14 md:grid-cols-12 md:gap-16 lg:gap-20">
-      <!-- Left: title + ashram mood grid (balanced with portrait column) -->
+    <div class="grid gap-12 md:grid-cols-12 md:items-center md:gap-16 lg:gap-20">
+      <!-- Single, balanced Gurudev portrait -->
       <div class="md:col-span-6">
-        <p class="reveal eyebrow">{gurudev.eyebrow}</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px]" style="transition-delay: 60ms">
-          {gurudev.title}
-        </h2>
-
-        <div class="reveal mt-10 grid grid-cols-2 gap-3 sm:gap-4" style="transition-delay: 100ms">
-          {
-            gurudev.moodGrid.map((cell) => (
-              <figure class="overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft">
-                <div class="relative aspect-square w-full overflow-hidden">
-                  <picture class="absolute inset-0 block">
-                    <source
-                      type="image/webp"
-                      srcset={`/images/${cell.folder}/${cell.slug}-640.webp 640w, /images/${cell.folder}/${cell.slug}-1024.webp 1024w`}
-                      sizes="(min-width: 768px) 25vw, 45vw"
-                    />
-                    <img
-                      src={`/images/${cell.folder}/${cell.slug}-640.webp`}
-                      alt={cell.alt}
-                      loading="lazy"
-                      decoding="async"
-                      class="hv-cover-img"
-                    />
-                  </picture>
-                </div>
-              </figure>
-            ))
-          }
-        </div>
-
-        <a
-          href={links.gurudev}
-          target="_blank"
-          rel="noopener"
-          class="reveal mt-8 inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400"
-          style="transition-delay: 160ms"
-        >
-          Visit gurudev.artofliving.org
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
-      </div>
-
-      <!-- Right: portrait + quote + extended copy + AOL card -->
-      <div class="md:col-span-6">
-        <figure class="reveal mx-auto max-w-md overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft md:mx-0 md:max-w-none" style="transition-delay: 80ms">
-          <div class="relative aspect-[4/5] w-full overflow-hidden md:aspect-[3/4]">
+        <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft">
+          <div class="relative aspect-[4/5] w-full overflow-hidden">
             <picture class="absolute inset-0 block">
               <source
                 type="image/webp"
-                srcset="/images/gurudev/portrait-640.webp 640w, /images/gurudev/portrait-1024.webp 1024w, /images/gurudev/portrait-1600.webp 1600w"
-                sizes="(min-width: 768px) 42vw, 90vw"
+                srcset="/images/gurudev/portrait-640.webp 640w, /images/gurudev/portrait-1024.webp 1024w, /images/gurudev/portrait-1600.webp 1600w, /images/gurudev/portrait-2400.webp 2400w"
+                sizes="(min-width: 768px) 46vw, 92vw"
               />
               <img
                 src="/images/gurudev/portrait.webp"
                 alt="Gurudev Sri Sri Ravi Shankar ji"
                 loading="lazy"
                 decoding="async"
-                fetchpriority="low"
                 class="hv-cover-img object-top"
               />
             </picture>
           </div>
         </figure>
+      </div>
 
-        <figure class="reveal relative mt-10" style="transition-delay: 140ms">
+      <!-- Right: title, quote, body, AOL card -->
+      <div class="md:col-span-6">
+        <p class="reveal eyebrow">{gurudev.eyebrow}</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px]" style="transition-delay: 60ms">
+          {gurudev.title}
+        </h2>
+
+        <figure class="reveal relative mt-8" style="transition-delay: 120ms">
           <span class="absolute -left-1 -top-2 font-serif text-[100px] leading-none text-saffron-200/90 md:-left-2 md:-top-4 md:text-[130px]" aria-hidden="true">“</span>
           <blockquote class="relative pl-7 md:pl-10">
             <p class="h-display-italic text-2xl text-ink-700 md:text-3xl lg:text-[34px]">
               {gurudev.quote}
             </p>
-            <figcaption class="mt-5 text-sm tracking-wide text-ink-500">
-              {gurudev.attribution}
-            </figcaption>
+            <figcaption class="mt-5 text-sm tracking-wide text-ink-500">{gurudev.attribution}</figcaption>
           </blockquote>
         </figure>
 
@@ -94,20 +53,29 @@ import { gurudev, links } from "~/data/site";
           ))
         }
 
-        <div class="reveal mt-10 rounded-2xl border border-ink-100/80 bg-cream-50 p-7 md:p-9" style="transition-delay: 300ms">
+        <div class="reveal mt-10 rounded-2xl border border-ink-100/80 bg-cream-50 p-6 md:p-8" style="transition-delay: 320ms">
           <p class="eyebrow">About The Art of Living</p>
           <p class="lead mt-4 text-ink-600">{gurudev.aolBlurb}</p>
-          <a
-            href={links.artOfLiving}
-            target="_blank"
-            rel="noopener"
-            class="mt-5 inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400"
-          >
-            Visit artofliving.org
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
+          <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+            <a
+              href={links.gurudev}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400"
+            >
+              gurudev.artofliving.org
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            </a>
+            <a
+              href={links.artOfLiving}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400"
+            >
+              artofliving.org
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>

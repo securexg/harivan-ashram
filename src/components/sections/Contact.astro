@@ -2,7 +2,8 @@
 import Button from "~/components/ui/Button.astro";
 import { contact } from "~/data/site";
 const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
-const mapEmbed = `https://www.google.com/maps?q=${contact.mapsQuery}&output=embed`;
+// z=15 = neighbourhood-level zoom (close enough to see the lane network)
+const mapEmbed = `https://www.google.com/maps?q=${contact.mapsQuery}&z=15&output=embed`;
 ---
 
 <section id="contact" class="relative bg-cream-50">

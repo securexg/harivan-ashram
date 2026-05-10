@@ -4,10 +4,11 @@ import logo from "~/assets/aol-logo.png";
 import { contact, links, site } from "~/data/site";
 
 const year = new Date().getFullYear();
+const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 ---
 
-<!-- Wide ashram landscape banner above footer -->
-<section aria-hidden="true" class="relative h-[40vh] min-h-[280px] overflow-hidden">
+<!-- Slim, edge-to-edge banner — keeps the cinematic close without piling on whitespace -->
+<section aria-hidden="true" class="relative h-[32vh] min-h-[220px] overflow-hidden">
   <picture class="absolute inset-0 block h-full w-full">
     <source
       type="image/webp"
@@ -22,88 +23,62 @@ const year = new Date().getFullYear();
       decoding="async"
     />
   </picture>
-  <div class="absolute inset-0 bg-gradient-to-t from-cream-100 via-ink-700/30 to-ink-700/20"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-cream-100 via-ink-700/30 to-ink-700/15"></div>
   <div class="relative z-10 flex h-full items-center justify-center px-6">
-    <p class="h-display-italic text-center text-3xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] md:text-5xl lg:text-6xl">
+    <p class="h-display-italic text-center text-3xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] md:text-5xl">
       Come, breathe, belong.
     </p>
   </div>
 </section>
 
 <footer class="relative bg-cream-100">
-  <div class="container-x grid gap-12 py-16 md:grid-cols-12 md:gap-x-16 md:py-20">
-    <div class="md:col-span-4">
-      <div class="flex flex-col items-start gap-5">
-        <Image
-          src={logo}
-          alt="The Art of Living"
-          class="h-14 w-auto"
-          widths={[160, 320]}
-          sizes="160px"
-          loading="lazy"
-          format="webp"
-        />
-        <div class="space-y-1">
-          <p class="font-serif text-2xl text-ink-700">Harivan Ashram</p>
-          <p class="eyebrow">{site.tagline} · Tricity · North India</p>
+  <div class="container-x grid gap-10 py-10 md:grid-cols-12 md:gap-x-10 md:py-12">
+    <div class="md:col-span-5">
+      <div class="flex items-start gap-4">
+        <Image src={logo} alt="The Art of Living" class="h-12 w-auto" widths={[160, 320]} sizes="160px" loading="lazy" format="webp" />
+        <div>
+          <p class="font-serif text-xl text-ink-700">Harivan Ashram</p>
+          <p class="eyebrow mt-1">{site.tagline} · Tricity</p>
         </div>
-        <p class="lead max-w-md">
-          Blessed by Pujya Gurudev Sri Sri Ravi Shankar ji. Eleven acres of forest
-          near Chandigarh — a sanctuary for breath, meditation and seva.
-        </p>
+      </div>
+      <p class="mt-5 max-w-md font-sans text-sm leading-relaxed text-ink-500">
+        Blessed by Pujya Gurudev Sri Sri Ravi Shankar ji. A sanctuary for breath, meditation and seva.
+      </p>
+      <div class="mt-5 flex flex-wrap items-center gap-2.5">
+        <a href={`tel:${contact.phoneIntl}`} class="inline-flex items-center gap-1.5 rounded-full border border-ink-100 bg-cream-50 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-ink-700 hover:border-saffron-300">Call</a>
+        <a href={wa} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 rounded-full bg-sage-700 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-cream-50 hover:bg-sage-700/90">WhatsApp</a>
+        <a href={links.instagram} target="_blank" rel="noopener" aria-label="@harivanashram on Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-ink-100 bg-cream-50 text-ink-600 hover:border-saffron-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+            <path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2 0 1.9.2 2.4.4.6.2 1.1.5 1.5.9.4.4.7.9.9 1.5.2.5.4 1.2.4 2.4 0 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c0 1.2-.2 1.9-.4 2.4-.2.6-.5 1.1-.9 1.5-.4.4-.9.7-1.5.9-.5.2-1.2.4-2.4.4-1.2 0-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2 0-1.9-.2-2.4-.4-.6-.2-1.1-.5-1.5-.9-.4-.4-.7-.9-.9-1.5-.2-.5-.4-1.2-.4-2.4 0-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c0-1.2.2-1.9.4-2.4.2-.6.5-1.1.9-1.5.4-.4.9-.7 1.5-.9.5-.2 1.2-.4 2.4-.4 1.2-.1 1.6-.1 4.8-.1zm0 1.8c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-2.2a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z" />
+          </svg>
+        </a>
       </div>
     </div>
 
-    <div class="grid gap-10 md:col-span-8 md:grid-cols-12 md:gap-x-8">
-      <div class="md:col-span-4">
-        <p class="eyebrow">Visit</p>
-        <p class="mt-3 body-text text-sm leading-relaxed">
-          {contact.addressFull}
-        </p>
-      </div>
-      <div class="md:col-span-5">
-        <p class="eyebrow">Reach us</p>
-        <ul class="mt-3 space-y-2 body-text text-sm">
-          <li>
-            <a href={`tel:${contact.phoneIntl}`} class="hover:text-ink-700"
-              >{contact.phone}</a
-            >
-          </li>
-          <li>
-            <a
-              href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`}
-              class="hover:text-ink-700">WhatsApp</a
-            >
-          </li>
-          <li>
-            <a
-              href={`mailto:${contact.email}`}
-              class="block break-all hover:text-ink-700"
-            >{contact.email}</a>
-          </li>
-        </ul>
-      </div>
-      <div class="md:col-span-3">
-        <p class="eyebrow">More</p>
-        <ul class="mt-3 space-y-2 body-text text-sm">
-          <li>
-            <a href={links.artOfLiving} target="_blank" rel="noopener" class="hover:text-ink-700">artofliving.org</a>
-          </li>
-          <li>
-            <a href={links.gurudev} target="_blank" rel="noopener" class="hover:text-ink-700">gurudev.artofliving.org</a>
-          </li>
-          <li>
-            <a href="#support" class="hover:text-ink-700">Support the Ashram</a>
-          </li>
-        </ul>
-      </div>
+    <div class="md:col-span-4">
+      <p class="eyebrow">Visit</p>
+      <p class="mt-2 text-sm leading-relaxed text-ink-500">{contact.addressFull}</p>
+      <a
+        href={`mailto:${contact.email}`}
+        class="mt-3 block break-all text-sm text-ink-600 hover:text-ink-700"
+      >{contact.email}</a>
+    </div>
+
+    <div class="md:col-span-3">
+      <p class="eyebrow">More</p>
+      <ul class="mt-2 space-y-1.5 text-sm text-ink-500">
+        <li><a href={links.artOfLiving} target="_blank" rel="noopener" class="hover:text-ink-700">artofliving.org</a></li>
+        <li><a href={links.gurudev} target="_blank" rel="noopener" class="hover:text-ink-700">gurudev.artofliving.org</a></li>
+        <li><a href={links.instagram} target="_blank" rel="noopener" class="hover:text-ink-700">@harivanashram</a></li>
+        <li><a href="#support" class="hover:text-ink-700">Support the Ashram</a></li>
+      </ul>
     </div>
   </div>
 
   <div class="border-t border-ink-100">
-    <div class="container-x flex flex-col gap-3 py-6 text-xs text-ink-300 md:flex-row md:items-center md:justify-between">
+    <div class="container-x flex flex-col gap-2 py-5 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
       <p>© {year} Harivan Ashram · The Art of Living</p>
-      <p class="font-serif italic text-ink-300">Sanghachadwam · Jaigurudev</p>
+      <p class="font-serif italic">Jaigurudev</p>
     </div>
   </div>
 </footer>

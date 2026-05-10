@@ -23,8 +23,8 @@ export const contact = {
   addressShort: "Bardar, near New Chandigarh – 140108",
   addressFull:
     "The Art of Living, Harivan Ashram, Haripur, Bardar, Purkhali, Rupnagar (Near New Chandigarh) – 140108",
-  mapsQuery:
-    "Harivan+Ashram+Bardar+Rupnagar+Punjab",
+  /** Used in the embedded Google Maps iframe — z=15 is street/locality level. */
+  mapsQuery: "Harivan+Ashram+Bardar+Rupnagar+Punjab",
 };
 
 export const links = {
@@ -32,6 +32,7 @@ export const links = {
   gurudev: "https://www.gurudev.artofliving.org/",
   yltp:
     "https://www.artofliving.org/in-en/youth-leadership-training-program-yltp",
+  instagram: "https://www.instagram.com/harivanashram/",
 };
 
 export const yltp = {
@@ -61,11 +62,11 @@ export const about = {
     },
     {
       title: "Art of Living",
-      desc: "A wing of Gurudev Sri Sri Ravi Shankar ji's global movement, carrying its lineage and teachings.",
+      desc: "A wing of Gurudev Sri Sri Ravi Shankar ji's global movement — open to all, rooted in service.",
     },
     {
-      title: "Sangha & Seva",
-      desc: "A growing volunteer community serving the surrounding villages with wisdom, time and skills.",
+      title: "Volunteers & Seva",
+      desc: "A growing community of volunteers serving the surrounding villages with wisdom, time and skills.",
     },
   ],
 };
@@ -75,68 +76,66 @@ export const gurudev = {
   title: "Gurudev Sri Sri Ravi Shankar",
   body:
     "A spiritual teacher, humanitarian and ambassador of peace, Gurudev Sri Sri Ravi Shankar ji has touched the lives of over 800 million people across 180 countries. His vision of a violence-free, stress-free society inspires every breath we take at Harivan.",
-  /** Additional paragraphs — aligned with public messaging on gurudev.artofliving.org */
+  /** Additional paragraphs — paraphrased from public material on gurudev.artofliving.org. */
   bodyMore: [
-    "Through The Art of Living, Gurudev has revived ancient breath-based practices such as Sudarshan Kriya, making meditation and inner calm accessible to people of every background, age and walk of life.",
-    "His work spans conflict resolution, trauma relief, education for tribal children, prisoner rehabilitation, environmental care and interfaith dialogue — always rooted in the simple message that inner peace is the basis of outer peace.",
+    "Through The Art of Living, Gurudev has revived ancient breath-based practices such as Sudarshan Kriya, making meditation and inner calm accessible to people of every faith, age and background.",
+    "His humanitarian work spans conflict resolution, trauma relief, education for tribal children, prisoner rehabilitation, environmental care and inter-faith dialogue — always rooted in the message that inner peace is the basis of outer peace.",
+    "The Art of Living is a global, open organisation — not bound to any sect or community. All are welcome at Harivan to learn, breathe and serve.",
   ],
   quote:
     "The world is a mixture of joy and sorrow. Celebrate when you have joy, and when you have sorrow, have the faith that this will also pass.",
   attribution: "— Gurudev Sri Sri Ravi Shankar ji",
   aolBlurb:
     "The Art of Living, founded in 1981, is one of the world's largest volunteer-based humanitarian and educational NGOs — present across 180 countries with programs in breath, meditation, leadership and rural development.",
-  /** Left-column 2×2 mood board — ashram life (no homa close-ups). Paths under /public/images/… */
-  moodGrid: [
-    { folder: "activities/shobha-yatra", slug: "photo-01", alt: "Harivan Ashram — outdoor gathering" },
-    { folder: "activities/navratri", slug: "photo-25", alt: "Walkway and banners at Harivan" },
-    { folder: "activities/shobha-yatra", slug: "photo-09", alt: "Community in celebration" },
-    { folder: "activities/navratri", slug: "photo-40", alt: "Evening satsang at the ashram" },
-  ],
 };
 
-export const activities = [
+/** Event Gallery cards (was: Recent gatherings).  Photos chosen so nothing
+ * repeats across hero / about / gurudev / gallery / footer. */
+export const events = [
   {
     title: "Navratri Celebration",
     date: "28 – 30 September 2025",
-    desc: "Three days of sacred homas by Vedic Pandits, joined by hundreds of villagers and the AOL family. A blissful, devotion-filled atmosphere.",
+    desc: "Three days of sacred homas by Vedic Pandits, joined by hundreds of villagers and volunteers. A devotion-filled atmosphere.",
     image: "/images/activities/navratri/photo-01.webp",
     slug: "navratri",
   },
   {
     title: "Somnath Ji Jyotirlinga Darshan",
     date: "21 February 2026",
-    desc: "Thousands of villagers and our AOL family came together for an unforgettable Shobha Yatra and darshan event at Harivan.",
-    image: "/images/activities/shobha-yatra/photo-01.webp",
+    desc: "Thousands of villagers and our Art of Living family came together for an unforgettable Shobha Yatra and darshan event at Harivan.",
+    image: "/images/activities/shobha-yatra/photo-05.webp",
     slug: "shobha-yatra",
   },
   {
     title: "First Rural Happiness Program",
     date: "Concluded 9 March 2026",
     desc: "A 6-day program bringing breath, meditation and joy to neighbouring villages — the first of many to come.",
-    image: "/images/activities/navratri/photo-25.webp",
+    image: "/images/activities/navratri/photo-03.webp",
     slug: "rural-happiness",
   },
   {
-    title: "Sanghachadwam Sunday",
+    title: "Volunteer Sunday",
     date: "19 April 2026",
-    desc: "Long Sudarshan Kriya, breakfast and a volunteer meet — building Harivan with all of us together.",
-    image: "/images/activities/shobha-yatra/photo-13.webp",
-    slug: "sanghachadwam",
+    desc: "Long Sudarshan Kriya, a warm breakfast and a volunteer meet — building Harivan with all of us together.",
+    image: "/images/activities/navratri/photo-13.webp",
+    slug: "volunteer-sunday",
   },
   {
     title: "Daily & Weekly Satsang",
     date: "Ongoing",
     desc: "Evening satsangs by Swamiji at the ashram, weekly satsangs across nearby villages, and a Sunday follow-up since 15 March 2026.",
-    image: "/images/activities/navratri/photo-40.webp",
+    image: "/images/activities/navratri/photo-20.webp",
     slug: "satsang",
   },
 ];
+/** Back-compat alias — older imports still call it `activities`. */
+export const activities = events;
 
 export const support = {
   eyebrow: "Support the Ashram",
-  title: "Sangha-driven, sustained by you.",
+  title: "Run by volunteers, sustained by you.",
   body:
-    "Harivan runs on seva and thoughtful contributions from the sangha. Bank account and UPI details will be published here when finalised — for now, please reach out by phone or WhatsApp and our volunteers will guide you.",
+    "Harivan runs on seva and thoughtful contributions from our community. Bank account and UPI details will be published here when finalised — for now, please reach out by phone or WhatsApp and our volunteers will guide you.",
 };
 
 export const team = {

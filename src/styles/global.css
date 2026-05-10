@@ -185,21 +185,16 @@ video {
   }
 }
 
-/* Faces marquee (overrides OS reduce-motion zeroing on generic animations) */
+/* Faces marquee — always moving, even on hover.
+   Defined OUTSIDE the prefers-reduced-motion block so OS-level reduce-motion
+   only slows it (above) instead of freezing it. */
 @keyframes hv-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 .hv-marquee .hv-marquee-track {
   animation: hv-marquee 72s linear infinite;
   will-change: transform;
-}
-.hv-marquee:hover .hv-marquee-track {
-  animation-play-state: paused;
 }
 
 .hv-cover-img {

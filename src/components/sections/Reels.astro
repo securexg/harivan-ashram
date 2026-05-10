@@ -1,11 +1,12 @@
 ---
 /** 4 short reels — 2x2 mobile, 1×4 row on laptop, autoplay muted, lazy-load,
-   with an unmute toggle in the corner of each clip. */
+   with an unmute toggle on each clip. We serve only MP4/AAC for maximum
+   browser compatibility (Safari + iOS); WebM/Opus has spotty support. */
 const reels = [
-  { mp4: "/videos/reels/reel-1.mp4", webm: "/videos/reels/reel-1.webm", poster: "/videos/reels/posters/reel-1.webp" },
-  { mp4: "/videos/reels/reel-2.mp4", webm: "/videos/reels/reel-2.webm", poster: "/videos/reels/posters/reel-2.webp" },
-  { mp4: "/videos/reels/reel-3.mp4", webm: "/videos/reels/reel-3.webm", poster: "/videos/reels/posters/reel-3.webp" },
-  { mp4: "/videos/reels/reel-4.mp4", webm: "/videos/reels/reel-4.webm", poster: "/videos/reels/posters/reel-4.webp" },
+  { mp4: "/videos/reels/reel-1.mp4", poster: "/videos/reels/posters/reel-1.webp" },
+  { mp4: "/videos/reels/reel-2.mp4", poster: "/videos/reels/posters/reel-2.webp" },
+  { mp4: "/videos/reels/reel-3.mp4", poster: "/videos/reels/posters/reel-3.webp" },
+  { mp4: "/videos/reels/reel-4.mp4", poster: "/videos/reels/posters/reel-4.webp" },
 ];
 ---
 
@@ -18,7 +19,7 @@ const reels = [
           Moments from the <span class="h-display-italic">ashram</span>.
         </h2>
       </div>
-      <p class="reveal text-xs tracking-[0.18em] uppercase text-ink-300" style="transition-delay: 120ms">
+      <p class="reveal text-xs uppercase tracking-[0.18em] text-ink-400" style="transition-delay: 120ms">
         Tap a clip to unmute · plays as you scroll
       </p>
     </div>
@@ -38,20 +39,13 @@ const reels = [
                 playsinline
                 preload="none"
                 poster={r.poster}
+                src={r.mp4}
                 class="absolute inset-0 h-full w-full object-cover"
-              >
-                <source data-src-webm={r.webm} type="video/webm" />
-                <source data-src-mp4={r.mp4} type="video/mp4" />
-              </video>
+              />
               <span
                 class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-700/35 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-0"
                 aria-hidden="true"
               />
-              <span
-                class="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink-700/55 px-2.5 py-1 text-[10px] tracking-[0.16em] uppercase text-cream-50 backdrop-blur-md"
-              >
-                <span class="h-1.5 w-1.5 rounded-full bg-saffron-300" /> Live
-              </span>
 
               <button
                 type="button"
@@ -76,30 +70,18 @@ const reels = [
 </section>
 
 <script>
-  const grid = document.querySelector<HTMLDivElement>("[data-reels-grid]");
-  if (grid) {
-    const figures = grid.querySelectorAll<HTMLElement>("figure");
+  document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.querySelector<HTMLDivElement>("[data-reels-grid]");
+    if (!grid) return;
 
-    const hydrate = (video: HTMLVideoElement) => {
-      if (video.dataset.hydrated === "true") return;
-      const sources = video.querySelectorAll("source");
-      sources.forEach((s) => {
-        const webm = s.getAttribute("data-src-webm");
-        const mp4 = s.getAttribute("data-src-mp4");
-        if (webm) s.setAttribute("src", webm);
-        if (mp4) s.setAttribute("src", mp4);
-      });
-      video.load();
-      video.dataset.hydrated = "true";
-    };
+    const figures = Array.from(grid.querySelectorAll<HTMLElement>("figure"));
 
-    const setMute = (video: HTMLVideoElement, btn: HTMLButtonElement, muted: boolean) => {
-      video.muted = muted;
-      const mutedIcon = btn.querySelector<SVGElement>("[data-icon-muted]");
-      const unmutedIcon = btn.querySelector<SVGElement>("[data-icon-unmuted]");
-      if (mutedIcon && unmutedIcon) {
-        mutedIcon.classList.toggle("hidden", !muted);
-        unmutedIcon.classList.toggle("hidden", muted);
+    const setIcon = (btn: HTMLButtonElement, muted: boolean) => {
+      const m = btn.querySelector<SVGElement>("[data-icon-muted]");
+      const u = btn.querySelector<SVGElement>("[data-icon-unmuted]");
+      if (m && u) {
+        m.classList.toggle("hidden", !muted);
+        u.classList.toggle("hidden", muted);
       }
       btn.setAttribute("aria-pressed", muted ? "true" : "false");
       btn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
@@ -113,25 +95,31 @@ const reels = [
       btn.addEventListener("click", async (e) => {
         e.stopPropagation();
         const willUnmute = video.muted;
+
         if (willUnmute) {
+          // Mute every other reel so we don't get a chorus
           grid.querySelectorAll<HTMLVideoElement>("video[data-reel]").forEach((v) => {
             if (v !== video) {
               v.muted = true;
-              v.volume = 1;
-              const otherFig = v.closest("figure");
-              const otherBtn = otherFig?.querySelector<HTMLButtonElement>("[data-mute-toggle]");
-              if (otherBtn) setMute(v, otherBtn, true);
+              const otherBtn = v.closest("figure")?.querySelector<HTMLButtonElement>("[data-mute-toggle]");
+              if (otherBtn) setIcon(otherBtn, true);
             }
           });
-        }
-        setMute(video, btn, !willUnmute);
-        if (willUnmute) {
+          // iOS Safari needs muted=false synchronously inside the click, plus a play() call
+          video.muted = false;
+          video.removeAttribute("muted");
           video.volume = 1;
+          setIcon(btn, false);
           try {
             await video.play();
           } catch {
-            /* ignore */
+            // Autoplay-with-sound was blocked — revert to muted state silently
+            video.muted = true;
+            setIcon(btn, true);
           }
+        } else {
+          video.muted = true;
+          setIcon(btn, true);
         }
       });
     });
@@ -140,24 +128,19 @@ const reels = [
       const io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
-            const video = entry.target as HTMLVideoElement;
+            const v = entry.target as HTMLVideoElement;
             if (entry.isIntersecting) {
-              hydrate(video);
-              const playPromise = video.play();
-              if (playPromise) playPromise.catch(() => {});
+              v.play().catch(() => {});
             } else {
-              video.pause();
+              v.pause();
             }
           }
         },
-        { threshold: 0.35 },
+        { threshold: 0.4 },
       );
       grid.querySelectorAll<HTMLVideoElement>("video[data-reel]").forEach((v) => io.observe(v));
     } else {
-      grid.querySelectorAll<HTMLVideoElement>("video[data-reel]").forEach((v) => {
-        hydrate(v);
-        v.play().catch(() => {});
-      });
+      grid.querySelectorAll<HTMLVideoElement>("video[data-reel]").forEach((v) => v.play().catch(() => {}));
     }
-  }
+  });
 </script>

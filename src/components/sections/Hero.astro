@@ -3,15 +3,25 @@ import Button from "~/components/ui/Button.astro";
 import { contact, site, yltp } from "~/data/site";
 const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 
-/* Hero slideshow — crossfade. Slugs must exist under public/images/<folder>/… */
-const slides: { folder: string; slug: string; alt: string }[] = [
-  { folder: "activities/navratri", slug: "photo-30", alt: "Navratri homa at Harivan Ashram" },
-  { folder: "activities/navratri", slug: "photo-25", alt: "Devotees in celebration" },
-  { folder: "activities/shobha-yatra", slug: "photo-09", alt: "Somnath Shobha Yatra" },
+/* Hero slideshow — 7 vibrant moments of celebration, devotion and community.
+   Each slug must exist under public/images/<folder>/<slug>-{640,1024,1600,2400}.webp */
+const slides: { folder: string; slug: string; alt: string; focal?: string }[] = [
+  { folder: "activities/navratri", slug: "photo-30", alt: "Navratri homa at Harivan", focal: "center" },
+  { folder: "activities/navratri", slug: "photo-22", alt: "Devotees in celebration" },
+  { folder: "activities/shobha-yatra", slug: "photo-09", alt: "Somnath Shobha Yatra procession" },
+  { folder: "happy-faces", slug: "photo-44", alt: "Smiling community at Harivan", focal: "center 30%" },
   { folder: "activities/navratri", slug: "photo-35", alt: "Sacred fire ceremony" },
   { folder: "activities/shobha-yatra", slug: "photo-12", alt: "Procession at Harivan" },
-  { folder: "activities/navratri", slug: "photo-40", alt: "Evening satsang" },
+  { folder: "happy-faces", slug: "photo-13", alt: "Joyful faces at Harivan" },
 ];
+
+/** Helper: many happy-faces files don't have responsive variants — render
+ *  with a smart srcset where available, plain src otherwise. */
+const slideUrl = (folder: string, slug: string, w?: number) => {
+  if (folder === "happy-faces") return `/images/happy-faces/${slug}.webp`;
+  if (!w) return `/images/${folder}/${slug}.webp`;
+  return `/images/${folder}/${slug}-${w}.webp`;
+};
 ---
 
 <section
@@ -25,31 +35,40 @@ const slides: { folder: string; slug: string; alt: string }[] = [
           class={`hero-slide pointer-events-none absolute inset-0 block h-full w-full transition-opacity duration-[1400ms] ease-[var(--ease-out-soft)] ${i === 0 ? "opacity-100" : "opacity-0"}`}
           data-slide-index={i}
         >
-          <source
-            type="image/webp"
-            srcset={`/images/${s.folder}/${s.slug}-1024.webp 1024w, /images/${s.folder}/${s.slug}-1600.webp 1600w, /images/${s.folder}/${s.slug}-2400.webp 2400w`}
-            sizes="100vw"
-          />
-          <img
-            src={`/images/${s.folder}/${s.slug}.webp`}
-            alt={s.alt}
-            class="hero-slide-img h-full w-full min-h-full min-w-full object-cover object-center"
-            loading={i === 0 ? "eager" : "lazy"}
-            fetchpriority={i === 0 ? "high" : "auto"}
-            decoding="async"
-          />
+          {s.folder === "happy-faces" ? (
+            <img
+              src={slideUrl(s.folder, s.slug)}
+              alt={s.alt}
+              class="hero-slide-img h-full w-full object-cover"
+              style={`object-position: ${s.focal || "center"};`}
+              loading={i === 0 ? "eager" : "lazy"}
+              fetchpriority={i === 0 ? "high" : "auto"}
+              decoding="async"
+            />
+          ) : (
+            <>
+              <source
+                type="image/webp"
+                srcset={`${slideUrl(s.folder, s.slug, 1024)} 1024w, ${slideUrl(s.folder, s.slug, 1600)} 1600w, ${slideUrl(s.folder, s.slug, 2400)} 2400w`}
+                sizes="100vw"
+              />
+              <img
+                src={slideUrl(s.folder, s.slug)}
+                alt={s.alt}
+                class="hero-slide-img h-full w-full object-cover"
+                style={`object-position: ${s.focal || "center"};`}
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchpriority={i === 0 ? "high" : "auto"}
+                decoding="async"
+              />
+            </>
+          )}
         </picture>
       ))
     }
-    <!-- Lighter centre so headline stays readable; darker at edges and bottom -->
-    <div
-      class="absolute inset-0 bg-gradient-to-b from-ink-700/70 via-ink-700/35 to-ink-700/92"
-      aria-hidden="true"
-    />
-    <div
-      class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/55 via-ink-700/20 to-transparent md:w-4/5"
-      aria-hidden="true"
-    />
+    <!-- Gradient stack: stronger at edges/bottom, light at centre -->
+    <div class="absolute inset-0 bg-gradient-to-b from-ink-700/70 via-ink-700/35 to-ink-700/95" aria-hidden="true" />
+    <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/60 via-ink-700/22 to-transparent md:w-3/4" aria-hidden="true" />
   </div>
 
   <div class="container-x relative z-10 pb-24 pt-32 sm:pb-28 sm:pt-36 md:pb-32 md:pt-44 lg:pt-48">
@@ -57,50 +76,34 @@ const slides: { folder: string; slug: string; alt: string }[] = [
       <p class="text-xs uppercase tracking-[0.22em] text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)] sm:text-[13px]">
         {site.org} · {site.tagline}
       </p>
-      <h1
-        class="h-display mt-5 text-5xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl lg:text-[88px]"
-      >
+      <h1 class="h-display mt-5 text-5xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl lg:text-[88px]">
         A space amidst <span class="h-display-italic text-saffron-200">nature.</span>
       </h1>
-      <p
-        class="hv-hero-lead mt-7 max-w-xl font-sans text-base font-normal leading-relaxed text-white md:text-lg"
-      >
+      <p class="hv-hero-lead mt-7 max-w-xl font-sans text-base font-normal leading-relaxed text-white md:text-lg">
         Eleven acres of forest near Chandigarh — blessed by Pujya Gurudev Sri Sri Ravi Shankar ji. A
         sanctuary for breath, meditation and seva, open to seekers, families and youth.
       </p>
 
       <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="lg" class="w-full justify-center sm:w-auto">
-          Call us
-        </Button>
+        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="lg" class="w-full justify-center sm:w-auto">Call us</Button>
         <Button
           href={wa}
           size="lg"
           external
           class="w-full justify-center border border-white/90 bg-white/95 text-ink-700 hover:bg-white sm:w-auto"
-        >
-          WhatsApp
-        </Button>
+        >WhatsApp</Button>
         <Button
           href="#yltp"
           size="lg"
           class="w-full justify-center border border-white/55 bg-white/10 text-white backdrop-blur-md hover:border-white hover:bg-white/20 sm:w-auto"
-        >
-          YLTP · {yltp.date}
-        </Button>
+        >YLTP · {yltp.date}</Button>
       </div>
     </div>
 
     <div class="mt-12 flex flex-col gap-3 text-[11px] uppercase tracking-[0.2em] text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] sm:mt-14 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-2 sm:text-[12px]">
-      <span class="flex items-center gap-2">
-        <span class="h-px w-6 bg-white/70"></span> 11 acres of forest
-      </span>
-      <span class="flex items-center gap-2">
-        <span class="h-px w-6 bg-white/70"></span> Bardar · near New Chandigarh
-      </span>
-      <span class="flex items-center gap-2">
-        <span class="h-px w-6 bg-white/70"></span> Sanghachadwam
-      </span>
+      <span class="flex items-center gap-2"><span class="h-px w-6 bg-white/70" /> 11 acres of forest</span>
+      <span class="flex items-center gap-2"><span class="h-px w-6 bg-white/70" /> Bardar · near New Chandigarh</span>
+      <span class="flex items-center gap-2"><span class="h-px w-6 bg-white/70" /> Open to all</span>
     </div>
   </div>
 
@@ -119,11 +122,7 @@ const slides: { folder: string; slug: string; alt: string }[] = [
     }
   </div>
 
-  <a
-    href="#about"
-    aria-label="Scroll to About"
-    class="group absolute bottom-5 left-1/2 z-10 -translate-x-1/2 md:bottom-10"
-  >
+  <a href="#about" aria-label="Scroll to About" class="group absolute bottom-5 left-1/2 z-10 -translate-x-1/2 md:bottom-10">
     <span class="flex h-12 w-7 items-start justify-center rounded-full border border-white/60 p-1.5">
       <span class="h-2 w-px animate-[scrollDot_1.6s_ease-in-out_infinite] bg-white/80"></span>
     </span>
@@ -149,36 +148,16 @@ const slides: { folder: string; slug: string; alt: string }[] = [
       });
     };
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (total > 1) {
-      const ms = reduce ? 9000 : 5500;
-      window.setInterval(advance, ms);
-    }
+    if (total > 1) window.setInterval(advance, reduce ? 9000 : 5500);
   }
 </script>
 
 <style>
-  /* Slight zoom so mobile “cover” feels fuller (Facebook-style hero crop) */
-  .hero-slide-img {
-    transform: scale(1.1);
-    transform-origin: center center;
-  }
-  @media (min-width: 768px) {
-    .hero-slide-img {
-      transform: scale(1.06);
-    }
-  }
+  .hero-slide-img { transform: scale(1.08); transform-origin: center; }
+  @media (min-width: 768px) { .hero-slide-img { transform: scale(1.04); } }
   @keyframes scrollDot {
-    0%,
-    20% {
-      transform: translateY(0);
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(14px);
-      opacity: 0;
-    }
+    0%, 20% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(14px); opacity: 0; }
   }
 </style>

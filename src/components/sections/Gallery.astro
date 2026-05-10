@@ -1,31 +1,31 @@
 ---
-/** Curated gallery — masonry-ish layout using CSS columns + click-to-lightbox. */
+/** Gallery — true CSS-columns masonry, edge-to-edge, no gaps. */
 
-interface GalleryItem {
-  src: string;
-  alt: string;
-  span?: 1 | 2;
-}
+interface GalleryItem { src: string; alt: string }
 
-// 12 best-of from optimized event folders.
+// Curated mix — none of these are reused in Hero / About / Gurudev / Events / Insta strip.
 const gallery: GalleryItem[] = [
-  { src: "/images/activities/shobha-yatra/photo-01.webp", alt: "Shobha Yatra procession", span: 2 },
-  { src: "/images/activities/navratri/photo-03.webp", alt: "Navratri homa" },
-  { src: "/images/activities/navratri/photo-08.webp", alt: "Navratri devotion" },
-  { src: "/images/activities/shobha-yatra/photo-04.webp", alt: "Devotees gathered" },
+  { src: "/images/activities/shobha-yatra/photo-02.webp", alt: "Shobha Yatra walk" },
+  { src: "/images/activities/navratri/photo-04.webp", alt: "Devotion in song" },
+  { src: "/images/activities/navratri/photo-07.webp", alt: "Lighting the lamp" },
+  { src: "/images/activities/shobha-yatra/photo-06.webp", alt: "Procession" },
+  { src: "/images/activities/navratri/photo-08.webp", alt: "Meditation" },
+  { src: "/images/activities/navratri/photo-09.webp", alt: "Together in seva" },
+  { src: "/images/activities/shobha-yatra/photo-08.webp", alt: "Yatra" },
+  { src: "/images/activities/navratri/photo-10.webp", alt: "Aarti" },
+  { src: "/images/activities/shobha-yatra/photo-10.webp", alt: "Open hall" },
   { src: "/images/activities/navratri/photo-15.webp", alt: "Sacred fire" },
-  { src: "/images/activities/shobha-yatra/photo-09.webp", alt: "Community walk", span: 2 },
-  { src: "/images/activities/navratri/photo-22.webp", alt: "Aarti" },
-  { src: "/images/activities/shobha-yatra/photo-12.webp", alt: "Somnath darshan" },
-  { src: "/images/activities/navratri/photo-30.webp", alt: "Volunteers" },
-  { src: "/images/activities/navratri/photo-40.webp", alt: "Quiet moment" },
-  { src: "/images/activities/shobha-yatra/photo-15.webp", alt: "Procession evening" },
-  { src: "/images/activities/navratri/photo-18.webp", alt: "Celebration" },
+  { src: "/images/activities/shobha-yatra/photo-11.webp", alt: "Yatra walk" },
+  { src: "/images/activities/navratri/photo-17.webp", alt: "Music in the courtyard" },
+  { src: "/images/activities/shobha-yatra/photo-14.webp", alt: "Evening procession" },
+  { src: "/images/activities/navratri/photo-21.webp", alt: "Friends together" },
+  { src: "/images/activities/navratri/photo-26.webp", alt: "Quiet moment" },
+  { src: "/images/activities/navratri/photo-28.webp", alt: "Volunteer crew" },
 ];
 ---
 
 <section id="gallery" class="relative bg-cream-50">
-  <div class="container-x py-[var(--section-y)]">
+  <div class="container-x pt-[var(--section-y)] pb-12">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div class="max-w-xl">
         <p class="reveal eyebrow">Gallery</p>
@@ -34,44 +34,36 @@ const gallery: GalleryItem[] = [
         </h2>
       </div>
     </div>
+  </div>
 
-    <div
-      class="mt-12 grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-4"
-      data-lightbox-grid
-    >
-      {
-        gallery.map((g, i) => (
-          <button
-            type="button"
-            data-lightbox-item
-            data-src={g.src}
-            data-alt={g.alt}
-            class={`reveal group relative overflow-hidden rounded-xl bg-cream-100 ring-1 ring-ink-100/60 ${g.span === 2 ? "col-span-2" : ""}`}
-            style={`transition-delay: ${(i % 6) * 50}ms`}
-            aria-label={`View ${g.alt}`}
-          >
-            <div class={`relative ${g.span === 2 ? "aspect-[16/9]" : "aspect-square"}`}>
-              <img
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                decoding="async"
-                class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
-                onerror="this.style.opacity='0.35'; this.style.background='linear-gradient(135deg,#ebe1cd,#b1c0a2)';"
-              />
-            </div>
-          </button>
-        ))
-      }
-    </div>
+  <!-- Edge-to-edge masonry, zero gaps -->
+  <div class="hv-masonry" data-lightbox-grid>
+    {
+      gallery.map((g) => (
+        <button
+          type="button"
+          data-lightbox-item
+          data-src={g.src}
+          data-alt={g.alt}
+          class="hv-masonry-item group relative block w-full overflow-hidden"
+          aria-label={`View ${g.alt}`}
+        >
+          <img
+            src={g.src}
+            alt={g.alt}
+            loading="lazy"
+            decoding="async"
+            class="block w-full transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+            onerror="this.style.opacity='0.35'; this.style.background='linear-gradient(135deg,#ebe1cd,#b1c0a2)';"
+          />
+        </button>
+      ))
+    }
   </div>
 </section>
 
 <!-- Lightbox -->
-<dialog
-  id="lightbox"
-  class="m-0 h-screen w-screen max-h-screen max-w-none bg-ink-700/95 p-0 text-cream-50 backdrop:bg-ink-700/95"
->
+<dialog id="lightbox" class="m-0 h-screen w-screen max-h-screen max-w-none bg-ink-700/95 p-0 text-cream-50 backdrop:bg-ink-700/95">
   <button
     type="button"
     data-lightbox-close
@@ -86,6 +78,28 @@ const gallery: GalleryItem[] = [
     <img id="lightbox-img" src="" alt="" class="max-h-full max-w-full rounded-lg object-contain" />
   </div>
 </dialog>
+
+<style>
+  /* CSS columns masonry, no gutters — items break to next column naturally */
+  .hv-masonry {
+    column-count: 2;
+    column-gap: 0;
+  }
+  @media (min-width: 640px)  { .hv-masonry { column-count: 3; } }
+  @media (min-width: 1024px) { .hv-masonry { column-count: 4; } }
+  @media (min-width: 1440px) { .hv-masonry { column-count: 5; } }
+
+  .hv-masonry-item {
+    /* Avoid items splitting across columns */
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin: 0;
+    padding: 0;
+    line-height: 0;     /* removes baseline gap below img */
+  }
+  .hv-masonry-item img { display: block; width: 100%; height: auto; }
+</style>
 
 <script>
   const grid = document.querySelector<HTMLDivElement>("[data-lightbox-grid]");
@@ -103,8 +117,6 @@ const gallery: GalleryItem[] = [
       });
     });
     closeBtn?.addEventListener("click", () => dialog.close());
-    dialog.addEventListener("click", (e) => {
-      if (e.target === dialog) dialog.close();
-    });
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
   }
 </script>

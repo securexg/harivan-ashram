@@ -1,6 +1,6 @@
 ---
-/* Faces of Harivan — curated smiling portraits (user-provided WebPs in
-   /public/images/happy-faces/). Marquee CSS lives in global.css. */
+/* Faces of Harivan — always-moving marquee of smiling portraits.
+   No pause-on-hover; respects prefers-reduced-motion (slower, not stopped). */
 
 const happyFaces = [
   "photo-03.webp",
@@ -26,11 +26,7 @@ const happyFaces = [
   "photo-45.webp",
 ];
 
-const faces = happyFaces.map((file) => ({
-  src: `/images/happy-faces/${file}`,
-  alt: "Sangha at Harivan Ashram",
-}));
-
+const faces = happyFaces.map((file) => ({ src: `/images/happy-faces/${file}`, alt: "Smiling moments at Harivan" }));
 const loop = [...faces, ...faces];
 ---
 
@@ -38,9 +34,9 @@ const loop = [...faces, ...faces];
   <div class="container-x py-[var(--section-y)]">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div class="max-w-xl">
-        <p class="reveal eyebrow">Faces of Harivan</p>
+        <p class="reveal eyebrow">Happy faces</p>
         <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
-          Sangha, <span class="h-display-italic">smiling</span>.
+          Volunteers, devotees, <span class="h-display-italic">friends</span>.
         </h2>
       </div>
       <p class="reveal max-w-md text-sm text-ink-500" style="transition-delay: 120ms">
@@ -53,7 +49,7 @@ const loop = [...faces, ...faces];
     <span class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cream-100 to-transparent md:w-32" aria-hidden="true"></span>
     <span class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cream-100 to-transparent md:w-32" aria-hidden="true"></span>
 
-    <div class="hv-marquee group flex gap-4 pb-[var(--section-y)] pt-2 md:gap-6">
+    <div class="hv-marquee flex gap-4 pb-[var(--section-y)] pt-2 md:gap-6">
       <ul class="hv-marquee-track flex shrink-0 items-stretch gap-4 md:gap-6">
         {
           loop.map((f, i) => (

@@ -3,7 +3,7 @@ import "~/styles/global.css";
 import MetaHead from "~/components/layout/MetaHead.astro";
 import Header from "~/components/layout/Header.astro";
 import Footer from "~/components/layout/Footer.astro";
-import GoogleTranslate from "~/components/layout/GoogleTranslate.astro";
+import Translate from "~/components/layout/Translate.astro";
 
 interface Props {
   title?: string;
@@ -32,7 +32,7 @@ const { title, description } = Astro.props;
     </main>
 
     <Footer />
-    <GoogleTranslate />
+    <Translate />
 
     <script>
       // Reveal-on-scroll observer (lightweight; respects reduced-motion via CSS)
