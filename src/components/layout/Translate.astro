@@ -1,20 +1,16 @@
 ---
 /* Custom, branded translation widget.
-   We render our own English / हिंदी / ਪੰਜਾਬੀ menu and quietly drive the
-   official Google Translate engine in the background — no Google badge,
-   no banner, no “Powered by” strip.
+   Embedded Google Translate is unreliable on mobile Safari/content blockers.
+   The menu now uses Google's full translated-page endpoint for Hindi/Punjabi,
+   while English returns to the canonical site URL.
 
    Two visual instances of the menu mount from this same component:
      · Desktop: inline pill in the site header (slot via header)
      · Mobile : floating bottom-right button
 
-   Under the hood there is one hidden #google_translate_element that does
-   the actual work; both menus dispatch a `change` on `.goog-te-combo`.
+   This keeps the switch clean and avoids half-translated widget UI.
 */
 ---
-
-<!-- Hidden engine host for Google Translate -->
-<div id="google_translate_element" class="hidden" aria-hidden="true"></div>
 
 <!-- Mobile floating button -->
 <div class="notranslate fixed bottom-5 right-4 z-40 md:hidden" data-hv-translate-mobile translate="no">
@@ -83,32 +79,10 @@
   .hv-translate-option[data-active="true"] { background: var(--color-cream-200); }
 </style>
 
-<script is:inline>
-  // Google Translate bootstrap
-  window.googleTranslateElementInit = function () {
-    if (!window.google || !window.google.translate) return;
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: "en",
-        includedLanguages: "en,hi,pa",
-        layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false,
-      },
-      "google_translate_element",
-    );
-  };
-</script>
-<script
-  is:inline
-  src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-  defer></script>
-
 <script>
   // Custom dropdown logic — supports multiple instances of the menu
   type Lang = "en" | "hi" | "pa";
   const LABELS: Record<Lang, string> = { en: "English", hi: "हिंदी", pa: "ਪੰਜਾਬੀ" };
-
-  const KEY = "hv-lang";
 
   const clearGoogTransCookies = () => {
     const host = window.location.hostname;
@@ -121,37 +95,18 @@
     });
   };
 
-  const setGoogTransCookie = (lang: Lang) => {
-    clearGoogTransCookies();
-    if (lang === "en") return;
-    const value = `/en/${lang}`;
-    document.cookie = `googtrans=${value};path=/`;
-    if (window.location.hostname.includes(".")) {
-      document.cookie = `googtrans=${value};path=/;domain=.${window.location.hostname}`;
-    }
+  const canonicalUrl = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("googtrans");
+    return `${url.origin}${url.pathname}${url.search}${url.hash}`;
   };
 
-  const waitForCombo = (cb: (combo: HTMLSelectElement) => void, fallback?: () => void) => {
-    let tries = 0;
-    const t = window.setInterval(() => {
-      tries += 1;
-      const combo = document.querySelector<HTMLSelectElement>(".goog-te-combo");
-      if (combo) {
-        window.clearInterval(t);
-        cb(combo);
-      } else if (tries > 24) {
-        window.clearInterval(t);
-        fallback?.();
-      }
-    }, 150);
-  };
-
-  const setComboLanguage = (lang: Lang, combo = document.querySelector<HTMLSelectElement>(".goog-te-combo")) => {
-    if (!combo) return false;
-    combo.value = lang === "en" ? "" : lang;
-    combo.dispatchEvent(new Event("change"));
-    combo.dispatchEvent(new Event("change", { bubbles: true }));
-    return true;
+  const translatedUrl = (lang: Exclude<Lang, "en">) => {
+    const url = new URL("https://translate.google.com/translate");
+    url.searchParams.set("sl", "en");
+    url.searchParams.set("tl", lang);
+    url.searchParams.set("u", canonicalUrl());
+    return url.toString();
   };
 
   const reflectInUI = (lang: Lang) => {
@@ -163,52 +118,18 @@
     });
   };
 
-  const apply = (lang: Lang, persist = true) => {
-    if (persist) {
-      try { localStorage.setItem(KEY, lang); } catch {}
-    }
+  const apply = (lang: Lang) => {
     reflectInUI(lang);
-    document.documentElement.classList.add("hv-translating");
+    clearGoogTransCookies();
     if (lang === "en") {
-      // Google Translate does not reliably undo DOM mutations in place.
-      // Clearing its cookie and reloading is the cleanest full return to English.
-      clearGoogTransCookies();
-      setComboLanguage("en");
-      window.setTimeout(() => window.location.reload(), 80);
+      window.location.href = canonicalUrl();
       return;
     }
-    setGoogTransCookie(lang);
-    if (setComboLanguage(lang)) {
-      window.setTimeout(() => window.location.reload(), 120);
-      return;
-    }
-    waitForCombo(
-      (combo) => setComboLanguage(lang, combo),
-      () => window.location.reload(),
-    );
-  };
-
-  const readCookieLang = (): Lang | null => {
-    const match = document.cookie.match(/(?:^|;\s*)googtrans=\/en\/(hi|pa)/);
-    return match?.[1] as Lang | null;
-  };
-
-  const getInitialLang = (): Lang => {
-    const cookieLang = readCookieLang();
-    if (cookieLang) return cookieLang;
-    try {
-      const saved = localStorage.getItem(KEY);
-      if (saved === "hi" || saved === "pa") return saved;
-    } catch {}
-    return "en";
+    window.location.href = translatedUrl(lang);
   };
 
   window.addEventListener("pageshow", () => {
-    const lang = getInitialLang();
-    reflectInUI(lang);
-    if (lang !== "en") {
-      waitForCombo((combo) => setComboLanguage(lang, combo));
-    }
+    reflectInUI("en");
   });
 
   const wireTriggers = () => {
@@ -248,11 +169,6 @@
   // Init
   document.addEventListener("DOMContentLoaded", () => {
     wireTriggers();
-    const saved = getInitialLang();
-    reflectInUI(saved);
-    if (saved !== "en") {
-      setGoogTransCookie(saved);
-      waitForCombo((combo) => setComboLanguage(saved, combo));
-    }
+    reflectInUI("en");
   });
 </script>
