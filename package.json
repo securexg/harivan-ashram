@@ -10,7 +10,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "optimize:media": "node scripts/optimize-media.mjs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "deploy": "astro build && vercel deploy --prebuilt --prod",
+    "ship": "git add -A && git commit -m \"Update: $(date '+%Y-%m-%d %H:%M')\" && git push"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
