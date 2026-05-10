@@ -75,11 +75,23 @@ export const gurudev = {
   title: "Gurudev Sri Sri Ravi Shankar",
   body:
     "A spiritual teacher, humanitarian and ambassador of peace, Gurudev Sri Sri Ravi Shankar ji has touched the lives of over 800 million people across 180 countries. His vision of a violence-free, stress-free society inspires every breath we take at Harivan.",
+  /** Additional paragraphs — aligned with public messaging on gurudev.artofliving.org */
+  bodyMore: [
+    "Through The Art of Living, Gurudev has revived ancient breath-based practices such as Sudarshan Kriya, making meditation and inner calm accessible to people of every background, age and walk of life.",
+    "His work spans conflict resolution, trauma relief, education for tribal children, prisoner rehabilitation, environmental care and interfaith dialogue — always rooted in the simple message that inner peace is the basis of outer peace.",
+  ],
   quote:
     "The world is a mixture of joy and sorrow. Celebrate when you have joy, and when you have sorrow, have the faith that this will also pass.",
   attribution: "— Gurudev Sri Sri Ravi Shankar ji",
   aolBlurb:
     "The Art of Living, founded in 1981, is one of the world's largest volunteer-based humanitarian and educational NGOs — present across 180 countries with programs in breath, meditation, leadership and rural development.",
+  /** Left-column 2×2 mood board — ashram life (no homa close-ups). Paths under /public/images/… */
+  moodGrid: [
+    { folder: "activities/shobha-yatra", slug: "photo-01", alt: "Harivan Ashram — outdoor gathering" },
+    { folder: "activities/navratri", slug: "photo-25", alt: "Walkway and banners at Harivan" },
+    { folder: "activities/shobha-yatra", slug: "photo-09", alt: "Community in celebration" },
+    { folder: "activities/navratri", slug: "photo-40", alt: "Evening satsang at the ashram" },
+  ],
 };
 
 export const activities = [
@@ -123,17 +135,8 @@ export const activities = [
 export const support = {
   eyebrow: "Support the Ashram",
   title: "Sangha-driven, sustained by you.",
-  body: "A dedicated bank account for Harivan Ashram has been approved. A monthly recurring contribution model helps meet regular maintenance and procurement. Every offering is seva.",
-  tiers: [
-    { amount: "₹1,100", note: "monthly" },
-    { amount: "₹2,100", note: "monthly" },
-    { amount: "₹5,000", note: "monthly" },
-    { amount: "Any", note: "one-time" },
-  ],
-  bankPlaceholder:
-    "Bank account details, UPI and donation link will be shared on request. Please call or message us to contribute.",
-  signatories:
-    "Authorised signatories: Sukhija ji, Anil Salwan ji, Gaurav Sood ji.",
+  body:
+    "Harivan runs on seva and thoughtful contributions from the sangha. Bank account and UPI details will be published here when finalised — for now, please reach out by phone or WhatsApp and our volunteers will guide you.",
 };
 
 export const team = {

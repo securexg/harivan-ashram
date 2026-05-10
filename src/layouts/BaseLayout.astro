@@ -3,7 +3,6 @@ import "~/styles/global.css";
 import MetaHead from "~/components/layout/MetaHead.astro";
 import Header from "~/components/layout/Header.astro";
 import Footer from "~/components/layout/Footer.astro";
-import ContactBar from "~/components/ui/ContactBar.astro";
 import GoogleTranslate from "~/components/layout/GoogleTranslate.astro";
 
 interface Props {
@@ -33,7 +32,6 @@ const { title, description } = Astro.props;
     </main>
 
     <Footer />
-    <ContactBar />
     <GoogleTranslate />
 
     <script>
@@ -56,15 +54,21 @@ const { title, description } = Astro.props;
         els.forEach((el) => el.classList.add("is-visible"));
       }
 
-      // Header background swap on scroll
+      // Header background swap on scroll (desktop only — mobile header is not fixed)
       const header = document.getElementById("site-header");
       if (header) {
+        const mq = window.matchMedia("(min-width: 768px)");
         const handleScroll = () => {
+          if (!mq.matches) {
+            header.dataset.scrolled = "false";
+            return;
+          }
           if (window.scrollY > 24) header.dataset.scrolled = "true";
           else header.dataset.scrolled = "false";
         };
         handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
+        mq.addEventListener("change", handleScroll);
       }
     </script>
   </body>

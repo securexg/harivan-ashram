@@ -78,6 +78,18 @@ function ffprobeFps(file) {
   }
 }
 
+function hasAudioStream(file) {
+  try {
+    const out = execSync(
+      `ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "${file}"`,
+      { encoding: "utf8" },
+    ).trim();
+    return out.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function processVideo(srcFile, destDir, slug) {
   ensure(destDir);
   const baseName = slug || basename(srcFile, extname(srcFile));
@@ -87,14 +99,19 @@ async function processVideo(srcFile, destDir, slug) {
   ensure(posterDir);
   const poster = join(posterDir, `${baseName}.webp`);
 
+  const audio = hasAudioStream(srcFile);
+  const map = audio ? "-map 0:v:0 -map 0:a:0" : "-map 0:v:0";
+  const aencMp4 = audio ? "-c:a aac -b:a 96k" : "-an";
+  const aencWebm = audio ? "-c:a libopus -b:a 96k" : "-an";
+
   if (!existsSync(mp4)) {
-    // h264 720p, mute audio, faststart for streaming
-    const cmd = `ffmpeg -y -i "${srcFile}" -vf "scale='min(720,iw)':-2:flags=lanczos" -an -c:v libx264 -preset medium -crf 24 -movflags +faststart -pix_fmt yuv420p "${mp4}"`;
+    // h264 720p, keep audio when present (unmute in browser), faststart for streaming
+    const cmd = `ffmpeg -y -i "${srcFile}" ${map} -vf "scale='min(720,iw)':-2:flags=lanczos" -c:v libx264 -preset medium -crf 24 -movflags +faststart -pix_fmt yuv420p ${aencMp4} "${mp4}"`;
     execSync(cmd, { stdio: "inherit" });
   }
 
   if (!existsSync(webm)) {
-    const cmd = `ffmpeg -y -i "${srcFile}" -vf "scale='min(720,iw)':-2:flags=lanczos" -an -c:v libvpx-vp9 -crf 32 -b:v 0 -row-mt 1 -threads 4 -deadline good -cpu-used 2 "${webm}"`;
+    const cmd = `ffmpeg -y -i "${srcFile}" ${map} -vf "scale='min(720,iw)':-2:flags=lanczos" -c:v libvpx-vp9 -crf 32 -b:v 0 -row-mt 1 -threads 4 -deadline good -cpu-used 2 ${aencWebm} "${webm}"`;
     execSync(cmd, { stdio: "inherit" });
   }
 
@@ -147,6 +164,11 @@ async function processFolder(srcSubdir, outName, options = {}) {
   }
 
   if (videos.length) {
+    if (!options.videoSlugs?.length) {
+      console.log(
+        `  · skipping ${videos.length} video file(s) in ${srcSubdir} (only folders with videoSlugs are encoded — e.g. Reel Videos).`,
+      );
+    } else {
     const destDir = join(OUT_VID, outName);
     let i = 0;
     for (const file of videos) {
@@ -162,6 +184,7 @@ async function processFolder(srcSubdir, outName, options = {}) {
         console.error(`FAILED: ${err.message}`);
       }
     }
+    }
   }
 }
 
@@ -171,9 +194,17 @@ async function main() {
 
   await processFolder("Navratri", "activities/navratri");
   await processFolder("Shobha Yatra", "activities/shobha-yatra");
+  await processFolder("Gurudev", "gurudev", { namedSlugs: ["portrait"] });
   await processFolder("Reel Videos", "reels", {
     videoSlugs: ["reel-1", "reel-2", "reel-3", "reel-4"],
   });
+  await processFolder("Smiling Faces", "activities/smiling-faces");
+
+  const yltpSrc = join(SRC, "1-may-YLTP-sri sri-4 (1).mp4");
+  if (existsSync(yltpSrc)) {
+    console.log("\n→ YLTP teaser (source root)");
+    await processVideo(yltpSrc, join(OUT_VID, "yltp"), "yltp-teaser");
+  }
 
   console.log("\n✓ media optimization complete");
 }

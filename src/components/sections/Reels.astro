@@ -110,14 +110,14 @@ const reels = [
       const btn = figure.querySelector<HTMLButtonElement>("[data-mute-toggle]");
       if (!video || !btn) return;
 
-      btn.addEventListener("click", (e) => {
+      btn.addEventListener("click", async (e) => {
         e.stopPropagation();
-        // When user unmutes one, mute all the others to avoid a chorus
         const willUnmute = video.muted;
         if (willUnmute) {
           grid.querySelectorAll<HTMLVideoElement>("video[data-reel]").forEach((v) => {
             if (v !== video) {
               v.muted = true;
+              v.volume = 1;
               const otherFig = v.closest("figure");
               const otherBtn = otherFig?.querySelector<HTMLButtonElement>("[data-mute-toggle]");
               if (otherBtn) setMute(v, otherBtn, true);
@@ -126,8 +126,12 @@ const reels = [
         }
         setMute(video, btn, !willUnmute);
         if (willUnmute) {
-          // Some browsers require a fresh play call when audio enables
-          video.play().catch(() => {});
+          video.volume = 1;
+          try {
+            await video.play();
+          } catch {
+            /* ignore */
+          }
         }
       });
     });

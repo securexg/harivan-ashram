@@ -1,26 +1,36 @@
 ---
-/* "Faces of Harivan" — auto-scrolling marquee of smiling photos
-   from the Navratri + Shobha Yatra archives.  Pauses on hover.
-   Uses CSS `animation` with two duplicated rows so the loop is seamless. */
+/* Faces of Harivan — curated smiling portraits (user-provided WebPs in
+   /public/images/happy-faces/). Marquee CSS lives in global.css. */
 
-const faces = [
-  { folder: "activities/navratri", slug: "photo-02", alt: "Navratri devotees" },
-  { folder: "activities/navratri", slug: "photo-06", alt: "Smiles at Harivan" },
-  { folder: "activities/navratri", slug: "photo-09", alt: "Sangha together" },
-  { folder: "activities/navratri", slug: "photo-11", alt: "Family at the ashram" },
-  { folder: "activities/navratri", slug: "photo-15", alt: "Devotion and joy" },
-  { folder: "activities/shobha-yatra", slug: "photo-04", alt: "Shobha Yatra devotees" },
-  { folder: "activities/navratri", slug: "photo-18", alt: "Volunteer team" },
-  { folder: "activities/navratri", slug: "photo-20", alt: "Ladies of Sangha" },
-  { folder: "activities/navratri", slug: "photo-21", alt: "Smiling moments" },
-  { folder: "activities/shobha-yatra", slug: "photo-11", alt: "Yatra walk" },
-  { folder: "activities/navratri", slug: "photo-42", alt: "Celebration" },
-  { folder: "activities/navratri", slug: "photo-43", alt: "Joy at Harivan" },
-  { folder: "activities/navratri", slug: "photo-44", alt: "Together in song" },
-  { folder: "activities/navratri", slug: "photo-45", alt: "Closing celebration" },
+const happyFaces = [
+  "photo-03.webp",
+  "photo-05.webp",
+  "photo-08.webp",
+  "photo-09.webp",
+  "photo-10.webp",
+  "photo-11.webp",
+  "photo-12.webp",
+  "photo-13.webp",
+  "photo-17.webp",
+  "photo-28.webp",
+  "photo-30-640.webp",
+  "photo-32.webp",
+  "photo-33.webp",
+  "photo-36.webp",
+  "photo-38.webp",
+  "photo-39.webp",
+  "photo-41.webp",
+  "photo-42-2400.webp",
+  "photo-43.webp",
+  "photo-44.webp",
+  "photo-45.webp",
 ];
 
-// Duplicate for seamless loop
+const faces = happyFaces.map((file) => ({
+  src: `/images/happy-faces/${file}`,
+  alt: "Sangha at Harivan Ashram",
+}));
+
 const loop = [...faces, ...faces];
 ---
 
@@ -33,16 +43,13 @@ const loop = [...faces, ...faces];
           Sangha, <span class="h-display-italic">smiling</span>.
         </h2>
       </div>
-      <p class="reveal max-w-md text-sm text-ink-400" style="transition-delay: 120ms">
-        The real ashram is its people. A few moments from a year of community
-        life — Navratri homas, the Somnath Yatra, satsangs and seva.
+      <p class="reveal max-w-md text-sm text-ink-500" style="transition-delay: 120ms">
+        The real ashram is its people — bright moments from gatherings, yatras and seva at Harivan.
       </p>
     </div>
   </div>
 
-  <!-- Edge-to-edge marquee track -->
   <div class="relative">
-    <!-- Left and right fade masks -->
     <span class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cream-100 to-transparent md:w-32" aria-hidden="true"></span>
     <span class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cream-100 to-transparent md:w-32" aria-hidden="true"></span>
 
@@ -52,21 +59,14 @@ const loop = [...faces, ...faces];
           loop.map((f, i) => (
             <li class="block w-[180px] shrink-0 sm:w-[220px] md:w-[260px] lg:w-[300px]">
               <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft">
-                <div class="relative aspect-[3/4]">
-                  <picture class="absolute inset-0 block">
-                    <source
-                      type="image/webp"
-                      srcset={`/images/${f.folder}/${f.slug}-640.webp 640w, /images/${f.folder}/${f.slug}-1024.webp 1024w`}
-                      sizes="300px"
-                    />
-                    <img
-                      src={`/images/${f.folder}/${f.slug}-640.webp`}
-                      alt={i < faces.length ? f.alt : ""}
-                      loading="lazy"
-                      decoding="async"
-                      class="absolute inset-0 h-full w-full object-cover object-center"
-                    />
-                  </picture>
+                <div class="relative aspect-[3/4] w-full overflow-hidden">
+                  <img
+                    src={f.src}
+                    alt={i < faces.length ? f.alt : ""}
+                    loading="lazy"
+                    decoding="async"
+                    class="hv-cover-img object-[center_22%]"
+                  />
                 </div>
               </figure>
             </li>
@@ -76,20 +76,3 @@ const loop = [...faces, ...faces];
     </div>
   </div>
 </section>
-
-<style>
-  .hv-marquee-track {
-    animation: hv-marquee 60s linear infinite;
-    will-change: transform;
-  }
-  .hv-marquee:hover .hv-marquee-track {
-    animation-play-state: paused;
-  }
-  @keyframes hv-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hv-marquee-track { animation: none; }
-  }
-</style>

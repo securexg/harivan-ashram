@@ -3,9 +3,7 @@ import Button from "~/components/ui/Button.astro";
 import { contact, site, yltp } from "~/data/site";
 const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 
-/* Hero slideshow — auto-rotating with crossfade.
-   Edit the list to swap order or add more.  Each entry must be a slug
-   that exists under public/images/<folder>/<slug>-{640,1024,1600,2400}.webp */
+/* Hero slideshow — crossfade. Slugs must exist under public/images/<folder>/… */
 const slides: { folder: string; slug: string; alt: string }[] = [
   { folder: "activities/navratri", slug: "photo-30", alt: "Navratri homa at Harivan Ashram" },
   { folder: "activities/navratri", slug: "photo-25", alt: "Devotees in celebration" },
@@ -18,14 +16,13 @@ const slides: { folder: string; slug: string; alt: string }[] = [
 
 <section
   id="top"
-  class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink-700"
+  class="relative isolate flex min-h-[100dvh] min-h-[100svh] flex-col justify-end overflow-hidden bg-ink-700"
 >
-  <!-- Auto-rotating hero slideshow -->
-  <div class="absolute inset-0 -z-10" data-hero-slideshow>
+  <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" data-hero-slideshow>
     {
       slides.map((s, i) => (
         <picture
-          class={`hero-slide absolute inset-0 block h-full w-full transition-opacity duration-[1400ms] ease-[var(--ease-out-soft)] ${i === 0 ? "opacity-100" : "opacity-0"}`}
+          class={`hero-slide pointer-events-none absolute inset-0 block h-full w-full transition-opacity duration-[1400ms] ease-[var(--ease-out-soft)] ${i === 0 ? "opacity-100" : "opacity-0"}`}
           data-slide-index={i}
         >
           <source
@@ -36,7 +33,7 @@ const slides: { folder: string; slug: string; alt: string }[] = [
           <img
             src={`/images/${s.folder}/${s.slug}.webp`}
             alt={s.alt}
-            class="h-full w-full object-cover object-center will-change-transform"
+            class="hero-slide-img h-full w-full min-h-full min-w-full object-cover object-center"
             loading={i === 0 ? "eager" : "lazy"}
             fetchpriority={i === 0 ? "high" : "auto"}
             decoding="async"
@@ -44,78 +41,69 @@ const slides: { folder: string; slug: string; alt: string }[] = [
         </picture>
       ))
     }
-    <!-- Vignettes (above slides, below content) -->
+    <!-- Lighter centre so headline stays readable; darker at edges and bottom -->
     <div
-      class="absolute inset-0 bg-gradient-to-b from-ink-700/55 via-ink-700/30 to-ink-700/95"
+      class="absolute inset-0 bg-gradient-to-b from-ink-700/70 via-ink-700/35 to-ink-700/92"
       aria-hidden="true"
-    >
-    </div>
+    />
     <div
-      class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/60 via-ink-700/25 to-transparent md:w-3/4"
+      class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/55 via-ink-700/20 to-transparent md:w-4/5"
       aria-hidden="true"
-    >
-    </div>
+    />
   </div>
 
-  <div class="container-x relative z-10 pb-20 pt-40 md:pb-28 md:pt-48">
+  <div class="container-x relative z-10 pb-24 pt-32 sm:pb-28 sm:pt-36 md:pb-32 md:pt-44 lg:pt-48">
     <div class="max-w-3xl">
-      <p class="reveal eyebrow text-saffron-200">
+      <p class="text-xs uppercase tracking-[0.22em] text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)] sm:text-[13px]">
         {site.org} · {site.tagline}
       </p>
       <h1
-        class="reveal h-display mt-5 text-5xl text-white sm:text-6xl md:text-7xl lg:text-[88px]"
+        class="h-display mt-5 text-5xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl lg:text-[88px]"
       >
         A space amidst <span class="h-display-italic text-saffron-200">nature.</span>
       </h1>
       <p
-        class="reveal lead mt-7 max-w-xl text-white/85"
-        style="transition-delay: 80ms"
+        class="hv-hero-lead mt-7 max-w-xl font-sans text-base font-normal leading-relaxed text-white md:text-lg"
       >
-        Eleven acres of forest near Chandigarh — blessed by Pujya Gurudev Sri
-        Sri Ravi Shankar ji. A sanctuary for breath, meditation and seva, open
-        to seekers, families and youth.
+        Eleven acres of forest near Chandigarh — blessed by Pujya Gurudev Sri Sri Ravi Shankar ji. A
+        sanctuary for breath, meditation and seva, open to seekers, families and youth.
       </p>
 
-      <div
-        class="reveal mt-10 flex flex-wrap items-center gap-3"
-        style="transition-delay: 160ms"
-      >
-        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="lg">Call us</Button>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="lg" class="w-full justify-center sm:w-auto">
+          Call us
+        </Button>
         <Button
           href={wa}
           size="lg"
           external
-          class="bg-white/95 text-ink-700 border border-white/95 hover:bg-white"
+          class="w-full justify-center border border-white/90 bg-white/95 text-ink-700 hover:bg-white sm:w-auto"
         >
           WhatsApp
         </Button>
         <Button
           href="#yltp"
           size="lg"
-          class="bg-white/10 text-white border border-white/50 hover:bg-white/20 hover:border-white backdrop-blur-md"
+          class="w-full justify-center border border-white/55 bg-white/10 text-white backdrop-blur-md hover:border-white hover:bg-white/20 sm:w-auto"
         >
           YLTP · {yltp.date}
         </Button>
       </div>
     </div>
 
-    <div
-      class="reveal mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 text-white/80"
-      style="transition-delay: 240ms"
-    >
-      <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
-        <span class="h-px w-6 bg-white/60"></span> 11 acres of forest
+    <div class="mt-12 flex flex-col gap-3 text-[11px] uppercase tracking-[0.2em] text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] sm:mt-14 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-2 sm:text-[12px]">
+      <span class="flex items-center gap-2">
+        <span class="h-px w-6 bg-white/70"></span> 11 acres of forest
       </span>
-      <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
-        <span class="h-px w-6 bg-white/60"></span> Bardar · near New Chandigarh
+      <span class="flex items-center gap-2">
+        <span class="h-px w-6 bg-white/70"></span> Bardar · near New Chandigarh
       </span>
-      <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
-        <span class="h-px w-6 bg-white/60"></span> Sanghachadwam
+      <span class="flex items-center gap-2">
+        <span class="h-px w-6 bg-white/70"></span> Sanghachadwam
       </span>
     </div>
   </div>
 
-  <!-- Slide indicators -->
   <div
     class="pointer-events-none absolute bottom-7 right-6 z-10 flex items-center gap-1.5 md:bottom-12 md:right-10"
     data-hero-dots
@@ -124,18 +112,17 @@ const slides: { folder: string; slug: string; alt: string }[] = [
     {
       slides.map((_, i) => (
         <span
-          class={`block h-px w-6 bg-white/40 transition-all duration-700 ${i === 0 ? "bg-white/95 w-10" : ""}`}
+          class={`block h-px w-6 bg-white/40 transition-all duration-700 ${i === 0 ? "w-10 bg-white/95" : ""}`}
           data-dot-index={i}
         />
       ))
     }
   </div>
 
-  <!-- Subtle scroll cue -->
   <a
     href="#about"
     aria-label="Scroll to About"
-    class="group absolute bottom-6 left-1/2 z-10 -translate-x-1/2 md:bottom-10"
+    class="group absolute bottom-5 left-1/2 z-10 -translate-x-1/2 md:bottom-10"
   >
     <span class="flex h-12 w-7 items-start justify-center rounded-full border border-white/60 p-1.5">
       <span class="h-2 w-px animate-[scrollDot_1.6s_ease-in-out_infinite] bg-white/80"></span>
@@ -162,13 +149,27 @@ const slides: { folder: string; slug: string; alt: string }[] = [
       });
     };
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduce && total > 1) setInterval(advance, 5500);
+    if (total > 1) {
+      const ms = reduce ? 9000 : 5500;
+      window.setInterval(advance, ms);
+    }
   }
 </script>
 
 <style>
+  /* Slight zoom so mobile “cover” feels fuller (Facebook-style hero crop) */
+  .hero-slide-img {
+    transform: scale(1.1);
+    transform-origin: center center;
+  }
+  @media (min-width: 768px) {
+    .hero-slide-img {
+      transform: scale(1.06);
+    }
+  }
   @keyframes scrollDot {
-    0%, 20% {
+    0%,
+    20% {
       transform: translateY(0);
       opacity: 0;
     }
