@@ -96,16 +96,33 @@
   };
 
   const canonicalUrl = () => {
-    const url = new URL(window.location.href);
+    const loc = window.location.href;
+    const url = new URL(loc);
+    if (url.hostname.endsWith(".translate.goog")) {
+      const orig = url.hostname.replace(/\.translate\.goog$/, "").replace(/-/g, ".");
+      url.hostname = orig;
+      url.searchParams.delete("_x_tr_sl");
+      url.searchParams.delete("_x_tr_tl");
+      url.searchParams.delete("_x_tr_hl");
+      return url.toString();
+    }
+    if (url.hostname === "translate.google.com") {
+      const u = url.searchParams.get("u");
+      if (u) return u;
+    }
     url.searchParams.delete("googtrans");
     return `${url.origin}${url.pathname}${url.search}${url.hash}`;
   };
 
   const translatedUrl = (lang: Exclude<Lang, "en">) => {
-    const url = new URL("https://translate.google.com/translate");
-    url.searchParams.set("sl", "en");
-    url.searchParams.set("tl", lang);
-    url.searchParams.set("u", canonicalUrl());
+    const u = canonicalUrl();
+    const host = new URL(u).hostname.replace(/\./g, "-");
+    const translateHost = `${host}.translate.goog`;
+    const url = new URL(u);
+    url.hostname = translateHost;
+    url.searchParams.set("_x_tr_sl", "en");
+    url.searchParams.set("_x_tr_tl", lang);
+    url.searchParams.set("_x_tr_hl", lang);
     return url.toString();
   };
 
