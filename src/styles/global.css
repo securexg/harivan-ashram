@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Harivan Ashram — Design System
+   Light, sober, spiritual. Inspired by artofliving.org + gurudev.artofliving.org.
+   No bold/heavy weights.  Inter for body, Cormorant for display accents.
+---------------------------------------------------------------------------- */
+
+@theme {
+  /* Brand */
+  --color-cream-50: #fdfbf6;
+  --color-cream-100: #faf7f0;
+  --color-cream-200: #f4ede0;
+  --color-cream-300: #ebe1cd;
+
+  --color-ink-50: #f5f3f0;
+  --color-ink-100: #e8e3dc;
+  --color-ink-200: #b8b0a4;
+  --color-ink-300: #8a8276;
+  --color-ink-400: #5e564b;
+  --color-ink-500: #3a342c;
+  --color-ink-600: #26221c;
+  --color-ink-700: #18150f;
+
+  /* Saffron / Gold — drawn from AOL logo sun */
+  --color-saffron-100: #fdebc8;
+  --color-saffron-200: #f6cf85;
+  --color-saffron-300: #ecb45b;
+  --color-saffron-400: #d99529;
+  --color-saffron-500: #b9760d;
+  --color-saffron-600: #8a5708;
+
+  /* Sage — calm nature accent */
+  --color-sage-100: #e6ece0;
+  --color-sage-300: #b1c0a2;
+  --color-sage-500: #6e8458;
+  --color-sage-700: #495b39;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+
+  /* Letterspacing helpers */
+  --tracking-airy: 0.06em;
+  --tracking-wide: 0.18em;
+
+  /* Easing */
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Section rhythm */
+  --section-y: clamp(4rem, 9vw, 8rem);
+}
+
+/* Custom utilities -------------------------------------------------------- */
+
+@layer utilities {
+  .container-x {
+    @apply mx-auto w-full max-w-[1240px] px-6 md:px-10;
+  }
+  .eyebrow {
+    @apply font-sans text-xs uppercase text-ink-300;
+    letter-spacing: var(--tracking-wide);
+    font-weight: 400;
+  }
+  .h-display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+  }
+  .h-display-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.05;
+  }
+  .lead {
+    @apply font-sans text-base md:text-lg text-ink-400;
+    font-weight: 300;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+  }
+  .body-text {
+    @apply font-sans text-ink-500;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-ink-100) 18%,
+      var(--color-ink-100) 82%,
+      transparent
+    );
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 1s var(--ease-out-soft),
+      transform 1s var(--ease-out-soft);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .ring-soft {
+    box-shadow:
+      0 1px 0 rgba(24, 21, 15, 0.04),
+      0 18px 48px -28px rgba(24, 21, 15, 0.18);
+  }
+}
+
+/* Base ------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-cream-50);
+  color: var(--color-ink-500);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  background: var(--color-cream-50);
+  color: var(--color-ink-500);
+}
+
+::selection {
+  background: var(--color-saffron-200);
+  color: var(--color-ink-700);
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reduced motion --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

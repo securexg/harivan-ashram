@@ -1,0 +1,151 @@
+---
+import { Image } from "astro:assets";
+import logo from "~/assets/aol-logo.png";
+import { contact } from "~/data/site";
+
+const nav = [
+  { label: "About", href: "#about" },
+  { label: "Gurudev", href: "#gurudev" },
+  { label: "Activities", href: "#activities" },
+  { label: "YLTP", href: "#yltp" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Support", href: "#support" },
+  { label: "Visit", href: "#contact" },
+];
+---
+
+<header
+  id="site-header"
+  data-scrolled="false"
+  class="fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color,box-shadow] duration-500 ease-out
+         data-[scrolled=true]:bg-cream-50/85 data-[scrolled=true]:backdrop-blur-xl data-[scrolled=true]:border-b data-[scrolled=true]:border-ink-100/70
+         data-[scrolled=false]:bg-transparent data-[scrolled=false]:border-b data-[scrolled=false]:border-transparent"
+>
+  <div class="container-x flex items-center justify-between py-4 md:py-5">
+    <a href="#top" class="group flex items-center gap-3" aria-label="Harivan Ashram home">
+      <Image
+        src={logo}
+        alt="The Art of Living"
+        class="h-10 w-auto md:h-11"
+        widths={[120, 240]}
+        sizes="120px"
+        loading="eager"
+        format="webp"
+      />
+      <span class="hidden flex-col leading-none sm:flex">
+        <span class="font-serif text-[15px] tracking-tight text-ink-700">Harivan Ashram</span>
+        <span class="eyebrow mt-1 text-[10px]">Tricity · North India</span>
+      </span>
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center gap-7">
+        {
+          nav.map((n) => (
+            <li>
+              <a
+                href={n.href}
+                class="font-sans text-[13px] font-light tracking-wide text-ink-500 transition-colors hover:text-ink-700"
+              >
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={`tel:${contact.phoneIntl}`}
+        class="hidden md:inline-flex items-center gap-2 rounded-full border border-ink-100/80 bg-cream-50/70 px-4 py-2 font-sans text-[12px] tracking-wide text-ink-600 backdrop-blur-md transition hover:border-saffron-300 hover:text-ink-700"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          class="h-4 w-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.272.527-.734.417-1.173L6.963 3.102A1.125 1.125 0 0 0 5.872 2.25H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+          />
+        </svg>
+        Call us
+      </a>
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink-100/80 bg-cream-50/70 text-ink-600 backdrop-blur-md"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    hidden
+    class="lg:hidden border-t border-ink-100/60 bg-cream-50/95 backdrop-blur-xl"
+  >
+    <ul class="container-x flex flex-col gap-1 py-4">
+      {
+        nav.map((n) => (
+          <li>
+            <a
+              href={n.href}
+              class="block rounded-md px-2 py-2.5 font-sans text-sm tracking-wide text-ink-500 transition hover:bg-cream-200 hover:text-ink-700"
+              data-mobile-link
+            >
+              {n.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="mt-2 grid grid-cols-2 gap-2">
+        <a
+          href={`tel:${contact.phoneIntl}`}
+          class="flex items-center justify-center rounded-full border border-ink-100 bg-cream-100 px-3 py-2 text-xs tracking-wide text-ink-600"
+        >Call</a>
+        <a
+          href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`}
+          class="flex items-center justify-center rounded-full bg-sage-700 px-3 py-2 text-xs tracking-wide text-cream-50"
+        >WhatsApp</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      const open = menu.hasAttribute("hidden") ? false : true;
+      if (open) {
+        menu.setAttribute("hidden", "");
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "Open menu");
+      } else {
+        menu.removeAttribute("hidden");
+        btn.setAttribute("aria-expanded", "true");
+        btn.setAttribute("aria-label", "Close menu");
+      }
+    });
+    menu.querySelectorAll<HTMLAnchorElement>("[data-mobile-link]").forEach((a) =>
+      a.addEventListener("click", () => {
+        menu.setAttribute("hidden", "");
+        btn.setAttribute("aria-expanded", "false");
+      }),
+    );
+  }
+</script>

@@ -1,0 +1,77 @@
+---
+import { site } from "~/data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.tagline}`;
+const desc = description ?? site.description;
+const url = new URL(Astro.url.pathname, site.url).toString();
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#fdfbf6" />
+<meta name="color-scheme" content="light" />
+
+<title>{fullTitle}</title>
+<meta name="description" content={desc} />
+<link rel="canonical" href={url} />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Fonts: Inter (300/400/500) + Cormorant Garamond (400 italic) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={desc} />
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:image" content="/og-image.jpg" />
+<meta property="og:locale" content="en_IN" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={desc} />
+<meta name="twitter:image" content="/og-image.jpg" />
+
+<!-- Structured data -->
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: site.name,
+    description: site.description,
+    url: site.url,
+    telephone: "+919569919990",
+    email: "artoflivingharivanashram@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Haripur, Bardar, Purkhali",
+      addressLocality: "Rupnagar",
+      addressRegion: "Punjab",
+      postalCode: "140108",
+      addressCountry: "IN",
+    },
+    parentOrganization: {
+      "@type": "NGO",
+      name: "The Art of Living",
+      url: "https://www.artofliving.org/",
+    },
+  })}
+/>

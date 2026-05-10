@@ -1,0 +1,115 @@
+---
+import Button from "~/components/ui/Button.astro";
+import { contact, site, yltp } from "~/data/site";
+const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+
+<section
+  id="top"
+  class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink-700"
+>
+  <!-- Hero image stack (slider-ready: replace with multiple <picture> entries when ready) -->
+  <div class="absolute inset-0 -z-10">
+    <picture class="block h-full w-full">
+      <source
+        type="image/webp"
+        srcset="/images/activities/shobha-yatra/photo-01-1024.webp 1024w, /images/activities/shobha-yatra/photo-01-1600.webp 1600w, /images/activities/shobha-yatra/photo-01-2400.webp 2400w"
+        sizes="100vw"
+      />
+      <img
+        src="/images/activities/shobha-yatra/photo-01.webp"
+        alt="Harivan Ashram — devotees gathered amidst nature"
+        class="h-full w-full object-cover object-center"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+    <!-- darker top + bottom for header + text legibility -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-ink-700/45 via-ink-700/20 to-ink-700/90"
+      aria-hidden="true"
+    >
+    </div>
+    <!-- left vignette behind copy -->
+    <div
+      class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/60 via-ink-700/25 to-transparent md:w-3/4"
+      aria-hidden="true"
+    >
+    </div>
+  </div>
+
+  <div class="container-x relative z-10 pb-16 pt-40 md:pb-24 md:pt-48">
+    <div class="max-w-3xl">
+      <p class="reveal eyebrow text-saffron-200">
+        {site.org} · {site.tagline}
+      </p>
+      <h1
+        class="reveal h-display mt-5 text-5xl text-cream-50 sm:text-6xl md:text-7xl lg:text-[88px]"
+      >
+        A space amidst <span class="h-display-italic text-saffron-200">nature.</span>
+      </h1>
+      <p
+        class="reveal lead mt-7 max-w-xl text-cream-100"
+        style="transition-delay: 80ms"
+      >
+        Eleven acres of forest near Chandigarh — blessed by Pujya Gurudev Sri
+        Sri Ravi Shankar ji. A sanctuary for breath, meditation and seva, open
+        to seekers, families and youth.
+      </p>
+
+      <div
+        class="reveal mt-10 flex flex-wrap items-center gap-3"
+        style="transition-delay: 160ms"
+      >
+        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="lg">Call us</Button>
+        <Button href={wa} variant="outline" size="lg" external class="text-cream-50 bg-cream-50/15 border-cream-50/40 hover:bg-cream-50/25 hover:border-cream-50/70">WhatsApp</Button>
+        <Button href="#yltp" variant="ghost" size="lg" class="text-cream-100 border-cream-100/40 hover:text-cream-50 hover:border-cream-100/80">
+          YLTP · {yltp.date}
+        </Button>
+      </div>
+    </div>
+
+    <div
+      class="reveal mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 text-cream-100/85"
+      style="transition-delay: 240ms"
+    >
+      <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
+        <span class="h-px w-6 bg-cream-100/60"></span> 11 acres of forest
+      </span>
+      <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
+        <span class="h-px w-6 bg-cream-100/60"></span> Bardar · near New Chandigarh
+      </span>
+      <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
+        <span class="h-px w-6 bg-cream-100/60"></span> Sanghachadwam
+      </span>
+    </div>
+  </div>
+
+  <!-- Subtle scroll cue -->
+  <a
+    href="#about"
+    aria-label="Scroll to About"
+    class="group absolute bottom-6 left-1/2 z-10 -translate-x-1/2 md:bottom-10"
+  >
+    <span class="flex h-12 w-7 items-start justify-center rounded-full border border-cream-200/60 p-1.5">
+      <span class="h-2 w-px animate-[scrollDot_1.6s_ease-in-out_infinite] bg-cream-200/80"></span>
+    </span>
+  </a>
+</section>
+
+<style>
+  @keyframes scrollDot {
+    0%, 20% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(14px);
+      opacity: 0;
+    }
+  }
+</style>

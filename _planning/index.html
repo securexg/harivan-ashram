@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harivan Ashram - A Nature Retreat | The Art of Living</title>
+    <meta name="description" content="Harivan Ashram - A nature-oriented spiritual retreat center under The Art of Living, located in Chandigarh. Experience peace, meditation, and spiritual growth in natural surroundings.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        /* Art of Living Design System */
+        :root {
+            --primary-purple: #6B46C1;
+            --primary-purple-dark: #553C9A;
+            --primary-purple-light: #8B5CF6;
+            --nature-green: #10B981;
+            --nature-green-dark: #059669;
+            --nature-green-light: #34D399;
+            --sky-blue: #3B82F6;
+            --sky-blue-dark: #2563EB;
+            --sky-blue-light: #60A5FA;
+            --sunrise-orange: #F59E0B;
+            --sunrise-orange-dark: #D97706;
+            --saffron: #FF9933;
+            --earth-brown: #8B4513;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+        
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Updated Gradients with Art of Living Colors */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--sky-blue) 100%);
+        }
+        
+        .nature-gradient {
+            background: linear-gradient(135deg, var(--nature-green) 0%, var(--sky-blue) 100%);
+        }
+        
+        .spiritual-gradient {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--saffron) 100%);
+        }
+        
+        .sunrise-gradient {
+            background: linear-gradient(135deg, var(--sunrise-orange) 0%, var(--nature-green) 100%);
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        /* Enhanced Animations */
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Enhanced Card Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(107, 70, 193, 0.15), 0 10px 10px -5px rgba(107, 70, 193, 0.1);
+            border-color: var(--primary-purple-light);
+        }
+        
+        /* Button Styles */
+        .btn-primary {
+            background: var(--primary-purple);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-purple-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(107, 70, 193, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-purple);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-purple);
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-purple);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .btn-nature {
+            background: var(--nature-green);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-nature:hover {
+            background: var(--nature-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Text Colors */
+        .text-primary { color: var(--primary-purple); }
+        .text-nature { color: var(--nature-green); }
+        .text-sky { color: var(--sky-blue); }
+        .text-sunrise { color: var(--sunrise-orange); }
+        
+        /* Background Colors */
+        .bg-primary { background: var(--primary-purple); }
+        .bg-nature { background: var(--nature-green); }
+        .bg-sky { background: var(--sky-blue); }
+        .bg-sunrise { background: var(--sunrise-orange); }
+    </style>
+</head>
+<body class="font-inter scroll-smooth">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-om text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800 font-playfair">Harivan Ashram</h1>
+                        <p class="text-xs text-gray-600">The Art of Living</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary transition font-medium">About</a>
+                    <a href="#events" class="text-gray-700 hover:text-primary transition font-medium">Events</a>
+                    <a href="#courses" class="text-gray-700 hover:text-primary transition font-medium">Courses</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-primary transition font-medium">Gallery</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary transition font-medium">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-4 space-y-3">
+                <a href="#home" class="block text-gray-700 hover:text-purple-600 transition">Home</a>
+                <a href="#about" class="block text-gray-700 hover:text-purple-600 transition">About</a>
+                <a href="#events" class="block text-gray-700 hover:text-purple-600 transition">Events</a>
+                <a href="#courses" class="block text-gray-700 hover:text-purple-600 transition">Courses</a>
+                <a href="#gallery" class="block text-gray-700 hover:text-purple-600 transition">Gallery</a>
+                <a href="#contact" class="block text-gray-700 hover:text-purple-600 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center hero-gradient text-white pt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 font-playfair animate-float">
+                        Welcome to Harivan Ashram
+                    </h2>
+                    <p class="text-xl mb-8 text-purple-100">
+                        A nature-oriented spiritual retreat center under The Art of Living, where peace meets natural beauty.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#about" class="btn-secondary">
+                            Discover More
+                        </a>
+                        <a href="#contact" class="btn-primary">
+                            Visit Us
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="w-full h-96 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-spa text-8xl text-white/50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 font-playfair">About Harivan Ashram</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A spiritual sanctuary where ancient wisdom meets modern living in harmony with nature
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-nature-green/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-leaf text-nature text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-primary">Nature-Oriented</h3>
+                    <p class="text-gray-600">
+                        Surrounded by natural beauty, our ashram provides the perfect environment for spiritual growth and inner peace.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-heart text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-primary">Art of Living</h3>
+                    <p class="text-gray-600">
+                        Part of the global Art of Living family, bringing Gurudev Sri Sri Ravi Shankar's vision of a stress-free, violence-free world.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-sky/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-sky text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-primary">Community Focus</h3>
+                    <p class="text-gray-600">
+                        Serving nearby villages through spiritual programs, satsangs, and community development initiatives.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Gurudev Section -->
+            <div class="bg-white p-12 rounded-2xl shadow-xl">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6 font-playfair text-primary">Our Inspiration</h3>
+                        <p class="text-gray-600 mb-6">
+                            Gurudev Sri Sri Ravi Shankar is a world-renowned humanitarian, spiritual leader, and ambassador of peace. His vision of personal and social transformation through yoga, meditation, and service has touched millions of lives worldwide.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            The Art of Living, founded by Gurudev, offers programs that eliminate stress, create a sense of belonging, restore human values, and encourage people from all backgrounds, religions, and cultural traditions to come together in celebration and service.
+                        </p>
+                        <blockquote class="border-l-4 border-primary pl-6 italic text-gray-700 font-playfair">
+                            "The world is a mixture of joy and sorrow. Celebrate when you have joy, and when you have sorrow, have the faith that this will also pass."
+                        </blockquote>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-64 h-64 mx-auto bg-gradient-to-br from-purple-200 to-blue-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-6xl text-purple-600"></i>
+                        </div>
+                        <p class="mt-4 text-gray-600">Gurudev Sri Sri Ravi Shankar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Events Section -->
+    <section id="events" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 font-playfair">Events & Activities</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Join us in our journey of spiritual growth and community service
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Past Events -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-calendar-check text-purple-600 text-xl mr-3"></i>
+                        <span class="text-sm font-semibold text-purple-600">PAST EVENT</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Navratri Celebration</h3>
+                    <p class="text-gray-600 mb-4">Three days of divine celebration with devotion, music, and spiritual practices.</p>
+                    <p class="text-sm text-gray-500">September 28-30, 2025</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-calendar-check text-blue-600 text-xl mr-3"></i>
+                        <span class="text-sm font-semibold text-blue-600">PAST EVENT</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Shobhayatra</h3>
+                    <p class="text-gray-600 mb-4">Grand procession in nearby villages to invite people for Somnath Ji darshan.</p>
+                    <p class="text-sm text-gray-500">February 19, 2026</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-calendar-check text-green-600 text-xl mr-3"></i>
+                        <span class="text-sm font-semibold text-green-600">PAST EVENT</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Somnath Ji Darshan</h3>
+                    <p class="text-gray-600 mb-4">Divine darshan with 1008 villagers joining the spiritual journey.</p>
+                    <p class="text-sm text-gray-500">February 21, 2026</p>
+                </div>
+                
+                <!-- Regular Activities -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sync text-orange-600 text-xl mr-3"></i>
+                        <span class="text-sm font-semibold text-orange-600">ONGOING</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Daily Satsang</h3>
+                    <p class="text-gray-600 mb-4">Evening satsangs at Harivan Ashram and regular visits to nearby villages.</p>
+                    <p class="text-sm text-gray-500">Every Evening</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-pink-50 to-purple-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sync text-pink-600 text-xl mr-3"></i>
+                        <span class="text-sm font-semibold text-pink-600">ONGOING</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Rural Happiness Program</h3>
+                    <p class="text-gray-600 mb-4">Conducted by Br. Nripen ji for key members of nearby villages.</p>
+                    <p class="text-sm text-gray-500">Regular Sessions</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sync text-indigo-600 text-xl mr-3"></i>
+                        <span class="text-sm font-semibold text-indigo-600">PLANNING</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Navchetna & Balchetna</h3>
+                    <p class="text-gray-600 mb-4">Community connection programs being planned for village outreach.</p>
+                    <p class="text-sm text-gray-500">Coming Soon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 font-playfair">Courses & Programs</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Transformative programs for personal growth and spiritual development
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-12 rounded-2xl shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-star text-yellow-300 text-2xl mr-3"></i>
+                        <span class="bg-yellow-300 text-purple-800 px-4 py-1 rounded-full text-sm font-bold">UPCOMING</span>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 font-playfair">Youth Leadership Training Program (YLTP)</h3>
+                    <p class="text-xl mb-8 text-purple-100">
+                        A transformative 7-day residential program for young leaders aged 18-35 years
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="font-semibold mb-3 text-lg">Program Highlights:</h4>
+                            <ul class="space-y-2 text-purple-100">
+                                <li><i class="fas fa-check mr-2"></i>Leadership skills development</li>
+                                <li><i class="fas fa-check mr-2"></i>Stress management techniques</li>
+                                <li><i class="fas fa-check mr-2"></i>Team building activities</li>
+                                <li><i class="fas fa-check mr-2"></i>Community service projects</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3 text-lg">Program Details:</h4>
+                            <ul class="space-y-2 text-purple-100">
+                                <li><i class="fas fa-calendar mr-2"></i>May 23-29, 2026</li>
+                                <li><i class="fas fa-users mr-2"></i>Age: 18-35 years</li>
+                                <li><i class="fas fa-home mr-2"></i>7-Day Residential</li>
+                                <li><i class="fas fa-rupee-sign mr-2"></i>Donation: ₹1,000/- only</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-50 transition">
+                            <i class="fas fa-phone mr-2"></i>Call for Registration
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition">
+                            <i class="fas fa-info-circle mr-2"></i>Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Other Programs -->
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-smile text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Rural Happiness Program</h3>
+                        <p class="text-gray-600 mb-4">
+                            Specialized programs designed for rural communities to bring happiness, peace, and prosperity.
+                        </p>
+                        <p class="text-sm text-gray-500">Contact for schedule</p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-child text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Balchetna Program</h3>
+                        <p class="text-gray-600 mb-4">
+                            Specially designed programs for children to develop their full potential and emotional intelligence.
+                        </p>
+                        <p class="text-sm text-gray-500">Coming Soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 font-playfair">Gallery</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Glimpses of our spiritual journey and community celebrations
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery Placeholders -->
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-purple-200 to-pink-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Navratri 2025</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-blue-200 to-green-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Shobhayatra 2026</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-green-200 to-blue-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Somnath Ji Darshan</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-yellow-200 to-orange-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Daily Satsang</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-pink-200 to-purple-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Rural Program</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-indigo-200 to-blue-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Ashram Life</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-green-200 to-teal-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Nature Views</p>
+                    </div>
+                </div>
+                
+                <div class="relative overflow-hidden rounded-lg aspect-square bg-gradient-to-br from-orange-200 to-red-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-white/50 text-4xl"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                        <p class="text-white text-sm">Celebrations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 font-playfair">Visit Harivan Ashram</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Experience peace and spirituality in the lap of nature
+                </p>
+            </div>
+            
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2">Address</h4>
+                                    <p class="text-gray-600">
+                                        The Art of Living<br>
+                                        Harivan Ashram, Bardar<br>
+                                        Chandigarh - 140108
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-nature-green/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-envelope text-nature text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2">Email</h4>
+                                    <p class="text-gray-600">artoflivingharivanashram@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-sky/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-phone text-sky text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2">Phone</h4>
+                                    <p class="text-gray-600">+91 95699 19990</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-sunrise-orange/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-calendar text-sunrise text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-primary">Navratri Celebration</h4>
+                                <p class="text-gray-600">September 28-30, 2025</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">
+                            Three days of divine celebration with devotion, music, and spiritual practices during the auspicious Navratri festival.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-dharmachakra text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-primary">Shobhayatra</h4>
+                                <p class="text-gray-600">February 19, 2026</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">
+                            Grand procession in nearby villages to invite people for Somnath Ji darshan and share the message of peace.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-sky/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-om text-sky text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-primary">Somnath Ji Darshan</h4>
+                                <p class="text-gray-600">February 21, 2026</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">
+                            Divine darshan with 1008 villagers joining the spiritual journey and experiencing the bliss of devotion.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-8 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">Visit Timings</h3>
+                        <div class="space-y-2">
+                            <p><i class="fas fa-clock mr-2"></i>Morning: 6:00 AM - 12:00 PM</p>
+                            <p><i class="fas fa-clock mr-2"></i>Evening: 4:00 PM - 8:00 PM</p>
+                            <p class="text-sm text-purple-200 mt-4">Special programs and events may have different timings</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-6 font-playfair">Send us a Message</h3>
+                        
+                        <form class="space-y-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Your Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter your name">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter your email">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter your phone number">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Tell us about your interest in Harivan Ashram"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-om text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold font-playfair">Harivan Ashram</h3>
+                            <p class="text-xs text-gray-400">The Art of Living</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">
+                        A nature-oriented spiritual retreat center for peace, meditation, and spiritual growth.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#events" class="hover:text-white transition">Events</a></li>
+                        <li><a href="#courses" class="hover:text-white transition">Courses</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Programs</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#courses" class="hover:text-white transition">YLTP</a></li>
+                        <li><a href="#courses" class="hover:text-white transition">Rural Happiness Program</a></li>
+                        <li><a href="#courses" class="hover:text-white transition">Balchetna</a></li>
+                        <li><a href="#courses" class="hover:text-white transition">Navchetna</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Follow us for updates and spiritual content
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Harivan Ashram. All rights reserved. | A unit of The Art of Living</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.querySelector('form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+        
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

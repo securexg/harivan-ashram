@@ -1,0 +1,110 @@
+---
+/** Curated gallery — masonry-ish layout using CSS columns + click-to-lightbox. */
+
+interface GalleryItem {
+  src: string;
+  alt: string;
+  span?: 1 | 2;
+}
+
+// 12 best-of from optimized event folders.
+const gallery: GalleryItem[] = [
+  { src: "/images/activities/shobha-yatra/photo-01.webp", alt: "Shobha Yatra procession", span: 2 },
+  { src: "/images/activities/navratri/photo-03.webp", alt: "Navratri homa" },
+  { src: "/images/activities/navratri/photo-08.webp", alt: "Navratri devotion" },
+  { src: "/images/activities/shobha-yatra/photo-04.webp", alt: "Devotees gathered" },
+  { src: "/images/activities/navratri/photo-15.webp", alt: "Sacred fire" },
+  { src: "/images/activities/shobha-yatra/photo-09.webp", alt: "Community walk", span: 2 },
+  { src: "/images/activities/navratri/photo-22.webp", alt: "Aarti" },
+  { src: "/images/activities/shobha-yatra/photo-12.webp", alt: "Somnath darshan" },
+  { src: "/images/activities/navratri/photo-30.webp", alt: "Volunteers" },
+  { src: "/images/activities/navratri/photo-40.webp", alt: "Quiet moment" },
+  { src: "/images/activities/shobha-yatra/photo-15.webp", alt: "Procession evening" },
+  { src: "/images/activities/navratri/photo-18.webp", alt: "Celebration" },
+];
+---
+
+<section id="gallery" class="relative bg-cream-50">
+  <div class="container-x py-[var(--section-y)]">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-xl">
+        <p class="reveal eyebrow">Gallery</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+          A walk through <span class="h-display-italic">Harivan</span>.
+        </h2>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-4"
+      data-lightbox-grid
+    >
+      {
+        gallery.map((g, i) => (
+          <button
+            type="button"
+            data-lightbox-item
+            data-src={g.src}
+            data-alt={g.alt}
+            class={`reveal group relative overflow-hidden rounded-xl bg-cream-100 ring-1 ring-ink-100/60 ${g.span === 2 ? "col-span-2" : ""}`}
+            style={`transition-delay: ${(i % 6) * 50}ms`}
+            aria-label={`View ${g.alt}`}
+          >
+            <div class={`relative ${g.span === 2 ? "aspect-[16/9]" : "aspect-square"}`}>
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+                onerror="this.style.opacity='0.35'; this.style.background='linear-gradient(135deg,#ebe1cd,#b1c0a2)';"
+              />
+            </div>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<dialog
+  id="lightbox"
+  class="m-0 h-screen w-screen max-h-screen max-w-none bg-ink-700/95 p-0 text-cream-50 backdrop:bg-ink-700/95"
+>
+  <button
+    type="button"
+    data-lightbox-close
+    class="absolute right-5 top-5 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream-200/30 bg-ink-700/60 backdrop-blur-md transition hover:bg-ink-700/80"
+    aria-label="Close"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <div class="flex h-full w-full items-center justify-center p-4 md:p-12">
+    <img id="lightbox-img" src="" alt="" class="max-h-full max-w-full rounded-lg object-contain" />
+  </div>
+</dialog>
+
+<script>
+  const grid = document.querySelector<HTMLDivElement>("[data-lightbox-grid]");
+  const dialog = document.getElementById("lightbox") as HTMLDialogElement | null;
+  const img = document.getElementById("lightbox-img") as HTMLImageElement | null;
+  const closeBtn = dialog?.querySelector("[data-lightbox-close]") as HTMLButtonElement | null;
+
+  if (grid && dialog && img) {
+    grid.querySelectorAll<HTMLButtonElement>("[data-lightbox-item]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        img.src = btn.dataset.src ?? "";
+        img.alt = btn.dataset.alt ?? "";
+        if (typeof dialog.showModal === "function") dialog.showModal();
+        else dialog.setAttribute("open", "");
+      });
+    });
+    closeBtn?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+</script>

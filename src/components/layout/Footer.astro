@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+import logo from "~/assets/aol-logo.png";
+import { contact, links, site } from "~/data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-ink-100 bg-cream-100">
+  <div class="container-x grid gap-12 py-16 md:grid-cols-12 md:py-20">
+    <div class="md:col-span-5">
+      <div class="flex flex-col items-start gap-5">
+        <Image
+          src={logo}
+          alt="The Art of Living"
+          class="h-14 w-auto"
+          widths={[160, 320]}
+          sizes="160px"
+          loading="lazy"
+          format="webp"
+        />
+        <div class="space-y-1">
+          <p class="font-serif text-2xl text-ink-700">Harivan Ashram</p>
+          <p class="eyebrow">{site.tagline} · Tricity · North India</p>
+        </div>
+        <p class="lead max-w-md">
+          Blessed by Pujya Gurudev Sri Sri Ravi Shankar ji. Eleven acres of forest
+          near Chandigarh — a sanctuary for breath, meditation and seva.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid gap-10 md:col-span-7 md:grid-cols-3">
+      <div>
+        <p class="eyebrow">Visit</p>
+        <p class="mt-3 body-text text-sm leading-relaxed">
+          {contact.addressFull}
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow">Reach us</p>
+        <ul class="mt-3 space-y-2 body-text text-sm">
+          <li>
+            <a href={`tel:${contact.phoneIntl}`} class="hover:text-ink-700"
+              >{contact.phone}</a
+            >
+          </li>
+          <li>
+            <a
+              href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`}
+              class="hover:text-ink-700">WhatsApp</a
+            >
+          </li>
+          <li>
+            <a href={`mailto:${contact.email}`} class="hover:text-ink-700"
+              >{contact.email}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">More</p>
+        <ul class="mt-3 space-y-2 body-text text-sm">
+          <li>
+            <a href={links.artOfLiving} target="_blank" rel="noopener" class="hover:text-ink-700">artofliving.org</a>
+          </li>
+          <li>
+            <a href={links.gurudev} target="_blank" rel="noopener" class="hover:text-ink-700">gurudev.artofliving.org</a>
+          </li>
+          <li>
+            <a href="#support" class="hover:text-ink-700">Support the Ashram</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-ink-100">
+    <div class="container-x flex flex-col gap-3 py-6 text-xs text-ink-300 md:flex-row md:items-center md:justify-between">
+      <p>© {year} Harivan Ashram · The Art of Living</p>
+      <p class="font-serif italic text-ink-300">Sanghachadwam · Jaigurudev</p>
+    </div>
+  </div>
+</footer>

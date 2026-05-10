@@ -1,0 +1,40 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "ghost" | "outline" | "saffron";
+  size?: "sm" | "md" | "lg";
+  external?: boolean;
+  class?: string;
+}
+
+const { href, variant = "primary", size = "md", external, class: className = "" } = Astro.props;
+
+const sizeMap: Record<string, string> = {
+  sm: "px-4 py-2 text-[12px]",
+  md: "px-6 py-3 text-[13px]",
+  lg: "px-7 py-3.5 text-[13px]",
+};
+
+const variantMap: Record<string, string> = {
+  primary:
+    "bg-ink-700 text-cream-50 hover:bg-ink-600 border border-ink-700",
+  ghost:
+    "bg-transparent text-ink-600 hover:text-ink-700 border border-ink-100 hover:border-ink-200",
+  outline:
+    "bg-cream-50/60 text-ink-600 hover:text-ink-700 border border-ink-100 hover:bg-cream-100 backdrop-blur-md",
+  saffron:
+    "bg-saffron-400 text-ink-700 hover:bg-saffron-300 border border-saffron-400",
+};
+
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class={`inline-flex items-center justify-center gap-2 rounded-full font-sans font-light tracking-[0.12em] uppercase transition-all duration-300 ${sizeMap[size]} ${variantMap[variant]} ${className}`}
+>
+  <slot />
+</a>

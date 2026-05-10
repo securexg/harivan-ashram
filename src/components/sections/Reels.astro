@@ -1,0 +1,101 @@
+---
+/** 4 short reels — 2x2 on every breakpoint, autoplay muted, lazy-loaded. */
+const reels = [
+  { mp4: "/videos/reels/reel-1.mp4", webm: "/videos/reels/reel-1.webm", poster: "/videos/reels/posters/reel-1.webp" },
+  { mp4: "/videos/reels/reel-2.mp4", webm: "/videos/reels/reel-2.webm", poster: "/videos/reels/posters/reel-2.webp" },
+  { mp4: "/videos/reels/reel-3.mp4", webm: "/videos/reels/reel-3.webm", poster: "/videos/reels/posters/reel-3.webp" },
+  { mp4: "/videos/reels/reel-4.mp4", webm: "/videos/reels/reel-4.webm", poster: "/videos/reels/posters/reel-4.webp" },
+];
+---
+
+<section id="reels" class="relative bg-cream-100">
+  <div class="container-x py-[var(--section-y)]">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-xl">
+        <p class="reveal eyebrow">Glimpses · Reels</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+          Moments from the <span class="h-display-italic">ashram</span>.
+        </h2>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:gap-5 md:gap-6" data-reels-grid>
+      {
+        reels.map((r, i) => (
+          <figure
+            class="reveal group relative overflow-hidden rounded-2xl bg-ink-700/5 ring-1 ring-ink-100/70 ring-soft"
+            style={`transition-delay: ${i * 60}ms`}
+          >
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <video
+                data-reel
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster={r.poster}
+                class="absolute inset-0 h-full w-full object-cover"
+              >
+                <source data-src-webm={r.webm} type="video/webm" />
+                <source data-src-mp4={r.mp4} type="video/mp4" />
+              </video>
+              <span
+                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-700/35 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-0"
+                aria-hidden="true"
+              ></span>
+              <span
+                class="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink-700/55 px-2.5 py-1 text-[10px] tracking-[0.16em] uppercase text-cream-50 backdrop-blur-md"
+              >
+                <span class="h-1.5 w-1.5 rounded-full bg-saffron-300"></span> Live
+              </span>
+            </div>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const grid = document.querySelector<HTMLDivElement>("[data-reels-grid]");
+  if (grid) {
+    const videos = grid.querySelectorAll<HTMLVideoElement>("video[data-reel]");
+
+    const hydrate = (video: HTMLVideoElement) => {
+      if (video.dataset.hydrated === "true") return;
+      const sources = video.querySelectorAll("source");
+      sources.forEach((s) => {
+        const webm = s.getAttribute("data-src-webm");
+        const mp4 = s.getAttribute("data-src-mp4");
+        if (webm) s.setAttribute("src", webm);
+        if (mp4) s.setAttribute("src", mp4);
+      });
+      video.load();
+      video.dataset.hydrated = "true";
+    };
+
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const video = entry.target as HTMLVideoElement;
+            if (entry.isIntersecting) {
+              hydrate(video);
+              const playPromise = video.play();
+              if (playPromise) playPromise.catch(() => {/* ignore autoplay block */});
+            } else {
+              video.pause();
+            }
+          }
+        },
+        { threshold: 0.35 },
+      );
+      videos.forEach((v) => io.observe(v));
+    } else {
+      videos.forEach((v) => {
+        hydrate(v);
+        v.play().catch(() => {});
+      });
+    }
+  }
+</script>

@@ -1,0 +1,71 @@
+---
+import "~/styles/global.css";
+import MetaHead from "~/components/layout/MetaHead.astro";
+import Header from "~/components/layout/Header.astro";
+import Footer from "~/components/layout/Footer.astro";
+import ContactBar from "~/components/ui/ContactBar.astro";
+import GoogleTranslate from "~/components/layout/GoogleTranslate.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="bg-cream-50 text-ink-500">
+  <head>
+    <MetaHead title={title} description={description} />
+  </head>
+  <body class="min-h-screen overflow-x-hidden bg-cream-50 antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-full focus:bg-ink-700 focus:px-4 focus:py-2 focus:text-cream-50"
+      >Skip to content</a
+    >
+
+    <Header />
+
+    <main id="main" class="relative">
+      <slot />
+    </main>
+
+    <Footer />
+    <ContactBar />
+    <GoogleTranslate />
+
+    <script>
+      // Reveal-on-scroll observer (lightweight; respects reduced-motion via CSS)
+      const els = document.querySelectorAll<HTMLElement>(".reveal");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.04 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add("is-visible"));
+      }
+
+      // Header background swap on scroll
+      const header = document.getElementById("site-header");
+      if (header) {
+        const handleScroll = () => {
+          if (window.scrollY > 24) header.dataset.scrolled = "true";
+          else header.dataset.scrolled = "false";
+        };
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+---
+import { contact } from "~/data/site";
+const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+
+<div
+  class="pointer-events-none fixed inset-x-0 bottom-0 z-40 md:hidden"
+>
+  <div class="container-x pb-3">
+    <div
+      class="pointer-events-auto grid grid-cols-2 gap-2 rounded-full border border-ink-100/70 bg-cream-50/95 p-1.5 shadow-[0_18px_48px_-20px_rgba(24,21,15,0.25)] backdrop-blur-xl"
+    >
+      <a
+        href={`tel:${contact.phoneIntl}`}
+        class="flex items-center justify-center gap-2 rounded-full bg-ink-700 px-4 py-3 text-[12px] font-light tracking-[0.14em] uppercase text-cream-50"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.272.527-.734.417-1.173L6.963 3.102A1.125 1.125 0 0 0 5.872 2.25H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+        </svg>
+        Call
+      </a>
+      <a
+        href={wa}
+        target="_blank"
+        rel="noopener"
+        class="flex items-center justify-center gap-2 rounded-full bg-sage-700 px-4 py-3 text-[12px] font-light tracking-[0.14em] uppercase text-cream-50"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zM12.04 20.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.235 8.235 0 0 1-1.27-4.39c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.183 8.183 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.24 8.24z" />
+        </svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
