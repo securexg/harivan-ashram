@@ -23,7 +23,7 @@ export const contact = {
   addressShort: "Bardar, near New Chandigarh – 140108",
   addressFull:
     "The Art of Living, Harivan Ashram, Haripur, Bardar, Purkhali, Rupnagar (Near New Chandigarh) – 140108",
-  /** Used in the embedded Google Maps iframe — z=15 is street/locality level. */
+  /** Used in the embedded Google Maps iframe. */
   mapsQuery: "Harivan+Ashram+Bardar+Rupnagar+Punjab",
 };
 
@@ -80,7 +80,6 @@ export const gurudev = {
   bodyMore: [
     "Through The Art of Living, Gurudev has revived ancient breath-based practices such as Sudarshan Kriya, making meditation and inner calm accessible to people of every faith, age and background.",
     "His humanitarian work spans conflict resolution, trauma relief, education for tribal children, prisoner rehabilitation, environmental care and inter-faith dialogue — always rooted in the message that inner peace is the basis of outer peace.",
-    "The Art of Living is a global, open organisation — not bound to any sect or community. All are welcome at Harivan to learn, breathe and serve.",
   ],
   quote:
     "The world is a mixture of joy and sorrow. Celebrate when you have joy, and when you have sorrow, have the faith that this will also pass.",
@@ -96,21 +95,21 @@ export const events = [
     title: "Navratri Celebration",
     date: "28 – 30 September 2025",
     desc: "Three days of sacred homas by Vedic Pandits, joined by hundreds of villagers and volunteers. A devotion-filled atmosphere.",
-    image: "/images/activities/navratri/photo-01.webp",
+    image: "/images/activities/navratri/photo-30.webp",
     slug: "navratri",
   },
   {
     title: "Somnath Ji Jyotirlinga Darshan",
     date: "21 February 2026",
     desc: "Thousands of villagers and our Art of Living family came together for an unforgettable Shobha Yatra and darshan event at Harivan.",
-    image: "/images/activities/shobha-yatra/photo-05.webp",
+    image: "/images/activities/shobha-yatra/photo-15.webp",
     slug: "shobha-yatra",
   },
   {
     title: "First Rural Happiness Program",
     date: "Concluded 9 March 2026",
     desc: "A 6-day program bringing breath, meditation and joy to neighbouring villages — the first of many to come.",
-    image: "/images/activities/navratri/photo-03.webp",
+    image: "/images/activities/navratri/photo-13.webp",
     slug: "rural-happiness",
   },
   {

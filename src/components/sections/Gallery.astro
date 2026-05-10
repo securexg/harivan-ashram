@@ -1,26 +1,19 @@
 ---
-/** Gallery — true CSS-columns masonry, edge-to-edge, no gaps. */
+/** Gallery — compact grid, max three columns. */
 
 interface GalleryItem { src: string; alt: string }
 
 // Curated mix — none of these are reused in Hero / About / Gurudev / Events / Insta strip.
 const gallery: GalleryItem[] = [
   { src: "/images/activities/shobha-yatra/photo-02.webp", alt: "Shobha Yatra walk" },
+  { src: "/images/activities/navratri/photo-30.webp", alt: "Sacred havan" },
+  { src: "/images/activities/shobha-yatra/photo-15.webp", alt: "Somnath group gathering" },
   { src: "/images/activities/navratri/photo-04.webp", alt: "Devotion in song" },
-  { src: "/images/activities/navratri/photo-07.webp", alt: "Lighting the lamp" },
-  { src: "/images/activities/shobha-yatra/photo-06.webp", alt: "Procession" },
   { src: "/images/activities/navratri/photo-08.webp", alt: "Meditation" },
-  { src: "/images/activities/navratri/photo-09.webp", alt: "Together in seva" },
-  { src: "/images/activities/shobha-yatra/photo-08.webp", alt: "Yatra" },
+  { src: "/images/activities/shobha-yatra/photo-13.webp", alt: "Harivan community" },
   { src: "/images/activities/navratri/photo-10.webp", alt: "Aarti" },
-  { src: "/images/activities/shobha-yatra/photo-10.webp", alt: "Open hall" },
-  { src: "/images/activities/navratri/photo-15.webp", alt: "Sacred fire" },
-  { src: "/images/activities/shobha-yatra/photo-11.webp", alt: "Yatra walk" },
-  { src: "/images/activities/navratri/photo-17.webp", alt: "Music in the courtyard" },
-  { src: "/images/activities/shobha-yatra/photo-14.webp", alt: "Evening procession" },
+  { src: "/images/activities/shobha-yatra/photo-10.webp", alt: "Ashram grounds" },
   { src: "/images/activities/navratri/photo-21.webp", alt: "Friends together" },
-  { src: "/images/activities/navratri/photo-26.webp", alt: "Quiet moment" },
-  { src: "/images/activities/navratri/photo-28.webp", alt: "Volunteer crew" },
 ];
 ---
 
@@ -36,7 +29,7 @@ const gallery: GalleryItem[] = [
     </div>
   </div>
 
-  <!-- Balanced masonry with gutters -->
+  <!-- Balanced grid with a filled final row -->
   <div class="container-x pb-[var(--section-y)]">
   <div class="hv-masonry" data-lightbox-grid>
     {
@@ -54,7 +47,7 @@ const gallery: GalleryItem[] = [
             alt={g.alt}
             loading="lazy"
             decoding="async"
-            class="block w-full rounded-lg transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+            class="block h-full w-full rounded-lg object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
             onerror="this.style.opacity='0.35'; this.style.background='linear-gradient(135deg,#ebe1cd,#b1c0a2)';"
           />
         </button>
@@ -82,28 +75,20 @@ const gallery: GalleryItem[] = [
 </dialog>
 
 <style>
-  /* CSS columns masonry with gutters; columns balance to even bottoms */
   .hv-masonry {
-    column-count: 2;
-    column-gap: 12px;
-    column-fill: balance;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
-  @media (min-width: 640px)  { .hv-masonry { column-count: 3; column-gap: 14px; } }
-  @media (min-width: 1024px) { .hv-masonry { column-count: 4; column-gap: 16px; } }
-  @media (min-width: 1440px) { .hv-masonry { column-count: 5; column-gap: 18px; } }
+  @media (min-width: 640px)  { .hv-masonry { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; } }
+  @media (min-width: 1024px) { .hv-masonry { gap: 16px; } }
 
   .hv-masonry-item {
-    break-inside: avoid;
-    page-break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    margin: 0 0 12px 0;
+    aspect-ratio: 4 / 3;
     padding: 0;
     line-height: 0;
   }
-  @media (min-width: 640px)  { .hv-masonry-item { margin-bottom: 14px; } }
-  @media (min-width: 1024px) { .hv-masonry-item { margin-bottom: 16px; } }
-  @media (min-width: 1440px) { .hv-masonry-item { margin-bottom: 18px; } }
-  .hv-masonry-item img { display: block; width: 100%; height: auto; }
+  .hv-masonry-item img { display: block; }
 </style>
 
 <script>

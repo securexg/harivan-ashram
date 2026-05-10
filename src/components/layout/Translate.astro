@@ -108,11 +108,47 @@
 
   const KEY = "hv-lang";
 
-  const setComboLanguage = (lang: Lang) => {
-    const combo = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+  const clearGoogTransCookies = () => {
+    const host = window.location.hostname;
+    const domains = ["", host, `.${host}`].filter(Boolean);
+    const paths = ["/", window.location.pathname || "/"];
+    domains.forEach((domain) => {
+      paths.forEach((path) => {
+        document.cookie = `googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=${path}${domain ? `;domain=${domain}` : ""}`;
+      });
+    });
+  };
+
+  const setGoogTransCookie = (lang: Lang) => {
+    clearGoogTransCookies();
+    if (lang === "en") return;
+    const value = `/en/${lang}`;
+    document.cookie = `googtrans=${value};path=/`;
+    if (window.location.hostname.includes(".")) {
+      document.cookie = `googtrans=${value};path=/;domain=.${window.location.hostname}`;
+    }
+  };
+
+  const waitForCombo = (cb: (combo: HTMLSelectElement) => void, fallback?: () => void) => {
+    let tries = 0;
+    const t = window.setInterval(() => {
+      tries += 1;
+      const combo = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+      if (combo) {
+        window.clearInterval(t);
+        cb(combo);
+      } else if (tries > 24) {
+        window.clearInterval(t);
+        fallback?.();
+      }
+    }, 150);
+  };
+
+  const setComboLanguage = (lang: Lang, combo = document.querySelector<HTMLSelectElement>(".goog-te-combo")) => {
     if (!combo) return false;
     combo.value = lang === "en" ? "" : lang;
     combo.dispatchEvent(new Event("change"));
+    combo.dispatchEvent(new Event("change", { bubbles: true }));
     return true;
   };
 
@@ -131,20 +167,43 @@
     }
     reflectInUI(lang);
     if (lang === "en") {
-      // Reset by stripping the googtrans cookie and reloading without google's overlay
-      document.cookie = "googtrans=/en/en;path=/";
-      document.cookie = "googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      const ok = setComboLanguage("en");
-      if (!ok) window.location.reload();
+      // Google Translate does not reliably undo DOM mutations in place.
+      // Clearing its cookie and reloading is the cleanest full return to English.
+      clearGoogTransCookies();
+      setComboLanguage("en");
+      window.setTimeout(() => window.location.reload(), 80);
       return;
     }
-    // Try the live combo first; if Google hasn't finished bootstrapping, fall
-    // back to the `googtrans` cookie + reload (the official documented approach).
-    if (!setComboLanguage(lang)) {
-      document.cookie = `googtrans=/en/${lang};path=/`;
-      window.location.reload();
-    }
+    setGoogTransCookie(lang);
+    if (setComboLanguage(lang)) return;
+    waitForCombo(
+      (combo) => setComboLanguage(lang, combo),
+      () => window.location.reload(),
+    );
   };
+
+  const readCookieLang = (): Lang | null => {
+    const match = document.cookie.match(/(?:^|;\s*)googtrans=\/en\/(hi|pa)/);
+    return match?.[1] as Lang | null;
+  };
+
+  const getInitialLang = (): Lang => {
+    const cookieLang = readCookieLang();
+    if (cookieLang) return cookieLang;
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved === "hi" || saved === "pa") return saved;
+    } catch {}
+    return "en";
+  };
+
+  window.addEventListener("pageshow", () => {
+    const lang = getInitialLang();
+    reflectInUI(lang);
+    if (lang !== "en") {
+      waitForCombo((combo) => setComboLanguage(lang, combo));
+    }
+  });
 
   const wireTriggers = () => {
     document.querySelectorAll<HTMLElement>("[data-hv-translate-mobile], [data-hv-translate-desktop]").forEach((root) => {
@@ -183,16 +242,11 @@
   // Init
   document.addEventListener("DOMContentLoaded", () => {
     wireTriggers();
-    let saved: Lang = "en";
-    try { saved = (localStorage.getItem(KEY) as Lang) || "en"; } catch {}
+    const saved = getInitialLang();
     reflectInUI(saved);
     if (saved !== "en") {
-      // wait briefly for the Google combo to mount, then apply
-      let tries = 0;
-      const t = window.setInterval(() => {
-        tries += 1;
-        if (setComboLanguage(saved) || tries > 20) window.clearInterval(t);
-      }, 250);
+      setGoogTransCookie(saved);
+      waitForCombo((combo) => setComboLanguage(saved, combo));
     }
   });
 </script>

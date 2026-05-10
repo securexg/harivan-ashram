@@ -6,7 +6,7 @@ import { about } from "~/data/site";
   <div class="container-x py-[var(--section-y)]">
     <div class="grid gap-12 md:grid-cols-12 md:items-start md:gap-16 lg:gap-20">
       <!-- Formal left column: copy + pillars -->
-      <div class="md:col-span-6">
+      <div class="order-2 md:order-1 md:col-span-6">
         <p class="reveal eyebrow">{about.eyebrow}</p>
         <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px]" style="transition-delay: 60ms">
           {about.title}
@@ -42,21 +42,21 @@ import { about } from "~/data/site";
       </div>
 
       <!-- Right column: a wide event/community moment from the ashram -->
-      <div class="md:col-span-6">
+      <div class="order-1 md:order-2 md:col-span-6">
         <figure class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft" style="transition-delay: 120ms">
           <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-[3/4]">
             <picture class="absolute inset-0 block">
               <source
                 type="image/webp"
-                srcset="/images/activities/navratri/photo-29-640.webp 640w, /images/activities/navratri/photo-29-1024.webp 1024w, /images/activities/navratri/photo-29-1600.webp 1600w"
+                srcset="/images/activities/shobha-yatra/photo-13-640.webp 640w, /images/activities/shobha-yatra/photo-13-1024.webp 1024w, /images/activities/shobha-yatra/photo-13-1600.webp 1600w"
                 sizes="(min-width: 768px) 45vw, 100vw"
               />
               <img
-                src="/images/activities/navratri/photo-29.webp"
-                alt="Harivan Ashram — community gathering"
+                src="/images/activities/shobha-yatra/photo-13.webp"
+                alt="Harivan Ashram community gathering"
                 loading="lazy"
                 decoding="async"
-                class="hv-cover-img object-center"
+                class="hv-cover-img object-[center_42%]"
               />
             </picture>
           </div>
