@@ -12,15 +12,17 @@ import { gurudev, links } from "~/data/site";
             <picture class="absolute inset-0 block">
               <source
                 type="image/webp"
-                srcset="/images/gurudev/portrait-640.webp 640w, /images/gurudev/portrait-1024.webp 1024w, /images/gurudev/portrait-1600.webp 1600w, /images/gurudev/portrait-2400.webp 2400w"
-                sizes="(min-width: 768px) 46vw, 92vw"
+                srcset="/images/gurudev/portrait-640.webp 640w, /images/gurudev/portrait-1024.webp 1024w, /images/gurudev/portrait-1600.webp 1600w"
+                sizes="(min-width: 1024px) 46vw, (min-width: 768px) 50vw, 92vw"
               />
               <img
-                src="/images/gurudev/portrait.webp"
+                src="/images/gurudev/portrait-1024.webp"
                 alt="Gurudev Sri Sri Ravi Shankar ji"
-                loading="lazy"
+                loading="eager"
+                fetchpriority="high"
                 decoding="async"
                 class="hv-cover-img object-top"
+                onerror="this.onerror=null; this.src='/images/gurudev/portrait.webp';"
               />
             </picture>
           </div>

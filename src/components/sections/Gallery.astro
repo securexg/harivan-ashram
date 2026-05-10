@@ -36,7 +36,8 @@ const gallery: GalleryItem[] = [
     </div>
   </div>
 
-  <!-- Edge-to-edge masonry, zero gaps -->
+  <!-- Balanced masonry with gutters -->
+  <div class="container-x pb-[var(--section-y)]">
   <div class="hv-masonry" data-lightbox-grid>
     {
       gallery.map((g) => (
@@ -53,12 +54,13 @@ const gallery: GalleryItem[] = [
             alt={g.alt}
             loading="lazy"
             decoding="async"
-            class="block w-full transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+            class="block w-full rounded-lg transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
             onerror="this.style.opacity='0.35'; this.style.background='linear-gradient(135deg,#ebe1cd,#b1c0a2)';"
           />
         </button>
       ))
     }
+  </div>
   </div>
 </section>
 
@@ -80,24 +82,27 @@ const gallery: GalleryItem[] = [
 </dialog>
 
 <style>
-  /* CSS columns masonry, no gutters — items break to next column naturally */
+  /* CSS columns masonry with gutters; columns balance to even bottoms */
   .hv-masonry {
     column-count: 2;
-    column-gap: 0;
+    column-gap: 12px;
+    column-fill: balance;
   }
-  @media (min-width: 640px)  { .hv-masonry { column-count: 3; } }
-  @media (min-width: 1024px) { .hv-masonry { column-count: 4; } }
-  @media (min-width: 1440px) { .hv-masonry { column-count: 5; } }
+  @media (min-width: 640px)  { .hv-masonry { column-count: 3; column-gap: 14px; } }
+  @media (min-width: 1024px) { .hv-masonry { column-count: 4; column-gap: 16px; } }
+  @media (min-width: 1440px) { .hv-masonry { column-count: 5; column-gap: 18px; } }
 
   .hv-masonry-item {
-    /* Avoid items splitting across columns */
     break-inside: avoid;
     page-break-inside: avoid;
     -webkit-column-break-inside: avoid;
-    margin: 0;
+    margin: 0 0 12px 0;
     padding: 0;
-    line-height: 0;     /* removes baseline gap below img */
+    line-height: 0;
   }
+  @media (min-width: 640px)  { .hv-masonry-item { margin-bottom: 14px; } }
+  @media (min-width: 1024px) { .hv-masonry-item { margin-bottom: 16px; } }
+  @media (min-width: 1440px) { .hv-masonry-item { margin-bottom: 18px; } }
   .hv-masonry-item img { display: block; width: 100%; height: auto; }
 </style>
 

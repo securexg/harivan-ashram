@@ -54,10 +54,10 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
         </Button>
         <Button
           href={wa}
-          variant="outline"
+          variant="outlineLight"
           size="lg"
           external
-          class="w-full justify-center border-cream-200/40 bg-white/5 text-cream-50 hover:bg-white/10 sm:w-auto"
+          class="w-full justify-center sm:w-auto"
         >
           Register via WhatsApp
         </Button>
@@ -125,17 +125,25 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
 
     btn.addEventListener("click", async (e) => {
       e.stopPropagation();
-      const nextMuted = !video.muted;
-      video.muted = nextMuted;
-      if (!nextMuted) {
+      const willUnmute = video.muted;
+      if (willUnmute) {
+        // Safari/iOS need ALL of: property false, attribute removed, volume set,
+        // and play() called synchronously inside the click gesture.
+        video.muted = false;
+        video.removeAttribute("muted");
         video.volume = 1;
+        syncIcons();
         try {
           await video.play();
         } catch {
-          /* autoplay policies: gesture already consumed */
+          // Autoplay-with-sound was blocked — revert silently
+          video.muted = true;
+          syncIcons();
         }
+      } else {
+        video.muted = true;
+        syncIcons();
       }
-      syncIcons();
     });
     syncIcons();
   });
