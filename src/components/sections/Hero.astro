@@ -7,12 +7,11 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.
    Each slug must exist under public/images/<folder>/<slug>-{640,1024,1600,2400}.webp */
 const slides: { folder: string; slug: string; alt: string; focal?: string }[] = [
   { folder: "activities/navratri", slug: "photo-30", alt: "Navratri homa at Harivan", focal: "center" },
-  { folder: "activities/navratri", slug: "photo-22", alt: "Devotees in celebration" },
-  { folder: "activities/shobha-yatra", slug: "photo-09", alt: "Somnath Shobha Yatra procession" },
-  { folder: "happy-faces", slug: "photo-44", alt: "Smiling community at Harivan", focal: "center 30%" },
-  { folder: "activities/navratri", slug: "photo-35", alt: "Sacred fire ceremony" },
-  { folder: "activities/shobha-yatra", slug: "photo-12", alt: "Procession at Harivan" },
-  { folder: "happy-faces", slug: "photo-13", alt: "Joyful faces at Harivan" },
+  { folder: "activities/shobha-yatra", slug: "photo-15", alt: "Somnath Shobha Yatra group at Harivan", focal: "center" },
+  { folder: "activities/shobha-yatra", slug: "photo-13", alt: "Harivan community group", focal: "center" },
+  { folder: "activities/navratri", slug: "photo-20", alt: "Puja at Harivan", focal: "center" },
+  { folder: "activities/navratri", slug: "photo-04", alt: "Satsang singers at Harivan", focal: "center" },
+  { folder: "activities/shobha-yatra", slug: "photo-10", alt: "Harivan Ashram centre and grounds", focal: "center bottom" },
 ];
 
 /** Helper: many happy-faces files don't have responsive variants — render
@@ -66,9 +65,9 @@ const slideUrl = (folder: string, slug: string, w?: number) => {
         </picture>
       ))
     }
-    <!-- Gradient stack: lighter on mobile so the photo breathes; stronger from md+ for readability -->
-    <div class="absolute inset-0 bg-gradient-to-b from-ink-700/40 via-ink-700/10 to-ink-700/80 md:from-ink-700/70 md:via-ink-700/35 md:to-ink-700/95" aria-hidden="true" />
-    <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/30 via-ink-700/10 to-transparent md:w-3/4 md:from-ink-700/60 md:via-ink-700/22" aria-hidden="true" />
+    <!-- Full-height photo treatment on mobile; desktop keeps stronger text contrast. -->
+    <div class="absolute inset-0 bg-gradient-to-b from-ink-700/25 via-ink-700/28 to-ink-700/70 md:from-ink-700/70 md:via-ink-700/35 md:to-ink-700/95" aria-hidden="true" />
+    <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/18 via-transparent to-transparent md:w-3/4 md:from-ink-700/60 md:via-ink-700/22" aria-hidden="true" />
   </div>
 
   <div class="container-x relative z-10 pb-16 pt-32 sm:pb-24 sm:pt-36 md:pb-32 md:pt-44 lg:pt-48">
@@ -153,7 +152,7 @@ const slideUrl = (folder: string, slug: string, w?: number) => {
 </script>
 
 <style>
-  .hero-slide-img { transform: scale(1.16); transform-origin: center; }
+  .hero-slide-img { transform: scale(1.3); transform-origin: center; }
   @media (min-width: 768px) { .hero-slide-img { transform: scale(1.04); } }
   @keyframes scrollDot {
     0%, 20% { transform: translateY(0); opacity: 0; }

@@ -106,24 +106,17 @@ export const events = [
     slug: "shobha-yatra",
   },
   {
-    title: "First Rural Happiness Program",
-    date: "Concluded 9 March 2026",
-    desc: "A 6-day program bringing breath, meditation and joy to neighbouring villages — the first of many to come.",
-    image: "/images/activities/navratri/photo-13.webp",
-    slug: "rural-happiness",
-  },
-  {
     title: "Volunteer Sunday",
     date: "19 April 2026",
     desc: "Long Sudarshan Kriya, a warm breakfast and a volunteer meet — building Harivan with all of us together.",
-    image: "/images/activities/navratri/photo-13.webp",
+    image: "/images/activities/shobha-yatra/photo-10.webp",
     slug: "volunteer-sunday",
   },
   {
     title: "Daily & Weekly Satsang",
     date: "Ongoing",
     desc: "Evening satsangs by Swamiji at the ashram, weekly satsangs across nearby villages, and a Sunday follow-up since 15 March 2026.",
-    image: "/images/activities/navratri/photo-20.webp",
+    image: "/images/activities/navratri/photo-04.webp",
     slug: "satsang",
   },
 ];
