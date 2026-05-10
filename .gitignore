@@ -40,3 +40,4 @@ source-media/
 *.log
 *.tmp
 tmp/
+.vercel
