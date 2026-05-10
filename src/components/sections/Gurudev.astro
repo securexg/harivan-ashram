@@ -10,6 +10,19 @@ import { gurudev, links } from "~/data/site";
         <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px]" style="transition-delay: 60ms">
           {gurudev.title}
         </h2>
+
+        <!-- Gurudev portrait — drop a square/portrait WebP at /public/images/gurudev/portrait.webp to swap. -->
+        <figure class="reveal mt-8 overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft" style="transition-delay: 90ms">
+          <img
+            src="/images/gurudev/portrait.webp"
+            alt="Gurudev Sri Sri Ravi Shankar ji"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/5] w-full object-cover object-center"
+            onerror="this.style.display='none'; this.parentElement.style.display='none';"
+          />
+        </figure>
+
         <p class="reveal lead mt-6" style="transition-delay: 120ms">{gurudev.body}</p>
 
         <a

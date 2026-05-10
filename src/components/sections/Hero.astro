@@ -3,44 +3,53 @@ import Button from "~/components/ui/Button.astro";
 import { contact, site, yltp } from "~/data/site";
 const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 
-/* ----------------------------------------------------------------------------
-   Hero image — change `heroSlug` to swap. Available source folders:
-     /images/activities/navratri/photo-01..45      (45 Navratri photos)
-     /images/activities/shobha-yatra/photo-01..15  (15 Shobha Yatra photos)
-   Each has -640, -1024, -1600, -2400 width variants for srcset.
----------------------------------------------------------------------------- */
-const heroFolder = "activities/navratri";
-const heroSlug = "photo-30"; // SAN-prefixed (professional photo)
+/* Hero slideshow — auto-rotating with crossfade.
+   Edit the list to swap order or add more.  Each entry must be a slug
+   that exists under public/images/<folder>/<slug>-{640,1024,1600,2400}.webp */
+const slides: { folder: string; slug: string; alt: string }[] = [
+  { folder: "activities/navratri", slug: "photo-30", alt: "Navratri homa at Harivan Ashram" },
+  { folder: "activities/navratri", slug: "photo-25", alt: "Devotees in celebration" },
+  { folder: "activities/shobha-yatra", slug: "photo-09", alt: "Somnath Shobha Yatra" },
+  { folder: "activities/navratri", slug: "photo-35", alt: "Sacred fire ceremony" },
+  { folder: "activities/shobha-yatra", slug: "photo-12", alt: "Procession at Harivan" },
+  { folder: "activities/navratri", slug: "photo-40", alt: "Evening satsang" },
+];
 ---
 
 <section
   id="top"
   class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink-700"
 >
-  <!-- Hero image stack (slider-ready: replace with multiple <picture> entries when ready) -->
-  <div class="absolute inset-0 -z-10">
-    <picture class="block h-full w-full">
-      <source
-        type="image/webp"
-        srcset={`/images/${heroFolder}/${heroSlug}-1024.webp 1024w, /images/${heroFolder}/${heroSlug}-1600.webp 1600w, /images/${heroFolder}/${heroSlug}-2400.webp 2400w`}
-        sizes="100vw"
-      />
-      <img
-        src={`/images/${heroFolder}/${heroSlug}.webp`}
-        alt="Harivan Ashram — devotees gathered amidst nature"
-        class="h-full w-full object-cover object-center"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </picture>
-    <!-- darker top + bottom for header + text legibility -->
+  <!-- Auto-rotating hero slideshow -->
+  <div class="absolute inset-0 -z-10" data-hero-slideshow>
+    {
+      slides.map((s, i) => (
+        <picture
+          class={`hero-slide absolute inset-0 block h-full w-full transition-opacity duration-[1400ms] ease-[var(--ease-out-soft)] ${i === 0 ? "opacity-100" : "opacity-0"}`}
+          data-slide-index={i}
+        >
+          <source
+            type="image/webp"
+            srcset={`/images/${s.folder}/${s.slug}-1024.webp 1024w, /images/${s.folder}/${s.slug}-1600.webp 1600w, /images/${s.folder}/${s.slug}-2400.webp 2400w`}
+            sizes="100vw"
+          />
+          <img
+            src={`/images/${s.folder}/${s.slug}.webp`}
+            alt={s.alt}
+            class="h-full w-full object-cover object-center will-change-transform"
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchpriority={i === 0 ? "high" : "auto"}
+            decoding="async"
+          />
+        </picture>
+      ))
+    }
+    <!-- Vignettes (above slides, below content) -->
     <div
-      class="absolute inset-0 bg-gradient-to-b from-ink-700/45 via-ink-700/20 to-ink-700/90"
+      class="absolute inset-0 bg-gradient-to-b from-ink-700/55 via-ink-700/30 to-ink-700/95"
       aria-hidden="true"
     >
     </div>
-    <!-- left vignette behind copy -->
     <div
       class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-ink-700/60 via-ink-700/25 to-transparent md:w-3/4"
       aria-hidden="true"
@@ -48,18 +57,18 @@ const heroSlug = "photo-30"; // SAN-prefixed (professional photo)
     </div>
   </div>
 
-  <div class="container-x relative z-10 pb-16 pt-40 md:pb-24 md:pt-48">
+  <div class="container-x relative z-10 pb-20 pt-40 md:pb-28 md:pt-48">
     <div class="max-w-3xl">
       <p class="reveal eyebrow text-saffron-200">
         {site.org} · {site.tagline}
       </p>
       <h1
-        class="reveal h-display mt-5 text-5xl text-cream-50 sm:text-6xl md:text-7xl lg:text-[88px]"
+        class="reveal h-display mt-5 text-5xl text-white sm:text-6xl md:text-7xl lg:text-[88px]"
       >
         A space amidst <span class="h-display-italic text-saffron-200">nature.</span>
       </h1>
       <p
-        class="reveal lead mt-7 max-w-xl text-cream-100"
+        class="reveal lead mt-7 max-w-xl text-white/85"
         style="transition-delay: 80ms"
       >
         Eleven acres of forest near Chandigarh — blessed by Pujya Gurudev Sri
@@ -72,27 +81,54 @@ const heroSlug = "photo-30"; // SAN-prefixed (professional photo)
         style="transition-delay: 160ms"
       >
         <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="lg">Call us</Button>
-        <Button href={wa} variant="outline" size="lg" external class="text-cream-50 bg-cream-50/15 border-cream-50/40 hover:bg-cream-50/25 hover:border-cream-50/70">WhatsApp</Button>
-        <Button href="#yltp" variant="ghost" size="lg" class="text-cream-100 border-cream-100/40 hover:text-cream-50 hover:border-cream-100/80">
+        <Button
+          href={wa}
+          size="lg"
+          external
+          class="bg-white/95 text-ink-700 border border-white/95 hover:bg-white"
+        >
+          WhatsApp
+        </Button>
+        <Button
+          href="#yltp"
+          size="lg"
+          class="bg-white/10 text-white border border-white/50 hover:bg-white/20 hover:border-white backdrop-blur-md"
+        >
           YLTP · {yltp.date}
         </Button>
       </div>
     </div>
 
     <div
-      class="reveal mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 text-cream-100/85"
+      class="reveal mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 text-white/80"
       style="transition-delay: 240ms"
     >
       <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
-        <span class="h-px w-6 bg-cream-100/60"></span> 11 acres of forest
+        <span class="h-px w-6 bg-white/60"></span> 11 acres of forest
       </span>
       <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
-        <span class="h-px w-6 bg-cream-100/60"></span> Bardar · near New Chandigarh
+        <span class="h-px w-6 bg-white/60"></span> Bardar · near New Chandigarh
       </span>
       <span class="flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase">
-        <span class="h-px w-6 bg-cream-100/60"></span> Sanghachadwam
+        <span class="h-px w-6 bg-white/60"></span> Sanghachadwam
       </span>
     </div>
+  </div>
+
+  <!-- Slide indicators -->
+  <div
+    class="pointer-events-none absolute bottom-7 right-6 z-10 flex items-center gap-1.5 md:bottom-12 md:right-10"
+    data-hero-dots
+    aria-hidden="true"
+  >
+    {
+      slides.map((_, i) => (
+        <span
+          class={`block h-px w-6 bg-white/40 transition-all duration-700 ${i === 0 ? "bg-white/95 w-10" : ""}`}
+          data-dot-index={i}
+        />
+      ))
+    }
   </div>
 
   <!-- Subtle scroll cue -->
@@ -101,11 +137,34 @@ const heroSlug = "photo-30"; // SAN-prefixed (professional photo)
     aria-label="Scroll to About"
     class="group absolute bottom-6 left-1/2 z-10 -translate-x-1/2 md:bottom-10"
   >
-    <span class="flex h-12 w-7 items-start justify-center rounded-full border border-cream-200/60 p-1.5">
-      <span class="h-2 w-px animate-[scrollDot_1.6s_ease-in-out_infinite] bg-cream-200/80"></span>
+    <span class="flex h-12 w-7 items-start justify-center rounded-full border border-white/60 p-1.5">
+      <span class="h-2 w-px animate-[scrollDot_1.6s_ease-in-out_infinite] bg-white/80"></span>
     </span>
   </a>
 </section>
+
+<script>
+  const root = document.querySelector<HTMLDivElement>("[data-hero-slideshow]");
+  if (root) {
+    const slides = root.querySelectorAll<HTMLElement>(".hero-slide");
+    const dots = document.querySelectorAll<HTMLElement>("[data-hero-dots] [data-dot-index]");
+    let i = 0;
+    const total = slides.length;
+    const advance = () => {
+      const prev = i;
+      i = (i + 1) % total;
+      slides[prev]?.classList.replace("opacity-100", "opacity-0");
+      slides[i]?.classList.replace("opacity-0", "opacity-100");
+      dots.forEach((d, di) => {
+        d.classList.toggle("bg-white/95", di === i);
+        d.classList.toggle("w-10", di === i);
+        d.classList.toggle("bg-white/40", di !== i);
+      });
+    };
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce && total > 1) setInterval(advance, 5500);
+  }
+</script>
 
 <style>
   @keyframes scrollDot {

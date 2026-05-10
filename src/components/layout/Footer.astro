@@ -6,7 +6,31 @@ import { contact, links, site } from "~/data/site";
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative border-t border-ink-100 bg-cream-100">
+<!-- Wide ashram landscape banner above footer -->
+<section aria-hidden="true" class="relative h-[40vh] min-h-[280px] overflow-hidden">
+  <picture class="absolute inset-0 block h-full w-full">
+    <source
+      type="image/webp"
+      srcset="/images/activities/navratri/photo-25-1024.webp 1024w, /images/activities/navratri/photo-25-1600.webp 1600w, /images/activities/navratri/photo-25-2400.webp 2400w"
+      sizes="100vw"
+    />
+    <img
+      src="/images/activities/navratri/photo-25.webp"
+      alt=""
+      class="h-full w-full object-cover object-center"
+      loading="lazy"
+      decoding="async"
+    />
+  </picture>
+  <div class="absolute inset-0 bg-gradient-to-t from-cream-100 via-ink-700/30 to-ink-700/20"></div>
+  <div class="relative z-10 flex h-full items-center justify-center px-6">
+    <p class="h-display-italic text-center text-3xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] md:text-5xl lg:text-6xl">
+      Come, breathe, belong.
+    </p>
+  </div>
+</section>
+
+<footer class="relative bg-cream-100">
   <div class="container-x grid gap-12 py-16 md:grid-cols-12 md:py-20">
     <div class="md:col-span-5">
       <div class="flex flex-col items-start gap-5">

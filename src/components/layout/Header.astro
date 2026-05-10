@@ -17,24 +17,22 @@ const nav = [
 <header
   id="site-header"
   data-scrolled="false"
-  class="fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color,box-shadow] duration-500 ease-out
-         data-[scrolled=true]:bg-cream-50/85 data-[scrolled=true]:backdrop-blur-xl data-[scrolled=true]:border-b data-[scrolled=true]:border-ink-100/70
-         data-[scrolled=false]:bg-transparent data-[scrolled=false]:border-b data-[scrolled=false]:border-transparent"
+  class="hv-header fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color,box-shadow] duration-500 ease-out"
 >
   <div class="container-x flex items-center justify-between py-4 md:py-5">
     <a href="#top" class="group flex items-center gap-3" aria-label="Harivan Ashram home">
       <Image
         src={logo}
         alt="The Art of Living"
-        class="h-10 w-auto md:h-11"
-        widths={[120, 240]}
-        sizes="120px"
+        class="hv-logo h-10 w-auto md:h-11"
+        widths={[160, 320]}
+        sizes="160px"
         loading="eager"
         format="webp"
       />
-      <span class="hidden flex-col leading-none sm:flex">
-        <span class="font-serif text-[15px] tracking-tight text-ink-700">Harivan Ashram</span>
-        <span class="eyebrow mt-1 text-[10px]">Tricity · North India</span>
+      <span class="hv-wordmark hidden flex-col leading-none sm:flex">
+        <span class="font-serif text-[15px] tracking-tight">Harivan Ashram</span>
+        <span class="hv-wordmark-sub mt-1 text-[10px] uppercase tracking-[0.18em]">Tricity · North India</span>
       </span>
     </a>
 
@@ -45,7 +43,7 @@ const nav = [
             <li>
               <a
                 href={n.href}
-                class="font-sans text-[13px] font-light tracking-wide text-ink-500 transition-colors hover:text-ink-700"
+                class="hv-nav-link font-sans text-[13px] font-light tracking-wide transition-colors"
               >
                 {n.label}
               </a>
@@ -58,7 +56,7 @@ const nav = [
     <div class="flex items-center gap-2">
       <a
         href={`tel:${contact.phoneIntl}`}
-        class="hidden md:inline-flex items-center gap-2 rounded-full border border-ink-100/80 bg-cream-50/70 px-4 py-2 font-sans text-[12px] tracking-wide text-ink-600 backdrop-blur-md transition hover:border-saffron-300 hover:text-ink-700"
+        class="hv-call-pill hidden md:inline-flex items-center gap-2 rounded-full px-4 py-2 font-sans text-[12px] tracking-wide backdrop-blur-md transition"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +80,7 @@ const nav = [
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
-        class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink-100/80 bg-cream-50/70 text-ink-600 backdrop-blur-md"
+        class="hv-burger lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5" />
@@ -124,6 +122,64 @@ const nav = [
     </ul>
   </div>
 </header>
+
+<style is:global>
+  /* ----- header colour states (no Tailwind group needed) ----- */
+
+  /* over-hero (transparent header): white nav + chrome */
+  .hv-header[data-scrolled="false"] {
+    background: transparent;
+  }
+  .hv-header[data-scrolled="false"] .hv-wordmark > span:first-child { color: #ffffff; }
+  .hv-header[data-scrolled="false"] .hv-wordmark-sub { color: rgba(255, 255, 255, 0.75); }
+  .hv-header[data-scrolled="false"] .hv-nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  .hv-header[data-scrolled="false"] .hv-nav-link:hover { color: #ffffff; }
+  .hv-header[data-scrolled="false"] .hv-call-pill {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .hv-header[data-scrolled="false"] .hv-call-pill:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 1);
+  }
+  .hv-header[data-scrolled="false"] .hv-burger {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  /* a true transparent logo on dark = display as-is */
+
+  /* scrolled (cream backdrop): dark nav + chrome */
+  .hv-header[data-scrolled="true"] {
+    background: rgba(253, 251, 246, 0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(232, 227, 220, 0.7);
+    box-shadow: 0 2px 24px -12px rgba(24, 21, 15, 0.18);
+  }
+  .hv-header[data-scrolled="true"] .hv-wordmark > span:first-child { color: var(--color-ink-700); }
+  .hv-header[data-scrolled="true"] .hv-wordmark-sub { color: var(--color-ink-300); }
+  .hv-header[data-scrolled="true"] .hv-nav-link { color: var(--color-ink-500); }
+  .hv-header[data-scrolled="true"] .hv-nav-link:hover { color: var(--color-ink-700); }
+  .hv-header[data-scrolled="true"] .hv-call-pill {
+    color: var(--color-ink-600);
+    background: rgba(253, 251, 246, 0.7);
+    border: 1px solid rgba(232, 227, 220, 0.8);
+  }
+  .hv-header[data-scrolled="true"] .hv-call-pill:hover {
+    color: var(--color-ink-700);
+    border-color: var(--color-saffron-300);
+  }
+  .hv-header[data-scrolled="true"] .hv-burger {
+    color: var(--color-ink-600);
+    background: rgba(253, 251, 246, 0.7);
+    border: 1px solid rgba(232, 227, 220, 0.8);
+  }
+</style>
 
 <script>
   const btn = document.getElementById("mobile-menu-toggle");
