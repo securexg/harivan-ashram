@@ -2,20 +2,20 @@
 import { about } from "~/data/site";
 ---
 
-<section id="about" class="relative bg-cream-50">
+<section id="about" class="relative bg-cream-50 overflow-hidden">
   <div class="container-x py-[var(--section-y)]">
     <div class="grid gap-12 md:grid-cols-12 md:items-start md:gap-16 lg:gap-20">
       <!-- Formal left column: copy + pillars -->
-      <div class="order-2 md:order-1 md:col-span-6">
-        <p class="reveal eyebrow">{about.eyebrow}</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px]" style="transition-delay: 60ms">
+      <div class="order-2 md:order-1 md:col-span-6 animate-slide-left">
+        <p class="reveal eyebrow hover-underline inline-block">{about.eyebrow}</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px] text-reveal-words" style="transition-delay: 60ms">
           {about.title}
         </h2>
 
-        <div class="mt-8 space-y-6">
+        <div class="mt-8 space-y-6 animate-stagger">
           {
             about.body.map((p, i) => (
-              <p class="reveal lead text-ink-600" style={`transition-delay: ${100 + i * 60}ms`}>
+              <p class="reveal lead text-ink-600 animate-fade-up" style={`transition-delay: ${100 + i * 60}ms`}>
                 {p}
               </p>
             ))
@@ -24,11 +24,11 @@ import { about } from "~/data/site";
 
         <div class="reveal mt-10 hairline" style="transition-delay: 260ms"></div>
 
-        <div class="mt-10 grid gap-8 sm:grid-cols-3">
+        <div class="mt-10 grid gap-8 sm:grid-cols-3 animate-stagger">
           {
             about.pillars.map((p, i) => (
-              <div class="reveal" style={`transition-delay: ${300 + i * 80}ms`}>
-                <p class="font-serif text-2xl text-ink-700">
+              <div class="reveal card-lift p-4 rounded-xl hover-glow cursor-default" style={`transition-delay: ${300 + i * 80}ms`}>
+                <p class="font-serif text-2xl text-ink-700 float-gentle">
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <p class="mt-3 font-sans text-[15px] text-ink-700" style="font-weight:400; letter-spacing:0.01em;">
@@ -42,9 +42,9 @@ import { about } from "~/data/site";
       </div>
 
       <!-- Right column: a wide event/community moment from the ashram -->
-      <div class="order-1 md:order-2 md:col-span-6">
-        <figure class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft" style="transition-delay: 120ms">
-          <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-[3/4]">
+      <div class="order-1 md:order-2 md:col-span-6 animate-slide-right">
+        <figure class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft img-zoom card-lift" style="transition-delay: 120ms">
+          <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-[3/4] parallax-medium">
             <picture class="absolute inset-0 block">
               <source
                 type="image/webp"

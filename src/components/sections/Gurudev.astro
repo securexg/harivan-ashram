@@ -2,12 +2,12 @@
 import { gurudev, links } from "~/data/site";
 ---
 
-<section id="gurudev" class="relative bg-cream-100">
+<section id="gurudev" class="relative bg-cream-100 overflow-hidden">
   <div class="container-x py-[var(--section-y)]">
     <div class="grid gap-12 md:grid-cols-12 md:items-center md:gap-16 lg:gap-20">
       <!-- Single, balanced Gurudev portrait -->
-      <div class="md:col-span-6">
-        <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft">
+      <div class="md:col-span-6 animate-slide-left">
+        <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft img-zoom card-lift parallax-slow">
           <div class="relative aspect-[4/5] w-full overflow-hidden">
             <picture class="absolute inset-0 block">
               <source
@@ -29,14 +29,14 @@ import { gurudev, links } from "~/data/site";
       </div>
 
       <!-- Right: title, quote, body, AOL card -->
-      <div class="md:col-span-6">
-        <p class="reveal eyebrow">{gurudev.eyebrow}</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px]" style="transition-delay: 60ms">
+      <div class="md:col-span-6 animate-slide-right">
+        <p class="reveal eyebrow hover-underline inline-block">{gurudev.eyebrow}</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px] text-reveal-words" style="transition-delay: 60ms">
           {gurudev.title}
         </h2>
 
-        <figure class="reveal relative mt-8" style="transition-delay: 120ms">
-          <span class="absolute -left-1 -top-2 font-serif text-[100px] leading-none text-saffron-200/90 md:-left-2 md:-top-4 md:text-[130px]" aria-hidden="true">“</span>
+        <figure class="reveal relative mt-8 animate-fade-up" style="transition-delay: 120ms">
+          <span class="absolute -left-1 -top-2 font-serif text-[100px] leading-none text-saffron-200/90 md:-left-2 md:-top-4 md:text-[130px] float-gentle" aria-hidden="true">“</span>
           <blockquote class="relative pl-7 md:pl-10">
             <p class="h-display-italic text-2xl text-ink-700 md:text-3xl lg:text-[34px]">
               {gurudev.quote}
@@ -45,16 +45,16 @@ import { gurudev, links } from "~/data/site";
           </blockquote>
         </figure>
 
-        <p class="reveal lead mt-8 text-ink-600" style="transition-delay: 180ms">{gurudev.body}</p>
+        <p class="reveal lead mt-8 text-ink-600 animate-fade-up" style="transition-delay: 180ms">{gurudev.body}</p>
         {
           gurudev.bodyMore.map((para, i) => (
-            <p class="reveal lead mt-5 text-ink-600" style={`transition-delay: ${220 + i * 40}ms`}>
+            <p class="reveal lead mt-5 text-ink-600 animate-fade-up" style={`transition-delay: ${220 + i * 40}ms`}>
               {para}
             </p>
           ))
         }
 
-        <div class="reveal mt-10 rounded-2xl border border-ink-100/80 bg-cream-50 p-6 md:p-8" style="transition-delay: 320ms">
+        <div class="reveal mt-10 rounded-2xl border border-ink-100/80 bg-cream-50 p-6 md:p-8 card-lift hover-glow" style="transition-delay: 320ms">
           <p class="eyebrow">About The Art of Living</p>
           <p class="lead mt-4 text-ink-600">{gurudev.aolBlurb}</p>
           <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2">
@@ -62,7 +62,7 @@ import { gurudev, links } from "~/data/site";
               href={links.gurudev}
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400"
+              class="inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400 hover-underline magnetic-btn"
             >
               gurudev.artofliving.org
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
@@ -71,7 +71,7 @@ import { gurudev, links } from "~/data/site";
               href={links.artOfLiving}
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400"
+              class="inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-saffron-500 transition-colors hover:text-saffron-400 hover-underline magnetic-btn"
             >
               artofliving.org
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>

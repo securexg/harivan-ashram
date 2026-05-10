@@ -74,38 +74,38 @@ const slideUrl = (folder: string, slug: string, w?: number) => {
   </div>
 
   <div class="container-x relative z-10 pb-16 pt-32 sm:pb-24 sm:pt-36 md:pb-32 md:pt-44 lg:pt-48">
-    <div class="max-w-3xl">
-      <p class="text-xs uppercase tracking-[0.22em] text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)] sm:text-[13px]">
+    <div class="max-w-3xl animate-stagger">
+      <p class="text-xs uppercase tracking-[0.22em] text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)] sm:text-[13px] animate-fade-up">
         {site.org} · {site.tagline}
       </p>
-      <h1 class="h-display mt-5 text-5xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl lg:text-[88px]">
+      <h1 class="h-display mt-5 text-5xl text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl lg:text-[88px] text-reveal-words">
         A space amidst <span class="h-display-italic text-saffron-200">nature.</span>
       </h1>
-      <p class="hv-hero-lead mt-6 max-w-xl font-sans text-[15px] font-normal leading-relaxed text-white md:mt-7 md:text-lg">
+      <p class="hv-hero-lead mt-6 max-w-xl font-sans text-[15px] font-normal leading-relaxed text-white md:mt-7 md:text-lg animate-fade-up">
         Eleven acres of forest near Chandigarh — blessed by Pujya Gurudev Sri Sri Ravi Shankar ji. A
         sanctuary for breath, meditation and seva, open to seekers, families and youth.
       </p>
 
       <div class="mt-8 grid grid-cols-2 gap-2.5 sm:mt-10 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
-        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="md" class="w-full justify-center sm:w-auto sm:!px-7 sm:!py-3.5">Call us</Button>
+        <Button href={`tel:${contact.phoneIntl}`} variant="saffron" size="md" class="w-full justify-center sm:w-auto sm:!px-7 sm:!py-3.5 magnetic-btn btn-press ripple">Call us</Button>
         <Button
           href={wa}
           size="md"
           external
-          class="w-full justify-center border border-white/90 bg-white/95 text-ink-700 hover:bg-white sm:w-auto sm:!px-7 sm:!py-3.5"
+          class="w-full justify-center border border-white/90 bg-white/95 text-ink-700 hover:bg-white sm:w-auto sm:!px-7 sm:!py-3.5 magnetic-btn btn-press ripple"
         >WhatsApp</Button>
         <Button
           href="#yltp"
           size="md"
-          class="col-span-2 w-full justify-center border border-white/55 bg-white/10 text-white backdrop-blur-md hover:border-white hover:bg-white/20 sm:w-auto sm:!px-7 sm:!py-3.5"
+          class="col-span-2 w-full justify-center border border-white/55 bg-white/10 text-white backdrop-blur-md hover:border-white hover:bg-white/20 sm:w-auto sm:!px-7 sm:!py-3.5 magnetic-btn btn-press ripple"
         >YLTP · {yltp.date}</Button>
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col items-center gap-3 text-center text-[11px] uppercase tracking-[0.2em] text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] sm:mt-14 sm:flex-row sm:flex-wrap sm:items-center sm:justify-start sm:gap-x-10 sm:gap-y-2 sm:text-left sm:text-[12px]">
-      <span class="grid grid-cols-[2rem_auto_2rem] items-center justify-center gap-3"><span class="h-px bg-white/70" /> <span>11 acres of forest</span><span class="h-px bg-white/70" /></span>
-      <span class="grid grid-cols-[2rem_auto_2rem] items-center justify-center gap-3"><span class="h-px bg-white/70" /> <span>Bardar · near New Chandigarh</span><span class="h-px bg-white/70" /></span>
-      <span class="grid grid-cols-[2rem_auto_2rem] items-center justify-center gap-3"><span class="h-px bg-white/70" /> <span>Open to all</span><span class="h-px bg-white/70" /></span>
+    <div class="mt-12 flex flex-col items-center gap-3 text-center text-[11px] uppercase tracking-[0.2em] text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] sm:mt-14 sm:flex-row sm:flex-wrap sm:items-center sm:justify-start sm:gap-x-10 sm:gap-y-2 sm:text-left sm:text-[12px] animate-fade-up">
+      <span class="grid grid-cols-[2rem_auto_2rem] items-center justify-center gap-3 hover-glow transition-all"><span class="h-px bg-white/70" /> <span>11 acres of forest</span><span class="h-px bg-white/70" /></span>
+      <span class="grid grid-cols-[2rem_auto_2rem] items-center justify-center gap-3 hover-glow transition-all"><span class="h-px bg-white/70" /> <span>Bardar · near New Chandigarh</span><span class="h-px bg-white/70" /></span>
+      <span class="grid grid-cols-[2rem_auto_2rem] items-center justify-center gap-3 hover-glow transition-all"><span class="h-px bg-white/70" /> <span>Open to all</span><span class="h-px bg-white/70" /></span>
     </div>
   </div>
 

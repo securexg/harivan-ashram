@@ -32,14 +32,14 @@ const loop = [...faces, ...faces];
 
 <section id="faces" class="relative overflow-hidden bg-cream-100">
   <div class="container-x py-[var(--section-y)]">
-    <div class="flex flex-wrap items-end justify-between gap-6">
+    <div class="flex flex-wrap items-end justify-between gap-6 animate-fade-up">
       <div class="max-w-xl">
-        <p class="reveal eyebrow">Happy faces</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+        <p class="reveal eyebrow hover-underline inline-block">Happy faces</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl text-reveal-words" style="transition-delay: 60ms">
           Volunteers, devotees, <span class="h-display-italic">friends</span>.
         </h2>
       </div>
-      <p class="reveal max-w-md text-sm text-ink-500" style="transition-delay: 120ms">
+      <p class="reveal max-w-md text-sm text-ink-500 animate-fade-up" style="transition-delay: 120ms">
         The real ashram is its people — bright moments from gatherings, yatras and seva at Harivan.
       </p>
     </div>
@@ -53,8 +53,8 @@ const loop = [...faces, ...faces];
       <ul class="hv-marquee-track flex shrink-0 items-stretch gap-4 md:gap-6">
         {
           loop.map((f, i) => (
-            <li class="block w-[180px] shrink-0 sm:w-[220px] md:w-[260px] lg:w-[300px]">
-              <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft">
+            <li class="block w-[180px] shrink-0 sm:w-[220px] md:w-[260px] lg:w-[300px] animate-scale">
+              <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft img-zoom card-lift hover-glow">
                 <div class="relative aspect-[3/4] w-full overflow-hidden">
                   <img
                     src={f.src}

@@ -10,25 +10,25 @@ const reels = [
 ];
 ---
 
-<section id="reels" class="relative bg-cream-100">
+<section id="reels" class="relative bg-cream-100 overflow-hidden">
   <div class="container-x py-[var(--section-y)]">
-    <div class="flex flex-wrap items-end justify-between gap-6">
+    <div class="flex flex-wrap items-end justify-between gap-6 animate-fade-up">
       <div class="max-w-xl">
-        <p class="reveal eyebrow">Glimpses · Reels</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+        <p class="reveal eyebrow hover-underline inline-block">Glimpses · Reels</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl text-reveal-words" style="transition-delay: 60ms">
           Moments from the <span class="h-display-italic">ashram</span>.
         </h2>
       </div>
-      <p class="reveal text-xs uppercase tracking-[0.18em] text-ink-400" style="transition-delay: 120ms">
+      <p class="reveal text-xs uppercase tracking-[0.18em] text-ink-400 animate-fade-up" style="transition-delay: 120ms">
         Tap a clip to unmute · plays as you scroll
       </p>
     </div>
 
-    <div class="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:gap-5 lg:gap-6" data-reels-grid>
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:gap-5 lg:gap-6" data-reels-grid data-reels-track>
       {
         reels.map((r, i) => (
           <figure
-            class="reveal group relative overflow-hidden rounded-2xl bg-ink-700/5 ring-1 ring-ink-100/70 ring-soft"
+            class="reveal group relative overflow-hidden rounded-2xl bg-ink-700/5 ring-1 ring-ink-100/70 ring-soft card-lift hover-glow img-zoom animate-scale"
             style={`transition-delay: ${i * 60}ms`}
           >
             <div class="relative aspect-[9/16] w-full overflow-hidden">
@@ -52,7 +52,7 @@ const reels = [
                 data-mute-toggle
                 aria-label="Unmute video"
                 aria-pressed="true"
-                class="absolute bottom-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink-700/55 text-cream-50 backdrop-blur-md transition hover:bg-ink-700/80"
+                class="absolute bottom-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink-700/55 text-cream-50 backdrop-blur-md transition hover:bg-ink-700/80 magnetic-btn btn-press ripple"
               >
                 <svg data-icon-muted xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.531V19.94a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75Z" />

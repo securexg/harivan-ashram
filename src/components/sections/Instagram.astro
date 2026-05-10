@@ -13,22 +13,22 @@ const insta = [
 ];
 ---
 
-<section id="instagram" class="relative bg-cream-50">
+<section id="instagram" class="relative bg-cream-50 overflow-hidden">
   <div class="container-x py-[clamp(3rem,6vw,5rem)]">
     <div class="grid items-center gap-10 md:grid-cols-12 md:gap-12">
-      <div class="md:col-span-4">
-        <p class="reveal eyebrow">Follow along</p>
-        <h2 class="reveal h-display mt-4 text-3xl text-ink-700 md:text-4xl" style="transition-delay: 60ms">
+      <div class="md:col-span-4 animate-slide-left">
+        <p class="reveal eyebrow hover-underline inline-block">Follow along</p>
+        <h2 class="reveal h-display mt-4 text-3xl text-ink-700 md:text-4xl text-reveal-words" style="transition-delay: 60ms">
           @harivanashram on <span class="h-display-italic">Instagram</span>.
         </h2>
-        <p class="reveal lead mt-5 text-ink-600" style="transition-delay: 120ms">
+        <p class="reveal lead mt-5 text-ink-600 animate-fade-up" style="transition-delay: 120ms">
           Day-to-day moments, satsang clips and event updates — all in one place.
         </p>
         <a
           href={links.instagram}
           target="_blank"
           rel="noopener"
-          class="reveal mt-6 inline-flex items-center gap-2 rounded-full border border-ink-100 bg-cream-100 px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink-700 transition hover:border-saffron-300"
+          class="reveal mt-6 inline-flex items-center gap-2 rounded-full border border-ink-100 bg-cream-100 px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink-700 transition hover:border-saffron-300 magnetic-btn btn-press ripple hover-glow"
           style="transition-delay: 180ms"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
@@ -38,7 +38,7 @@ const insta = [
         </a>
       </div>
 
-      <div class="md:col-span-8">
+      <div class="md:col-span-8 animate-slide-right">
         <a
           href={links.instagram}
           target="_blank"
@@ -46,16 +46,16 @@ const insta = [
           aria-label="Open @harivanashram on Instagram"
           class="block"
         >
-          <div class="reveal grid grid-cols-3 gap-1.5 sm:gap-2 md:grid-cols-6 md:gap-2.5" style="transition-delay: 100ms">
+          <div class="reveal grid grid-cols-3 gap-1.5 sm:gap-2 md:grid-cols-6 md:gap-2.5 animate-stagger" style="transition-delay: 100ms">
             {
               insta.map((src) => (
-                <figure class="relative aspect-square overflow-hidden rounded-md bg-cream-200">
+                <figure class="relative aspect-square overflow-hidden rounded-md bg-cream-200 img-zoom card-lift animate-scale">
                   <img
                     src={src}
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    class="hv-cover-img transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    class="hv-cover-img transition-transform duration-700 ease-out group-hover:scale-[1.08]"
                   />
                 </figure>
               ))

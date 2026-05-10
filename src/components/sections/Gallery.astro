@@ -17,12 +17,12 @@ const gallery: GalleryItem[] = [
 ];
 ---
 
-<section id="gallery" class="relative bg-cream-50">
+<section id="gallery" class="relative bg-cream-50 overflow-hidden">
   <div class="container-x pt-[var(--section-y)] pb-12">
-    <div class="flex flex-wrap items-end justify-between gap-6">
+    <div class="flex flex-wrap items-end justify-between gap-6 animate-fade-up">
       <div class="max-w-xl">
-        <p class="reveal eyebrow">Gallery</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+        <p class="reveal eyebrow hover-underline inline-block">Gallery</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl text-reveal-words" style="transition-delay: 60ms">
           A walk through <span class="h-display-italic">Harivan</span>.
         </h2>
       </div>
@@ -31,15 +31,16 @@ const gallery: GalleryItem[] = [
 
   <!-- Balanced grid with a filled final row -->
   <div class="container-x pb-[var(--section-y)]">
-  <div class="hv-masonry" data-lightbox-grid>
+  <div class="hv-masonry" data-lightbox-grid data-gallery-grid>
     {
-      gallery.map((g) => (
+      gallery.map((g, i) => (
         <button
           type="button"
           data-lightbox-item
           data-src={g.src}
           data-alt={g.alt}
-          class="hv-masonry-item group relative block w-full overflow-hidden"
+          data-gallery-item
+          class="hv-masonry-item group relative block w-full overflow-hidden img-zoom card-lift animate-scale"
           aria-label={`View ${g.alt}`}
         >
           <img
@@ -47,7 +48,7 @@ const gallery: GalleryItem[] = [
             alt={g.alt}
             loading="lazy"
             decoding="async"
-            class="block h-full w-full rounded-lg object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+            class="block h-full w-full rounded-lg object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.08]"
             onerror="this.style.opacity='0.35'; this.style.background='linear-gradient(135deg,#ebe1cd,#b1c0a2)';"
           />
         </button>
@@ -62,7 +63,7 @@ const gallery: GalleryItem[] = [
   <button
     type="button"
     data-lightbox-close
-    class="absolute right-5 top-5 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream-200/30 bg-ink-700/60 backdrop-blur-md transition hover:bg-ink-700/80"
+    class="absolute right-5 top-5 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream-200/30 bg-ink-700/60 backdrop-blur-md transition hover:bg-ink-700/80 magnetic-btn btn-press ripple hover-glow"
     aria-label="Close"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

@@ -6,50 +6,50 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.
 const mapEmbed = `https://www.google.com/maps?q=${contact.mapsQuery}&z=13&output=embed`;
 ---
 
-<section id="contact" class="relative bg-cream-50">
+<section id="contact" class="relative bg-cream-50 overflow-hidden">
   <div class="container-x py-[var(--section-y)]">
     <div class="grid gap-14 md:grid-cols-12 md:gap-20">
-      <div class="md:col-span-5">
-        <p class="reveal eyebrow">Visit Harivan</p>
-        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+      <div class="md:col-span-5 animate-slide-left">
+        <p class="reveal eyebrow hover-underline inline-block">Visit Harivan</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl text-reveal-words" style="transition-delay: 60ms">
           Come, sit, breathe.
         </h2>
-        <p class="reveal lead mt-6 max-w-md" style="transition-delay: 120ms">
+        <p class="reveal lead mt-6 max-w-md animate-fade-up" style="transition-delay: 120ms">
           You are warmly welcomed to attend a satsang, walk the land, or simply
           share a chai. Reach out — we'll guide you in.
         </p>
 
-        <div class="reveal mt-10 space-y-6" style="transition-delay: 180ms">
-          <div>
+        <div class="reveal mt-10 space-y-6 animate-stagger" style="transition-delay: 180ms">
+          <div class="card-lift p-4 rounded-xl hover-glow cursor-default animate-fade-up">
             <p class="eyebrow">Address</p>
             <p class="mt-2 body-text text-sm">{contact.addressFull}</p>
           </div>
           <div class="grid gap-6 sm:grid-cols-2">
-            <div>
+            <div class="card-lift p-4 rounded-xl hover-glow cursor-default animate-fade-up">
               <p class="eyebrow">Phone</p>
               <a
                 href={`tel:${contact.phoneIntl}`}
-                class="mt-2 block font-serif text-lg text-ink-700 hover:text-saffron-500"
+                class="mt-2 block font-serif text-lg text-ink-700 hover:text-saffron-500 hover-underline magnetic-btn"
               >{contact.phone}</a>
             </div>
-            <div>
+            <div class="card-lift p-4 rounded-xl hover-glow cursor-default animate-fade-up">
               <p class="eyebrow">Email</p>
               <a
                 href={`mailto:${contact.email}`}
-                class="mt-2 block whitespace-nowrap font-sans text-[15px] text-ink-700 hover:text-saffron-500 lg:text-base xl:font-serif xl:text-lg"
+                class="mt-2 block whitespace-nowrap font-sans text-[15px] text-ink-700 hover:text-saffron-500 hover-underline magnetic-btn lg:text-base xl:font-serif xl:text-lg"
               >{contact.email}</a>
             </div>
           </div>
         </div>
 
-        <div class="reveal mt-10 flex flex-wrap items-center gap-3" style="transition-delay: 240ms">
-          <Button href={`tel:${contact.phoneIntl}`} variant="primary" size="lg">Call</Button>
-          <Button href={wa} variant="saffron" size="lg" external>WhatsApp</Button>
+        <div class="reveal mt-10 flex flex-wrap items-center gap-3 animate-stagger" style="transition-delay: 240ms">
+          <Button href={`tel:${contact.phoneIntl}`} variant="primary" size="lg" class="magnetic-btn btn-press ripple">Call</Button>
+          <Button href={wa} variant="saffron" size="lg" external class="magnetic-btn btn-press ripple">WhatsApp</Button>
         </div>
       </div>
 
-      <div class="md:col-span-7">
-        <div class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft" style="transition-delay: 200ms">
+      <div class="md:col-span-7 animate-slide-right">
+        <div class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft card-lift hover-glow parallax-medium" style="transition-delay: 200ms">
           <iframe
             title="Harivan Ashram on Google Maps"
             src={mapEmbed}

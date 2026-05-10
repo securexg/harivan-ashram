@@ -58,7 +58,7 @@ const nav = [
             <li>
               <a
                 href={n.href}
-                class="hv-nav-link font-sans text-[15px] font-medium tracking-[0.01em] transition-colors"
+                class="hv-nav-link font-sans text-[15px] font-medium tracking-[0.01em] transition-colors hover-underline magnetic-btn"
               >
                 {n.label}
               </a>
@@ -75,7 +75,7 @@ const nav = [
 
       <a
         href={`tel:${contact.phoneIntl}`}
-        class="hv-call-pill hidden md:inline-flex items-center gap-2 rounded-full px-4 py-2 font-sans text-[12px] tracking-wide backdrop-blur-md transition"
+        class="hv-call-pill hidden md:inline-flex items-center gap-2 rounded-full px-4 py-2 font-sans text-[12px] tracking-wide backdrop-blur-md transition magnetic-btn btn-press ripple"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.272.527-.734.417-1.173L6.963 3.102A1.125 1.125 0 0 0 5.872 2.25H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
@@ -88,7 +88,7 @@ const nav = [
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
-        class="hv-burger lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition"
+        class="hv-burger lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition magnetic-btn btn-press ripple"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5" />
@@ -120,11 +120,11 @@ const nav = [
       <li class="mt-2 grid grid-cols-2 gap-2">
         <a
           href={`tel:${contact.phoneIntl}`}
-          class="flex items-center justify-center rounded-full border border-ink-100 bg-cream-100 px-3 py-2 text-xs tracking-wide text-ink-600"
+          class="flex items-center justify-center rounded-full border border-ink-100 bg-cream-100 px-3 py-2 text-xs tracking-wide text-ink-600 magnetic-btn btn-press ripple hover-glow"
         >Call</a>
         <a
           href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`}
-          class="flex items-center justify-center rounded-full bg-sage-700 px-3 py-2 text-xs tracking-wide text-cream-50"
+          class="flex items-center justify-center rounded-full bg-sage-700 px-3 py-2 text-xs tracking-wide text-cream-50 magnetic-btn btn-press ripple hover-glow"
         >WhatsApp</a>
       </li>
     </ul>
