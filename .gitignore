@@ -41,3 +41,6 @@ source-media/
 *.tmp
 tmp/
 .vercel
+WhatsApp Image*.jpeg
+WhatsApp Image*.jpg
+*.png.original.png

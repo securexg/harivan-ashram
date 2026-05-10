@@ -11,16 +11,21 @@ import { gurudev, links } from "~/data/site";
           {gurudev.title}
         </h2>
 
-        <!-- Gurudev portrait — drop a square/portrait WebP at /public/images/gurudev/portrait.webp to swap. -->
-        <figure class="reveal mt-8 overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft" style="transition-delay: 90ms">
-          <img
-            src="/images/gurudev/portrait.webp"
-            alt="Gurudev Sri Sri Ravi Shankar ji"
-            loading="lazy"
-            decoding="async"
-            class="aspect-[4/5] w-full object-cover object-center"
-            onerror="this.style.display='none'; this.parentElement.style.display='none';"
-          />
+        <figure class="reveal mt-8 overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft" style="transition-delay: 90ms">
+          <picture class="block">
+            <source
+              type="image/webp"
+              srcset="/images/gurudev/portrait-640.webp 640w, /images/gurudev/portrait-1024.webp 1024w, /images/gurudev/portrait-1600.webp 1600w"
+              sizes="(min-width: 768px) 40vw, 90vw"
+            />
+            <img
+              src="/images/gurudev/portrait.webp"
+              alt="Gurudev Sri Sri Ravi Shankar ji"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[4/5] w-full object-cover object-top"
+            />
+          </picture>
         </figure>
 
         <p class="reveal lead mt-6" style="transition-delay: 120ms">{gurudev.body}</p>

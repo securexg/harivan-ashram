@@ -1,0 +1,95 @@
+---
+/* "Faces of Harivan" — auto-scrolling marquee of smiling photos
+   from the Navratri + Shobha Yatra archives.  Pauses on hover.
+   Uses CSS `animation` with two duplicated rows so the loop is seamless. */
+
+const faces = [
+  { folder: "activities/navratri", slug: "photo-02", alt: "Navratri devotees" },
+  { folder: "activities/navratri", slug: "photo-06", alt: "Smiles at Harivan" },
+  { folder: "activities/navratri", slug: "photo-09", alt: "Sangha together" },
+  { folder: "activities/navratri", slug: "photo-11", alt: "Family at the ashram" },
+  { folder: "activities/navratri", slug: "photo-15", alt: "Devotion and joy" },
+  { folder: "activities/shobha-yatra", slug: "photo-04", alt: "Shobha Yatra devotees" },
+  { folder: "activities/navratri", slug: "photo-18", alt: "Volunteer team" },
+  { folder: "activities/navratri", slug: "photo-20", alt: "Ladies of Sangha" },
+  { folder: "activities/navratri", slug: "photo-21", alt: "Smiling moments" },
+  { folder: "activities/shobha-yatra", slug: "photo-11", alt: "Yatra walk" },
+  { folder: "activities/navratri", slug: "photo-42", alt: "Celebration" },
+  { folder: "activities/navratri", slug: "photo-43", alt: "Joy at Harivan" },
+  { folder: "activities/navratri", slug: "photo-44", alt: "Together in song" },
+  { folder: "activities/navratri", slug: "photo-45", alt: "Closing celebration" },
+];
+
+// Duplicate for seamless loop
+const loop = [...faces, ...faces];
+---
+
+<section id="faces" class="relative overflow-hidden bg-cream-100">
+  <div class="container-x py-[var(--section-y)]">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-xl">
+        <p class="reveal eyebrow">Faces of Harivan</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl" style="transition-delay: 60ms">
+          Sangha, <span class="h-display-italic">smiling</span>.
+        </h2>
+      </div>
+      <p class="reveal max-w-md text-sm text-ink-400" style="transition-delay: 120ms">
+        The real ashram is its people. A few moments from a year of community
+        life — Navratri homas, the Somnath Yatra, satsangs and seva.
+      </p>
+    </div>
+  </div>
+
+  <!-- Edge-to-edge marquee track -->
+  <div class="relative">
+    <!-- Left and right fade masks -->
+    <span class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cream-100 to-transparent md:w-32" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cream-100 to-transparent md:w-32" aria-hidden="true"></span>
+
+    <div class="hv-marquee group flex gap-4 pb-[var(--section-y)] pt-2 md:gap-6">
+      <ul class="hv-marquee-track flex shrink-0 items-stretch gap-4 md:gap-6">
+        {
+          loop.map((f, i) => (
+            <li class="block w-[180px] shrink-0 sm:w-[220px] md:w-[260px] lg:w-[300px]">
+              <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft">
+                <div class="relative aspect-[3/4]">
+                  <picture class="absolute inset-0 block">
+                    <source
+                      type="image/webp"
+                      srcset={`/images/${f.folder}/${f.slug}-640.webp 640w, /images/${f.folder}/${f.slug}-1024.webp 1024w`}
+                      sizes="300px"
+                    />
+                    <img
+                      src={`/images/${f.folder}/${f.slug}-640.webp`}
+                      alt={i < faces.length ? f.alt : ""}
+                      loading="lazy"
+                      decoding="async"
+                      class="absolute inset-0 h-full w-full object-cover object-center"
+                    />
+                  </picture>
+                </div>
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hv-marquee-track {
+    animation: hv-marquee 60s linear infinite;
+    will-change: transform;
+  }
+  .hv-marquee:hover .hv-marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes hv-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hv-marquee-track { animation: none; }
+  }
+</style>

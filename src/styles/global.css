@@ -36,9 +36,22 @@
   --color-sage-500: #6e8458;
   --color-sage-700: #495b39;
 
-  /* Typography */
+  /* Typography
+     -----------------------------------------------------------------------
+     Display serif: Fraunces — modern editorial serif, optical-size variants,
+     reads as substantial without going full bold.  Alternatives to try in
+     order of formality / weight presence:
+       1. "Fraunces"          (current — modern editorial)
+       2. "EB Garamond"       (classic, more solid than Cormorant Garamond)
+       3. "Crimson Pro"       (book-style, calm + readable)
+       4. "Spectral"          (warm, contemporary humanist serif)
+       5. "DM Serif Display"  (sturdy editorial, more presence)
+       6. "Cormorant Garamond"(thinner / more elegant — original choice)
+     To swap, change the first family below + the Google Fonts link in
+     src/components/layout/MetaHead.astro.
+  ----------------------------------------------------------------------- */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+  --font-serif: "Fraunces", "EB Garamond", "Georgia", "Times New Roman", serif;
 
   /* Letterspacing helpers */
   --tracking-airy: 0.06em;
@@ -66,23 +79,27 @@
   .h-display {
     font-family: var(--font-serif);
     font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.005em;
+    line-height: 1.04;
+    letter-spacing: -0.012em;
+    /* Fraunces optical sizing — uses display-optimised glyph shapes */
+    font-variation-settings: "opsz" 144, "SOFT" 50;
   }
   .h-display-italic {
     font-family: var(--font-serif);
     font-style: italic;
     font-weight: 400;
-    line-height: 1.05;
+    line-height: 1.04;
+    letter-spacing: -0.005em;
+    font-variation-settings: "opsz" 144, "SOFT" 70;
   }
   .lead {
-    @apply font-sans text-base md:text-lg text-ink-400;
-    font-weight: 300;
+    @apply font-sans text-base md:text-lg text-ink-500;
+    font-weight: 400;
     line-height: 1.65;
-    letter-spacing: 0.005em;
+    letter-spacing: 0.002em;
   }
   .body-text {
-    @apply font-sans text-ink-500;
+    @apply font-sans text-ink-600;
     font-weight: 400;
     line-height: 1.7;
   }

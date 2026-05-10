@@ -6,6 +6,28 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
 )}`;
 ---
 
+<script>
+  const frame = document.querySelector<HTMLDivElement>("[data-yltp-frame]");
+  const video = frame?.querySelector<HTMLVideoElement>("[data-yltp-video]");
+  const btn = frame?.querySelector<HTMLButtonElement>("[data-yltp-mute]");
+  if (video && btn) {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      const muted = video.muted;
+      const mutedIcon = btn.querySelector<SVGElement>("[data-icon-muted]");
+      const unmutedIcon = btn.querySelector<SVGElement>("[data-icon-unmuted]");
+      if (mutedIcon && unmutedIcon) {
+        mutedIcon.classList.toggle("hidden", !muted);
+        unmutedIcon.classList.toggle("hidden", muted);
+      }
+      btn.setAttribute("aria-pressed", muted ? "true" : "false");
+      btn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
+      if (!muted) video.play().catch(() => {});
+    });
+  }
+</script>
+
 <section
   id="yltp"
   class="relative overflow-hidden bg-ink-700 text-cream-50"
@@ -55,9 +77,10 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
     </div>
 
     <div class="md:col-span-5">
-      <div class="reveal relative mx-auto w-full max-w-[300px]" style="transition-delay: 200ms">
+      <div class="reveal relative mx-auto w-full max-w-[300px]" style="transition-delay: 200ms" data-yltp-frame>
         <div class="relative aspect-[9/16] overflow-hidden rounded-[36px] border-[10px] border-ink-600 bg-ink-600 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.6)]">
           <video
+            data-yltp-video
             autoplay
             muted
             loop
@@ -69,9 +92,24 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
             <source src="/videos/yltp/yltp-teaser.mp4" type="video/mp4" />
           </video>
           <span class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream-50/10 rounded-[28px]"></span>
+
+          <button
+            type="button"
+            data-yltp-mute
+            aria-label="Unmute video"
+            aria-pressed="true"
+            class="absolute bottom-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-ink-700/55 text-cream-50 backdrop-blur-md transition hover:bg-ink-700/80"
+          >
+            <svg data-icon-muted xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.531V19.94a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75Z" />
+            </svg>
+            <svg data-icon-unmuted xmlns="http://www.w3.org/2000/svg" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75Z" />
+            </svg>
+          </button>
         </div>
         <p class="mt-4 text-center text-[11px] tracking-[0.18em] uppercase text-cream-200/70">
-          YLTP at Harivan · with Gurudev ji
+          A glimpse of YLTP at Harivan
         </p>
       </div>
     </div>

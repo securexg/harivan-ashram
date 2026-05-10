@@ -37,13 +37,13 @@ const nav = [
     </a>
 
     <nav class="hidden lg:block" aria-label="Primary">
-      <ul class="flex items-center gap-7">
+      <ul class="flex items-center gap-8">
         {
           nav.map((n) => (
             <li>
               <a
                 href={n.href}
-                class="hv-nav-link font-sans text-[13px] font-light tracking-wide transition-colors"
+                class="hv-nav-link font-sans text-[15px] font-medium tracking-[0.01em] transition-colors"
               >
                 {n.label}
               </a>
@@ -101,7 +101,7 @@ const nav = [
           <li>
             <a
               href={n.href}
-              class="block rounded-md px-2 py-2.5 font-sans text-sm tracking-wide text-ink-500 transition hover:bg-cream-200 hover:text-ink-700"
+              class="block rounded-md px-2 py-3 font-sans text-base font-medium tracking-[0.01em] text-ink-600 transition hover:bg-cream-200 hover:text-ink-700"
               data-mobile-link
             >
               {n.label}
