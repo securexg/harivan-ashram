@@ -11,6 +11,7 @@ const { title, description } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.tagline}`;
 const desc = description ?? site.description;
 const url = new URL(Astro.url.pathname, site.url).toString();
+const ogImageUrl = new URL("/og-image.jpg", site.url).toString();
 ---
 
 <meta charset="UTF-8" />
@@ -44,14 +45,14 @@ const url = new URL(Astro.url.pathname, site.url).toString();
 <meta property="og:description" content={desc} />
 <meta property="og:url" content={url} />
 <meta property="og:site_name" content={site.name} />
-<meta property="og:image" content="/og-image.jpg" />
+<meta property="og:image" content={ogImageUrl} />
 <meta property="og:locale" content="en_IN" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={desc} />
-<meta name="twitter:image" content="/og-image.jpg" />
+<meta name="twitter:image" content={ogImageUrl} />
 
 <!-- Structured data -->
 <script
