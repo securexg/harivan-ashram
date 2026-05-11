@@ -8,7 +8,7 @@ export const site = {
   tagline: "A Space Amidst Nature",
   blessing: "Blessed by Pujya Gurudev Sri Sri Ravi Shankar ji",
   org: "The Art of Living",
-  url: "https://harivan.sphost.online",
+  url: "https://harivanashram.org",
   description:
     "AOL Harivan Ashram, Tricity (North India) — an 11-acre nature-oriented spiritual retreat under The Art of Living, near New Chandigarh. Yoga, meditation, satsang, YLTP, and rural happiness programs.",
 };
