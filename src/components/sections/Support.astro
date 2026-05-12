@@ -9,24 +9,45 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
 <section id="support" class="relative bg-cream-100 overflow-hidden">
   <div class="container-x py-[var(--section-y)]">
     <div class="grid gap-12 md:grid-cols-12 md:gap-16 md:items-center">
-      <div class="md:col-span-5 animate-slide-left">
+      <div class="md:col-span-6 animate-slide-left">
         <p class="reveal eyebrow hover-underline inline-block">{support.eyebrow}</p>
         <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl text-reveal-words" style="transition-delay: 60ms">
           {support.title}
         </h2>
-        <p class="reveal lead mt-6 text-ink-600 animate-fade-up" style="transition-delay: 120ms">{support.body}</p>
+        
+        <div class="reveal mt-6 space-y-4 animate-fade-up" style="transition-delay: 120ms">
+          {support.intro.split('\n\n').map(p => (
+            <p class="lead text-ink-600">{p}</p>
+          ))}
+          
+          <ul class="mt-6 space-y-3">
+            {support.initiatives.map(item => (
+              <li class="bg-white/40 p-4 rounded-xl ring-1 ring-ink-100/50 shadow-sm backdrop-blur-sm">
+                <p class="font-medium text-ink-900">{item.title}</p>
+                <p class="text-sm text-ink-600 mt-1">{item.desc}</p>
+              </li>
+            ))}
+          </ul>
 
-        <div class="reveal mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap animate-stagger" style="transition-delay: 180ms">
-          <Button href={`tel:${contact.phoneIntl}`} variant="primary" size="lg" class="w-full justify-center sm:w-auto magnetic-btn btn-press ripple">
-            Call us
+          <p class="font-medium text-ink-800 italic mt-4">{support.closing}</p>
+          
+          <div class="text-sm text-ink-700 mt-6 bg-saffron-50/50 p-3 rounded-lg ring-1 ring-saffron-100">
+            <strong>For Sewa at Harivan Ashram:</strong><br/>
+            {support.sewaContacts}
+          </div>
+        </div>
+
+        <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap animate-stagger" style="transition-delay: 180ms">
+          <Button href={support.donationLink} variant="saffron" size="lg" external class="w-full justify-center sm:w-auto magnetic-btn btn-press ripple">
+            Donate Now
           </Button>
-          <Button href={wa} variant="ghost" size="lg" external class="w-full justify-center border border-ink-200 bg-cream-50 sm:w-auto magnetic-btn btn-press ripple hover-glow">
-            WhatsApp
+          <Button href={support.whatsappGroup} variant="primary" size="lg" external class="w-full justify-center sm:w-auto magnetic-btn btn-press ripple ring-2 ring-saffron-500 ring-offset-2 ring-offset-cream-100">
+            Join Seva WhatsApp Group
           </Button>
         </div>
       </div>
 
-      <div class="md:col-span-7 animate-slide-right">
+      <div class="md:col-span-6 animate-slide-right">
         <figure
           class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft img-zoom card-lift parallax-slow"
           style="transition-delay: 140ms"

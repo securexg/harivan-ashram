@@ -1,0 +1,47 @@
+---
+import { swamiji } from "~/data/site";
+import Button from "~/components/ui/Button.astro";
+---
+
+<section id="swamiji" class="relative bg-cream-50 overflow-hidden">
+  <div class="container-x py-[var(--section-y)]">
+    <div class="grid gap-12 md:grid-cols-12 md:items-center md:gap-16 lg:gap-20">
+      
+      <div class="md:col-span-6 md:order-2 animate-slide-right">
+        <p class="reveal eyebrow hover-underline inline-block">{swamiji.eyebrow}</p>
+        <h2 class="reveal h-display mt-5 text-4xl text-ink-700 md:text-5xl lg:text-[56px] text-reveal-words" style="transition-delay: 60ms">
+          {swamiji.title}
+        </h2>
+
+        <div class="reveal mt-8 space-y-5 animate-fade-up" style="transition-delay: 180ms">
+          {swamiji.body.map((para) => (
+            <p class="lead text-ink-600">{para}</p>
+          ))}
+        </div>
+        
+        <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap animate-stagger" style="transition-delay: 220ms">
+          <Button href={`tel:+919115719933`} variant="primary" size="lg" class="w-full justify-center sm:w-auto magnetic-btn btn-press ripple">
+            Contact: {swamiji.contact}
+          </Button>
+        </div>
+      </div>
+
+      <div class="md:col-span-6 md:order-1 animate-slide-left">
+        <figure class="overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-ink-100/70 ring-soft img-zoom card-lift parallax-slow">
+          <div class="relative aspect-[4/5] w-full overflow-hidden">
+            <picture class="absolute inset-0 block">
+              <img
+                src="/images/swamiji.jpg"
+                alt={swamiji.title}
+                loading="lazy"
+                decoding="async"
+                class="hv-cover-img object-[center_top]"
+              />
+            </picture>
+          </div>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>

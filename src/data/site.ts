@@ -14,15 +14,15 @@ export const site = {
 };
 
 export const contact = {
-  phone: "+91 95699 19990",
-  phoneIntl: "+919569919990",
-  whatsapp: "919569919990",
+  phone: "0188 129 7833 / +91 91155 30951",
+  phoneIntl: "+919115530951",
+  whatsapp: "919115530951",
   whatsappMessage:
     "Hari Om. I'd like to know more about Harivan Ashram and upcoming programs.",
   email: "artoflivingharivanashram@gmail.com",
-  addressShort: "Bardar, near New Chandigarh – 140108",
+  addressShort: "Bardar - 140108, Near Mata Mansa Devi Mandir",
   addressFull:
-    "The Art of Living, Harivan Ashram, Haripur, Bardar, Purkhali, Rupnagar (Near New Chandigarh) – 140108",
+    "The Art of Living - Harivan Ashram, Bardar -140108, Near Mata Mansa Devi Mandir",
   /** Used in the embedded Google Maps iframe. */
   mapsQuery: "Harivan+Ashram+Bardar+Rupnagar+Punjab",
 };
@@ -124,12 +124,44 @@ export const events = [
 export const activities = events;
 
 export const support = {
-  eyebrow: "Support the Ashram",
-  title: "Run by volunteers, sustained by you.",
-  body:
-    "Harivan runs on seva and thoughtful contributions from our community. Bank account and UPI details will be published here when finalised — for now, please reach out by phone or WhatsApp and our volunteers will guide you.",
+  eyebrow: "Nirman Seva",
+  title: "Let us build this divine space together! 🏗️✨",
+  intro:
+    "We are lovingly expanding Harivan Ashram near New Chandigarh to create a beautiful sanctuary for Art of Living courses, Meditation, Yoga, Satsang, and Seva 🧘‍♀️✨\n\nWe warmly invite you to become a part of this sacred Nirman Seva and help us build a true “Lighthouse of Peace & Tranquility” 🌸",
+  initiatives: [
+    {
+      title: "🏛️ Shanti Mantap",
+      desc: "Support the construction of our main Meditation & Satsang Hall."
+    },
+    {
+      title: "🛌 Atithi Nivas",
+      desc: "Sponsor cottage tents and essential accessories for seekers and volunteers."
+    },
+    {
+      title: "🥗 Annapurna Kitchen",
+      desc: "Contribute towards a modern Satvic kitchen and dining facility."
+    },
+    {
+      title: "🌳 Prakriti Seva",
+      desc: "Help create green gardens, solar power systems, tree plantations, and peaceful zen walking trails."
+    }
+  ],
+  closing: "Every brick you sponsor can help someone discover peace, joy, and inner transformation.",
+  donationLink: "https://vdst.in/e/77128",
+  whatsappGroup: "https://chat.whatsapp.com/JjEQwFpXgC8EbBhYIntS2c?mode=gi_t",
+  sewaContacts: "0188 129 7833 / +91 91 1571 9933 / +91 91155 30951"
 };
 
 export const team = {
   // Public-facing site keeps team off the page; data retained for footer credit if needed later.
+};
+
+export const swamiji = {
+  eyebrow: "Resident Teacher",
+  title: "Brahamchari (Br.) Nripen ji",
+  body: [
+    "Originally from Assam, he began his journey in 2011 as a full-time volunteer at the Bengaluru Ashram, serving across multiple departments. From 2015–2021, he contributed as an Ayurvedic practitioner in Panchakarma and Naturopathy.",
+    "He has completed his Brahmachari training, serving people and society with joy and dedication. Embodying simplicity, sincerity, and committed seva, he manages AOL Tricity - Harivan Ashram with Gurudev's blessings."
+  ],
+  contact: "+91 91 1571 9933"
 };
