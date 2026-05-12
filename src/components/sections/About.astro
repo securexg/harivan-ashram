@@ -41,24 +41,17 @@ import { about } from "~/data/site";
         </div>
       </div>
 
-      <!-- Right column: a wide event/community moment from the ashram -->
       <div class="order-1 md:order-2 md:col-span-6 animate-slide-right">
         <figure class="reveal overflow-hidden rounded-2xl ring-1 ring-ink-100/70 ring-soft img-zoom card-lift" style="transition-delay: 120ms">
-          <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-[3/4] parallax-medium">
-            <picture class="absolute inset-0 block">
-              <source
-                type="image/webp"
-                srcset="/images/activities/shobha-yatra/photo-13-640.webp 640w, /images/activities/shobha-yatra/photo-13-1024.webp 1024w, /images/activities/shobha-yatra/photo-13-1600.webp 1600w"
-                sizes="(min-width: 768px) 45vw, 100vw"
-              />
-              <img
-                src="/images/activities/shobha-yatra/photo-13.webp"
-                alt="Harivan Ashram community gathering"
-                loading="lazy"
-                decoding="async"
-                class="hv-cover-img object-[center_42%]"
-              />
-            </picture>
+          <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-[3/4] parallax-medium bg-ink-100">
+            <video
+              src="/videos/ashram.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="hv-cover-img object-[center_center]"
+            ></video>
           </div>
         </figure>
       </div>

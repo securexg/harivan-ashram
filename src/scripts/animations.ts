@@ -459,7 +459,8 @@ export function initTextAnimations() {
   gsap.utils.toArray<HTMLElement>(".text-reveal-words").forEach((el) => {
     const text = el.textContent || "";
     el.innerHTML = text
-      .split(" ")
+      .trim()
+      .split(/\s+/)
       .map((word) => `<span class="word" style="display: inline-block; opacity: 0; transform: translateY(30px); margin-right: 0.3em;">${word}</span>`)
       .join("");
 
