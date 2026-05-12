@@ -125,7 +125,7 @@ export const activities = events;
 
 export const support = {
   eyebrow: "Nirman Seva",
-  title: "Let us build this divine space together! 🏗️✨",
+  title: "Let us build this divine space together!",
   intro:
     "We are lovingly expanding Harivan Ashram near New Chandigarh to create a beautiful sanctuary for Art of Living courses, Meditation, Yoga, Satsang, and Seva 🧘‍♀️✨\n\nWe warmly invite you to become a part of this sacred Nirman Seva and help us build a true “Lighthouse of Peace & Tranquility” 🌸",
   initiatives: [
@@ -158,7 +158,7 @@ export const team = {
 
 export const swamiji = {
   eyebrow: "Resident Teacher",
-  title: "Brahamchari (Br.) Nripen ji",
+  title: "Brahmachari Nripen Das ji",
   body: [
     "Originally from Assam, he began his journey in 2011 as a full-time volunteer at the Bengaluru Ashram, serving across multiple departments. From 2015–2021, he contributed as an Ayurvedic practitioner in Panchakarma and Naturopathy.",
     "He has completed his Brahmachari training, serving people and society with joy and dedication. Embodying simplicity, sincerity, and committed seva, he manages AOL Tricity - Harivan Ashram with Gurudev's blessings."
