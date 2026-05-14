@@ -18,7 +18,7 @@ export const contact = {
   phoneIntl: "+919115530951",
   whatsapp: "919115530951",
   whatsappMessage:
-    "Hari Om. I'd like to know more about Harivan Ashram and upcoming programs.",
+    "Hi I visited harivanashram.org and I'd like to know more about Harivan Ashram and upcoming programs.",
   email: "artoflivingharivanashram@gmail.com",
   addressShort: "Bardar - 140108, Near Mata Mansa Devi Mandir",
   addressFull:
